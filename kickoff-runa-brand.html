@@ -528,7 +528,6 @@
         <input type="hidden" id="f-comentarios" name="comentarios" />
       </form>
 
-      <button class="btn btn-primary btn-large" onclick="submitForm()">ENVIAR KICK-OFF →</button>
     </div>
 
   </div>
@@ -547,6 +546,7 @@
   <div id="nav-bar">
     <button class="btn btn-ghost" id="btn-prev" onclick="prevStep()">← Anterior</button>
     <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Siguiente →</button>
+    <button class="btn btn-primary" id="btn-submit" onclick="submitForm()" style="display:none">ENVIAR →</button>
   </div>
 
   <script>
@@ -596,6 +596,7 @@
       document.getElementById('btn-prev').style.display = n === 1 ? 'none' : 'inline-flex';
       const isLast = n === state.totalSteps;
       document.getElementById('btn-next').style.display = isLast ? 'none' : 'inline-flex';
+      document.getElementById('btn-submit').style.display = isLast ? 'inline-flex' : 'none';
       window.scrollTo({ top: 0, behavior: 'smooth' });
       updateProgress();
     }
