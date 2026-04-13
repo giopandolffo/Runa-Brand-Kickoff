@@ -387,6 +387,80 @@
       presupuesto: '',
       comentarios: '',
     };
+
+    const STEP_LABELS = [
+      '', // 1-indexed
+      'Productos',
+      'Diseño',
+      'Canales',
+      'Ecommerce & Marketing',
+      'Resumen & Envío',
+    ];
+
+    function updateProgress() {
+      const pct = ((state.step - 1) / (state.totalSteps - 1)) * 100;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('step-indicator').innerHTML =
+        `<strong>Paso ${state.step}</strong> de ${state.totalSteps} — ${STEP_LABELS[state.step]}`;
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('step-' + n);
+      if (el) el.classList.add('active');
+      document.getElementById('btn-prev').style.display = n === 1 ? 'none' : 'inline-flex';
+      const isLast = n === state.totalSteps;
+      document.getElementById('btn-next').style.display = isLast ? 'none' : 'inline-flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function nextStep() {
+      if (!validateStep(state.step)) return;
+      if (state.step < state.totalSteps) {
+        state.step++;
+        if (state.step === state.totalSteps) renderSummary();
+        showStep(state.step);
+      }
+    }
+
+    function prevStep() {
+      if (state.step > 1) { state.step--; showStep(state.step); }
+    }
+
+    // Validation — returns true if step is valid
+    function validateStep(n) {
+      const msgId = 'val-msg-' + n;
+      const msg = document.getElementById(msgId);
+      const hide = () => { if (msg) { msg.classList.remove('visible'); } return true; };
+      const show = (text) => {
+        if (msg) { msg.textContent = text; msg.classList.add('visible'); }
+        return false;
+      };
+
+      if (n === 1) {
+        const anySelected = Object.values(state.productos).some(p => p.selected);
+        return anySelected ? hide() : show('Seleccioná al menos un producto para continuar.');
+      }
+      if (n === 2) {
+        const anySelected = Object.values(state.disenio).some(d => d.selected);
+        return anySelected ? hide() : show('Seleccioná al menos una ruta de diseño para continuar.');
+      }
+      if (n === 3) {
+        const anySelected = Object.values(state.canales).some(v => v);
+        return anySelected ? hide() : show('Seleccioná al menos un canal para continuar.');
+      }
+      if (n === 4) {
+        return state.ecommerce !== '' ? hide() : show('Respondé la pregunta de ecommerce para continuar.');
+      }
+      return true;
+    }
+
+    // Placeholder for renderSummary — implemented in Task 7
+    function renderSummary() {}
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => showStep(1));
   </script>
 
 </body>
