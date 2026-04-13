@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RUNA-BRAND — Plan 3 Días</title>
+  <title>RUNA — Lo que sigue</title>
   <style>
     :root {
-      --bg:     #0A0A0A;
-      --green:  #90D932;
-      --white:  #FFFFFF;
-      --muted:  #888888;
-      --card:   #161616;
-      --border: #2A2A2A;
-      --font:   'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --bg:    #0A0A0A;
+      --green: #90D932;
+      --white: #FFFFFF;
+      --muted: #666666;
+      --card:  #111111;
+      --dim:   #1A1A1A;
+      --font:  'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,677 +25,484 @@
       overflow: hidden;
     }
 
-    /* ── Progress bar ── */
-    #progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      background: var(--green);
-      transition: width 0.35s ease;
-      z-index: 100;
+    /* ── Progress ── */
+    #bar {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--green);
+      transition: width 0.4s ease; z-index: 200;
     }
 
     /* ── Slide engine ── */
-    .deck {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+    .deck { position: relative; width: 100vw; height: 100vh; }
 
     .slide {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 60px 80px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease;
-      text-align: center;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 72px 10vw;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.45s ease;
     }
     .slide.active { opacity: 1; visibility: visible; }
-    .slide.left  { text-align: left; align-items: flex-start; }
+    .slide.center { align-items: center; text-align: center; }
 
-    /* ── Navigation ── */
+    /* ── Nav ── */
     #nav {
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      z-index: 100;
+      position: fixed; bottom: 32px; right: 48px;
+      display: flex; align-items: center; gap: 16px; z-index: 200;
     }
-    .nav-btn {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.06);
-      color: var(--white);
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.2s;
+    .nb {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid #2A2A2A;
+      background: rgba(255,255,255,0.04);
+      color: var(--white); font-size: 15px;
+      cursor: pointer; transition: background 0.2s;
     }
-    .nav-btn:hover { background: rgba(255,255,255,0.14); }
-    #counter { font-size: 13px; color: var(--muted); min-width: 52px; text-align: center; }
+    .nb:hover { background: rgba(255,255,255,0.1); }
+    #ctr { font-size: 12px; color: var(--muted); letter-spacing: 2px; }
 
-    /* ── Type scale ── */
-    .label {
-      font-size: 0.7rem;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--green);
+    /* Slide number watermark */
+    .wm {
+      position: absolute; right: 10vw; top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(8rem, 18vw, 18rem);
+      font-weight: 900; font-style: italic;
+      color: rgba(255,255,255,0.025);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+
+    /* ── Type ── */
+    .eyebrow {
+      font-size: 0.68rem; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--green);
       margin-bottom: 20px;
     }
-    .hero {
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 900;
-      font-style: italic;
-      letter-spacing: -3px;
-      line-height: 0.92;
+    .h1 {
+      font-size: clamp(3.2rem, 8vw, 8rem);
+      font-weight: 900; font-style: italic;
+      letter-spacing: -3px; line-height: 0.9;
     }
-    .hero-green { color: var(--green); }
-    .title {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -1px;
+    .h1 em { color: var(--green); font-style: inherit; }
+    .h2 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -1.5px;
     }
-    .subtitle {
-      font-size: clamp(1rem, 2vw, 1.35rem);
-      color: var(--muted);
-      margin-top: 16px;
-      max-width: 640px;
-      line-height: 1.6;
+    .h2 em { color: var(--green); font-style: inherit; }
+    .h3 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700; line-height: 1.2;
     }
-    .tag {
-      display: inline-block;
-      background: var(--green);
-      color: #000;
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 4px;
-      margin-bottom: 24px;
+    .body {
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      color: var(--muted); line-height: 1.7;
+      max-width: 580px; margin-top: 20px;
     }
+    .body strong { color: var(--white); }
+    .accent { color: var(--green); }
+    .bar { width: 40px; height: 3px; background: var(--green); border-radius: 2px; margin: 24px 0; }
 
-    /* ── Cards / grids ── */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      width: 100%;
-      max-width: 900px;
-      margin-top: 32px;
+    /* ── Layouts ── */
+    .row {
+      display: flex; align-items: flex-start;
+      gap: 20px; width: 100%; max-width: 900px; margin-top: 32px;
     }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 860px;
-      margin-top: 32px;
-    }
+    .col { flex: 1; }
+
+    /* ── Cards ── */
+    .cards { display: flex; gap: 16px; margin-top: 32px; width: 100%; max-width: 920px; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 20px;
-      text-align: left;
+      flex: 1; background: var(--card);
+      border: 1px solid #1E1E1E; border-radius: 14px;
+      padding: 26px 22px;
     }
-    .card-day {
-      font-size: 0.65rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 10px;
+    .card-num {
+      font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 12px;
     }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 800;
-      margin-bottom: 8px;
+    .card-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .card-body { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── Quote cards (what he said) ── */
+    .quotes { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; max-width: 860px; width: 100%; }
+    .qcard {
+      background: var(--dim); border-left: 3px solid var(--green);
+      border-radius: 0 10px 10px 0; padding: 16px 22px;
+      display: flex; align-items: flex-start; gap: 16px;
     }
-    .card-body {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.6;
+    .qtopic {
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green); min-width: 100px; margin-top: 2px;
     }
+    .qtext { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.55; }
+
+    /* ── Insight cards ── */
+    .insights { display: flex; gap: 16px; margin-top: 28px; max-width: 920px; width: 100%; }
+    .insight {
+      flex: 1; background: var(--card); border-radius: 14px;
+      padding: 28px 22px; border-top: 3px solid var(--green);
+    }
+    .insight-icon { font-size: 1.6rem; margin-bottom: 14px; }
+    .insight-h { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .insight-p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
 
     /* ── Phrase cards ── */
-    .phrase-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      width: 100%;
-      max-width: 840px;
-      margin-top: 28px;
+    .phrases { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; max-width: 860px; width: 100%; }
+    .phrase {
+      background: var(--card); border-radius: 12px;
+      padding: 20px 22px; border: 1px solid #1E1E1E;
     }
-    .phrase-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 20px;
-      text-align: left;
-    }
-    .phrase-line {
-      font-size: 1.1rem;
-      font-weight: 800;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .phrase-note {
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
+    .phrase-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .phrase-text { font-size: 1.15rem; font-weight: 800; font-style: italic; line-height: 1.3; }
 
-    /* ── Style blocks ── */
-    .style-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      width: 100%;
-      max-width: 920px;
-      margin-top: 28px;
+    /* ── Style cards ── */
+    .styles { display: flex; gap: 16px; margin-top: 28px; max-width: 920px; width: 100%; }
+    .style {
+      flex: 1; background: var(--card); border-radius: 14px;
+      padding: 28px 22px; position: relative; overflow: hidden;
     }
-    .style-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 20px;
-      text-align: left;
-    }
-    .style-letter {
-      font-size: 2.5rem;
-      font-weight: 900;
-      font-style: italic;
-      color: var(--green);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .style-name {
-      font-size: 0.9rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .style-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 10px 0;
+    .style-bg {
+      position: absolute; right: -10px; bottom: -20px;
+      font-size: 7rem; font-weight: 900; font-style: italic;
+      color: rgba(144,217,50,0.06); line-height: 1; pointer-events: none;
     }
     .style-tag {
-      font-size: 0.65rem;
-      padding: 3px 8px;
-      border: 1px solid var(--green);
-      border-radius: 4px;
-      color: var(--green);
-    }
-
-    /* ── Campaign world cards ── */
-    .world-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 860px;
-      margin-top: 28px;
-    }
-    .world-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 24px;
-      text-align: left;
-    }
-    .world-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-    .world-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .world-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
+      display: inline-block; background: rgba(144,217,50,0.12);
+      color: var(--green); font-size: 0.65rem; letter-spacing: 2px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
       margin-bottom: 14px;
-      line-height: 1.5;
     }
-    .piece-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .style-h { font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+    .style-p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .style-items {
+      margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
     }
-    .piece-list li {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .piece-list li::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      flex-shrink: 0;
+    .style-item {
+      font-size: 0.7rem; padding: 3px 9px;
+      border: 1px solid #2A2A2A; border-radius: 20px; color: #666;
     }
 
-    /* ── Checklist ── */
-    .checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 640px;
-      margin-top: 28px;
-      text-align: left;
+    /* ── Deliverable list ── */
+    .deliv { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; max-width: 740px; width: 100%; }
+    .deliv-item {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--dim); border-radius: 10px; padding: 14px 20px;
     }
-    .checklist li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.5;
+    .deliv-day {
+      font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green); min-width: 48px;
     }
-    .check-box {
-      width: 20px; height: 20px;
-      border: 2px solid var(--green);
-      border-radius: 4px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    /* ── Divider / accent ── */
-    .divider {
-      width: 48px; height: 4px;
-      background: var(--green);
-      border-radius: 2px;
-      margin: 20px 0;
-    }
-
-    /* ── Pitch box ── */
-    .pitch-box {
-      background: var(--card);
-      border-left: 4px solid var(--green);
-      border-radius: 0 12px 12px 0;
-      padding: 24px 28px;
-      max-width: 760px;
-      text-align: left;
-      margin-top: 28px;
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.85);
-      font-style: italic;
-    }
+    .deliv-text { font-size: 0.9rem; color: rgba(255,255,255,0.85); flex: 1; }
+    .deliv-type { font-size: 0.72rem; color: var(--muted); text-align: right; }
 
     /* ── OK button ── */
     .ok-btn {
-      margin-top: 40px;
-      padding: 18px 60px;
-      background: var(--green);
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-family: var(--font);
-      font-size: 1.1rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: filter 0.2s, transform 0.2s;
+      margin-top: 40px; padding: 18px 64px;
+      background: var(--green); color: #000;
+      border: none; border-radius: 8px;
+      font-family: var(--font); font-size: 1rem;
+      font-weight: 900; letter-spacing: 3px;
+      text-transform: uppercase; cursor: pointer;
+      transition: filter 0.2s, transform 0.15s;
     }
-    .ok-btn:hover { filter: brightness(1.1); transform: scale(1.03); }
+    .ok-btn:hover { filter: brightness(1.08); transform: scale(1.02); }
 
     /* ── Animations ── */
-    .slide.active .animate {
-      animation: fadeUp 0.5s ease-out forwards;
-      opacity: 0;
+    .slide.active > * {
+      animation: up 0.55s ease-out both;
     }
-    .slide.active .animate:nth-child(1) { animation-delay: 0.05s; }
-    .slide.active .animate:nth-child(2) { animation-delay: 0.15s; }
-    .slide.active .animate:nth-child(3) { animation-delay: 0.25s; }
-    .slide.active .animate:nth-child(4) { animation-delay: 0.35s; }
-    .slide.active .animate:nth-child(5) { animation-delay: 0.45s; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
+    .slide.active > *:nth-child(1) { animation-delay: 0.04s; }
+    .slide.active > *:nth-child(2) { animation-delay: 0.12s; }
+    .slide.active > *:nth-child(3) { animation-delay: 0.2s; }
+    .slide.active > *:nth-child(4) { animation-delay: 0.28s; }
+    .slide.active > *:nth-child(5) { animation-delay: 0.36s; }
+    .slide.active > *:nth-child(6) { animation-delay: 0.44s; }
+    @keyframes up {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* ── Big number ── */
-    .big-num {
-      font-size: clamp(6rem, 15vw, 14rem);
-      font-weight: 900;
-      font-style: italic;
-      color: var(--green);
-      line-height: 1;
-      opacity: 0.15;
-      position: absolute;
-      right: 60px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* ── Table ── */
-    .simple-table {
-      width: 100%;
-      max-width: 780px;
-      border-collapse: collapse;
-      margin-top: 28px;
-      font-size: 0.88rem;
-    }
-    .simple-table th {
-      text-align: left;
-      padding: 10px 14px;
-      color: var(--green);
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
-    }
-    .simple-table td {
-      padding: 12px 14px;
-      color: var(--muted);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      line-height: 1.5;
-    }
-    .simple-table td:first-child { color: var(--white); font-weight: 600; }
   </style>
 </head>
 <body>
 
-<div id="progress-bar"></div>
+<div id="bar"></div>
 
 <div class="deck">
 
   <!-- 1. COVER -->
-  <div class="slide active">
-    <div class="label animate">RUNA-BRAND × LAB080</div>
-    <div class="hero animate">PLAN<br><span class="hero-green">3 DÍAS</span></div>
-    <p class="subtitle animate">Estrategia de diseño, frases, estilos visuales<br>y campaña completa generada con IA.</p>
+  <div class="slide center">
+    <div class="eyebrow">RUNA-BRAND · 2025</div>
+    <div class="h1">Tu marca.<br><em>Lo que sigue.</em></div>
+    <p class="body" style="text-align:center;margin-left:auto;margin-right:auto">
+      Analizamos tus respuestas. Esto es lo que vimos<br>y lo que haremos juntos en los próximos tres días.
+    </p>
   </div>
 
-  <!-- 2. CONTEXTO — respuestas de Sebastián -->
-  <div class="slide left">
-    <div class="big-num">S</div>
-    <div class="label animate">Sebastián Weiss — Kick-off</div>
-    <h2 class="title animate">Lo que nos dijiste</h2>
-    <div class="divider animate"></div>
-    <table class="simple-table animate">
-      <thead>
-        <tr>
-          <th>Área</th>
-          <th>Respuesta</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Productos hero</td><td>Polera, hoodie, short, calcetines, gorra, tote, protector bucal, toalla</td></tr>
-        <tr><td>Diseño</td><td>Tipografía + frases · Íconos jiu-jitsu · Depende la línea</td></tr>
-        <tr><td>Canal principal</td><td>Instagram → Web/Tienda → WhatsApp → Newsletter → Eventos</td></tr>
-        <tr><td>Ecommerce</td><td>Sí — plataforma por definir</td></tr>
-        <tr><td>Contenido</td><td>Contratar fotógrafo · 3–4x por semana · Sin ads por ahora</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- 3. RUNA — más que jiu-jitsu -->
+  <!-- 2. LO QUE NOS DIJISTE -->
   <div class="slide">
-    <div class="tag animate">Marco de marca</div>
-    <h2 class="title animate">RUNA no es una marca de jiu-jitsu.<br>Es una marca <span style="color:var(--green)">deportiva.</span></h2>
-    <p class="subtitle animate">El jiu-jitsu es el punto de entrada — no el techo.<br>Surf, snow, atletismo, artes marciales. Cualquier deporte donde haya tribu.</p>
-    <div class="grid-3 animate">
-      <div class="card">
-        <div class="card-day">Ahora</div>
-        <div class="card-title">JJF Collab</div>
-        <div class="card-body">Entrada al mercado con audiencia existente de 1.000–1.500 personas.</div>
+    <div class="wm">S</div>
+    <div class="eyebrow">Sebastián Weiss · Kick-off</div>
+    <div class="h2">Lo que<br><em>nos dijiste.</em></div>
+    <div class="quotes">
+      <div class="qcard">
+        <span class="qtopic">Producto</span>
+        <span class="qtext">Polera, hoodie, short, calcetines, gorra, tote, protector bucal, toalla — y estás abierto a más.</span>
       </div>
-      <div class="card">
-        <div class="card-day">Próximo</div>
-        <div class="card-title">RUNA Sports</div>
-        <div class="card-body">Marca deportiva multi-disciplina. Surf, snow, atletismo.</div>
+      <div class="qcard">
+        <span class="qtopic">Diseño</span>
+        <span class="qtext">"Dependiendo la línea. Con JJF: logos e íconos del jiu-jitsu. Con RUNA sin colab: frases y patrones streetwear."</span>
       </div>
-      <div class="card">
-        <div class="card-day">Futuro</div>
-        <div class="card-title">RUNA Streetwear</div>
-        <div class="card-body">Del entrenamiento a la calle, sin cambiar. Cuando el core esté sólido.</div>
+      <div class="qcard">
+        <span class="qtopic">Canal</span>
+        <span class="qtext">Instagram primero. Después tienda online, WhatsApp, newsletter y eventos. Sin ads por ahora.</span>
       </div>
-    </div>
-  </div>
-
-  <!-- 4. DÍA 1 — frases -->
-  <div class="slide left">
-    <div class="big-num">1</div>
-    <div class="label animate">Día 1</div>
-    <h2 class="title animate">Sistema de frases</h2>
-    <div class="divider animate"></div>
-    <div class="phrase-grid animate">
-      <div class="phrase-card">
-        <div class="card-day">RUNA Sports · Ancla</div>
-        <div class="phrase-line">"You belong here."</div>
-        <div class="phrase-note">Frase madre — no se toca, se refuerza en todo</div>
-      </div>
-      <div class="phrase-card">
-        <div class="card-day">RUNA Sports · Comunidad</div>
-        <div class="phrase-line">"Together, we are stronger."</div>
-        <div class="phrase-note">Tribu, equipo, colectivo</div>
-      </div>
-      <div class="phrase-card">
-        <div class="card-day">RUNA Sports · Movimiento</div>
-        <div class="phrase-line">"Forged in friction."</div>
-        <div class="phrase-note">Aplica a cualquier deporte de esfuerzo</div>
-      </div>
-      <div class="phrase-card">
-        <div class="card-day">JJF Collab</div>
-        <div class="phrase-line">"Tap or be tapped."</div>
-        <div class="phrase-note">Identidad jiu-jitsu, directa y sin adorno</div>
-      </div>
-      <div class="phrase-card">
-        <div class="card-day">JJF Collab</div>
-        <div class="phrase-line">"Leave it on the mat."</div>
-        <div class="phrase-note">Esfuerzo total, filosofía del deporte</div>
-      </div>
-      <div class="phrase-card">
-        <div class="card-day">JJF Collab</div>
-        <div class="phrase-line">"The mat doesn't lie."</div>
-        <div class="phrase-note">Honestidad del proceso, no del resultado</div>
+      <div class="qcard">
+        <span class="qtopic">Contenido</span>
+        <span class="qtext">Vas a contratar a alguien. 3–4 posts por semana. Hoy no tenés fotógrafo.</span>
       </div>
     </div>
   </div>
 
-  <!-- 5. DÍA 1 — líneas visuales -->
-  <div class="slide left">
-    <div class="big-num">1</div>
-    <div class="label animate">Día 1 — continuación</div>
-    <h2 class="title animate">3 líneas visuales</h2>
-    <div class="divider animate"></div>
-    <div class="style-grid animate">
-      <div class="style-card">
-        <div class="style-letter">A</div>
-        <div class="style-name">Sports Core</div>
-        <div class="card-body" style="margin-bottom:12px">Tipografía bold condensada. Frase corta en pecho o espalda grande. Alto contraste.</div>
-        <div class="style-tags">
-          <span class="style-tag">Mayúsculas</span>
-          <span class="style-tag">Sin ilustración</span>
-          <span class="style-tag">Verde + Negro</span>
-        </div>
-      </div>
-      <div class="style-card">
-        <div class="style-letter">B</div>
-        <div class="style-name">JJF Collab</div>
-        <div class="card-body" style="margin-bottom:12px">Ilustración lineal de objetos (cinturón, tape, kimono, açaí). Composición tipo patch.</div>
-        <div class="style-tags">
-          <span class="style-tag">Íconos lineales</span>
-          <span class="style-tag">Patch / Escudo</span>
-          <span class="style-tag">Naranjo acento</span>
-        </div>
-      </div>
-      <div class="style-card">
-        <div class="style-letter">C</div>
-        <div class="style-name">Pattern</div>
-        <div class="card-body" style="margin-bottom:12px">Íconos pequeños en repetición como allover print o banda. Conecta A y B.</div>
-        <div class="style-tags">
-          <span class="style-tag">Allover print</span>
-          <span class="style-tag">Toalla / Calcetines</span>
-          <span class="style-tag">Cápsula</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. DÍA 2 — campaña IA -->
-  <div class="slide left">
-    <div class="big-num">2</div>
-    <div class="label animate">Día 2</div>
-    <h2 class="title animate">Campaña generada con IA</h2>
-    <div class="divider animate"></div>
-    <div class="world-grid animate">
-      <div class="world-card">
-        <div class="world-icon">🥋</div>
-        <div class="world-title">Mundo 1 — El mat</div>
-        <div class="world-sub">Autenticidad deportiva. Tatami, luz lateral dura, editorial gritty.</div>
-        <ul class="piece-list">
-          <li>2 fotos hero atleta en hoodie / polera</li>
-          <li>3 fotos detalle (íconos, tejido, etiqueta)</li>
-          <li>1 foto de grupo — comunidad</li>
-        </ul>
-      </div>
-      <div class="world-card">
-        <div class="world-icon">🌆</div>
-        <div class="world-title">Mundo 2 — La calle</div>
-        <div class="world-sub">Multi-deporte. Calle latinoamericana, golden hour, lifestyle editorial.</div>
-        <ul class="piece-list">
-          <li>2 fotos hero calle / skatepark / parque</li>
-          <li>3 mockups producto flat lay</li>
-          <li>1 banner web 1920×600</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. DÍA 2 — piezas -->
-  <div class="slide left">
-    <div class="big-num">2</div>
-    <div class="label animate">Día 2 — Piezas</div>
-    <h2 class="title animate">Lo que producimos<br><span style="color:var(--green)">sin fotógrafo.</span></h2>
-    <div class="divider animate"></div>
-    <table class="simple-table animate">
-      <thead>
-        <tr><th>Pieza</th><th>Formato</th><th>Uso</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>4 fotos hero</td><td>1080 × 1350</td><td>Instagram feed principal</td></tr>
-        <tr><td>6 mockups producto</td><td>1080 × 1080</td><td>Feed + tienda online</td></tr>
-        <tr><td>3 fotos detalle</td><td>1080 × 1080</td><td>Carrusel / Stories</td></tr>
-        <tr><td>2 fotos de grupo</td><td>1080 × 1080</td><td>Stories + feed</td></tr>
-        <tr><td>1 banner web</td><td>1920 × 600</td><td>Landing page hero</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- 8. DÍA 3 — deck -->
-  <div class="slide left">
-    <div class="big-num">3</div>
-    <div class="label animate">Día 3</div>
-    <h2 class="title animate">Deck de presentación</h2>
-    <div class="divider animate"></div>
-    <div class="grid-2 animate">
-      <div class="card">
-        <div class="card-day">Estructura</div>
-        <div class="card-body" style="line-height:2">
-          01 Cover — foto hero<br>
-          02 La marca — RUNA Uruz + valores<br>
-          03 Estrategia — JJF + RUNA Sports<br>
-          04 Sistema de frases en prenda<br>
-          05 Estilos A, B, C — moodboard
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-day">Continuación</div>
-        <div class="card-body" style="line-height:2">
-          06 Productos — primer drop + precio<br>
-          07 Campaña — Mundo 1 (mat)<br>
-          08 Campaña — Mundo 2 (calle)<br>
-          09 Canales — cómo vive la campaña<br>
-          10 Próximos pasos + propuesta IA
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 9. EL PITCH IA -->
+  <!-- 3. LO QUE VIMOS -->
   <div class="slide">
-    <div class="label animate">El servicio</div>
-    <h2 class="title animate">El shooting con IA <span style="color:var(--green)">es lo que le vendemos.</span></h2>
-    <div class="pitch-box animate">
-      "Todo lo que ven en este deck — fotos, locaciones, modelos, campaña — fue generado con inteligencia artificial en 48 horas. Esto es lo que podemos hacer para cada drop de RUNA: campaña completa antes de producir una sola prenda, sin fotógrafo, sin locación, sin esperar. Cuando el producto físico esté listo, lo validamos con shooting real. Hasta entonces, esto es su ventana al mercado."
+    <div class="wm">→</div>
+    <div class="eyebrow">Nuestro análisis</div>
+    <div class="h2">Lo que<br><em>nosotros vimos.</em></div>
+    <div class="insights">
+      <div class="insight">
+        <div class="insight-icon">🏹</div>
+        <div class="insight-h">JJF es la puerta, no el techo.</div>
+        <div class="insight-p">La collab con Jiu-Jitsu Fest te da 1.000–1.500 compradores el día uno. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo. Si te quedás en jiu-jitsu, el límite llega rápido.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-icon">✂️</div>
+        <div class="insight-h">Dos líneas. Dos voces. Un nombre.</div>
+        <div class="insight-p">La collab JJF y la marca RUNA hablan distinto. Si las mezclás sin separación, ninguna convence. Hay que dejarlas claras desde el diseño.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-icon">📷</div>
+        <div class="insight-h">No necesitás fotógrafo hoy.</div>
+        <div class="insight-p">Con IA podemos tener campaña completa en 48 horas — locación, modelos, productos. Lanzás primero. Cuando el producto esté físico, validamos con shooting real.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. LA ESTRATEGIA -->
+  <div class="slide">
+    <div class="wm">↑</div>
+    <div class="eyebrow">Estrategia de marca</div>
+    <div class="h2">Una marca deportiva<br>que empieza en el mat.<br><em>No termina ahí.</em></div>
+    <div class="bar"></div>
+    <p class="body">
+      <strong>Ahora:</strong> RUNA × Jiu-Jitsu Fest. Entrar con audiencia, volumen y visibilidad.<br>
+      <strong>Después:</strong> RUNA Sports. Surf, snow, atletismo, artes marciales.<br>
+      <strong>Más adelante:</strong> RUNA Streetwear. Del entrenamiento a la calle.
+    </p>
+  </div>
+
+  <!-- 5. DÍA 1 — FRASES -->
+  <div class="slide">
+    <div class="wm">1</div>
+    <div class="eyebrow">Día 1</div>
+    <div class="h2">Las frases<br>de <em>tu marca.</em></div>
+    <div class="phrases">
+      <div class="phrase">
+        <div class="phrase-label">RUNA · Ancla</div>
+        <div class="phrase-text">"You belong here."</div>
+      </div>
+      <div class="phrase">
+        <div class="phrase-label">RUNA · Comunidad</div>
+        <div class="phrase-text">"Together, we are stronger."</div>
+      </div>
+      <div class="phrase">
+        <div class="phrase-label">RUNA · Movimiento</div>
+        <div class="phrase-text">"Forged in friction."</div>
+      </div>
+      <div class="phrase">
+        <div class="phrase-label">JJF Collab</div>
+        <div class="phrase-text">"Tap or be tapped."</div>
+      </div>
+      <div class="phrase">
+        <div class="phrase-label">JJF Collab</div>
+        <div class="phrase-text">"Leave it on the mat."</div>
+      </div>
+      <div class="phrase">
+        <div class="phrase-label">JJF Collab</div>
+        <div class="phrase-text">"The mat doesn't lie."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. DÍA 1 — ESTILOS -->
+  <div class="slide">
+    <div class="wm">1</div>
+    <div class="eyebrow">Día 1</div>
+    <div class="h2">3 caminos<br>de <em>diseño.</em></div>
+    <div class="styles">
+      <div class="style">
+        <div class="style-bg">A</div>
+        <div class="style-tag">RUNA Sports</div>
+        <div class="style-h">Tipografía + frases</div>
+        <div class="style-p">Letras grandes, frases cortas, alto contraste. Verde sobre negro o blanco sobre negro. Sin ilustraciones.</div>
+        <div class="style-items">
+          <span class="style-item">Polera</span>
+          <span class="style-item">Hoodie</span>
+          <span class="style-item">Gorra</span>
+        </div>
+      </div>
+      <div class="style">
+        <div class="style-bg">B</div>
+        <div class="style-tag">JJF Collab</div>
+        <div class="style-h">Íconos + cultura</div>
+        <div class="style-p">Ilustración lineal: cinturón, tape, kimono, açaí. Composición tipo patch o escudo. Con acento naranjo.</div>
+        <div class="style-items">
+          <span class="style-item">Calcetines</span>
+          <span class="style-item">Tote</span>
+          <span class="style-item">Protector</span>
+        </div>
+      </div>
+      <div class="style">
+        <div class="style-bg">C</div>
+        <div class="style-tag">Cápsula</div>
+        <div class="style-h">Patrón repetido</div>
+        <div class="style-p">Íconos pequeños en repetición — allover print o banda. Une los dos mundos en piezas de lifestyle.</div>
+        <div class="style-items">
+          <span class="style-item">Toalla</span>
+          <span class="style-item">Calcetines pack</span>
+          <span class="style-item">Bolso</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. DÍA 2 — CAMPAÑA SIN FOTÓGRAFO -->
+  <div class="slide">
+    <div class="wm">2</div>
+    <div class="eyebrow">Día 2</div>
+    <div class="h2">Campaña completa.<br><em>Sin fotógrafo.<br>Sin esperar.</em></div>
+    <div class="bar"></div>
+    <p class="body">
+      Con IA generamos todas las fotos de tu lanzamiento — locación, modelos, productos — en 48 horas.
+      Tenés material listo para Instagram y tu tienda <strong>antes de producir una sola prenda.</strong>
+      Cuando el producto físico esté, lo validamos con shooting real.
+    </p>
+  </div>
+
+  <!-- 8. DÍA 2 — PIEZAS -->
+  <div class="slide">
+    <div class="wm">2</div>
+    <div class="eyebrow">Día 2 · Lo que vas a tener</div>
+    <div class="h2"><em>16 piezas</em><br>listas para publicar.</div>
+    <div class="cards" style="margin-top:28px;max-width:860px">
+      <div class="card">
+        <div class="card-num">Mundo 1 · El mat</div>
+        <div class="card-title">Autenticidad deportiva</div>
+        <div class="card-body">2 fotos hero · 3 fotos detalle · 1 foto de grupo<br><br>Tatami, luz lateral, gritty editorial. Lo que vive en el jiu-jitsu.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">Mundo 2 · La calle</div>
+        <div class="card-title">Más allá del deporte</div>
+        <div class="card-body">2 fotos hero · 3 mockups producto · 1 banner web<br><br>Calle latinoamericana, golden hour, lifestyle. Donde RUNA crece.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">Formatos</div>
+        <div class="card-title">Listos para subir</div>
+        <div class="card-body">Feed cuadrado · Vertical Stories · Banner horizontal<br><br>Instagram, tienda online y WhatsApp desde el día uno.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. DÍA 3 — EL DECK -->
+  <div class="slide">
+    <div class="wm">3</div>
+    <div class="eyebrow">Día 3</div>
+    <div class="h2">Un deck que<br>podés <em>mostrar.</em></div>
+    <div class="bar"></div>
+    <p class="body">
+      Al final de los tres días tenés una presentación completa para mostrársela a tu equipo, al festival, a inversores o al fabricante.
+      <strong>Frases aprobadas. Estilos definidos. Campaña visual lista.</strong>
+    </p>
+    <div class="cards" style="margin-top:24px;max-width:640px">
+      <div class="card" style="border-top:2px solid var(--green)">
+        <div class="card-body" style="line-height:2.1;color:rgba(255,255,255,0.7)">
+          ✦ &nbsp;Las frases de cada línea<br>
+          ✦ &nbsp;Los 3 estilos visuales con mockups<br>
+          ✦ &nbsp;La campaña fotográfica lista<br>
+          ✦ &nbsp;Los canales y cómo activarlos<br>
+          ✦ &nbsp;El primer drop definido
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- 10. OK -->
-  <div class="slide">
-    <div class="label animate">Listo para empezar</div>
-    <div class="hero animate">RUNA<br><span class="hero-green">BRAND</span></div>
-    <p class="subtitle animate">3 días. Frases, estilos, campaña IA, deck.<br>Si estás de acuerdo con el plan, presiona OK.</p>
-    <button class="ok-btn animate" onclick="handleOK()">OK — EMPEZAMOS</button>
+  <div class="slide center">
+    <div class="eyebrow">Todo listo</div>
+    <div class="h1">3 días.<br><em>Tu marca.</em></div>
+    <p class="body" style="text-align:center;margin-left:auto;margin-right:auto;margin-top:24px">
+      Si estás de acuerdo con este plan,<br>presioná OK y empezamos.
+    </p>
+    <button class="ok-btn" onclick="handleOK()">OK — EMPEZAMOS</button>
   </div>
 
-</div><!-- /.deck -->
+</div>
 
-<!-- Navigation -->
+<!-- Nav -->
 <div id="nav">
-  <button class="nav-btn" onclick="prevSlide()">←</button>
-  <span id="counter">1 / 10</span>
-  <button class="nav-btn" onclick="nextSlide()">→</button>
+  <button class="nb" onclick="prev()">←</button>
+  <span id="ctr">01 / 10</span>
+  <button class="nb" onclick="next()">→</button>
 </div>
 
 <script>
   const slides = document.querySelectorAll('.slide');
   const total  = slides.length;
-  let current  = 0;
+  let cur = 0;
 
   function show(n) {
-    slides.forEach((s, i) => s.classList.toggle('active', i === n));
-    current = n;
-    document.getElementById('counter').textContent = (n + 1) + ' / ' + total;
-    document.getElementById('progress-bar').style.width = ((n + 1) / total * 100) + '%';
+    if (n < 0 || n >= total) return;
+    slides[cur].classList.remove('active');
+    cur = n;
+    slides[cur].classList.add('active');
+    document.getElementById('ctr').textContent =
+      String(cur + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    document.getElementById('bar').style.width = ((cur + 1) / total * 100) + '%';
   }
 
-  function nextSlide() { if (current < total - 1) show(current + 1); }
-  function prevSlide() { if (current > 0)         show(current - 1); }
+  function next() { show(cur + 1); }
+  function prev() { show(cur - 1); }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-    if (e.key === 'ArrowLeft')                    { e.preventDefault(); prevSlide(); }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft')                    { e.preventDefault(); prev(); }
   });
 
-  // Click anywhere (except nav) to advance
-  document.querySelector('.deck').addEventListener('click', e => {
-    if (!e.target.closest('#nav') && !e.target.closest('.ok-btn')) nextSlide();
+  // Swipe support
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (dx < -50) next();
+    if (dx >  50) prev();
   });
 
   function handleOK() {
-    document.body.style.transition = 'background 0.6s';
+    document.body.style.transition = 'background 0.7s';
     document.body.style.background = '#90D932';
     setTimeout(() => {
       document.body.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:'Inter',sans-serif;color:#000;text-align:center;padding:40px">
-          <div style="font-size:5rem;font-weight:900;font-style:italic;letter-spacing:-3px;line-height:1">RUNA<br>BRAND</div>
-          <div style="margin-top:24px;font-size:1.1rem;opacity:0.7;letter-spacing:2px;text-transform:uppercase">Plan confirmado · Empezamos</div>
-          <div style="margin-top:48px;font-size:0.85rem;opacity:0.5">Cerrá esta ventana y avisale a Giorgio.</div>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
+          height:100vh;font-family:'Inter',sans-serif;color:#000;text-align:center;padding:48px">
+          <div style="font-size:clamp(4rem,12vw,9rem);font-weight:900;font-style:italic;
+            letter-spacing:-4px;line-height:0.9">RUNA<br>BRAND</div>
+          <div style="margin-top:28px;font-size:1rem;opacity:0.6;letter-spacing:4px;text-transform:uppercase">
+            Plan confirmado
+          </div>
+          <div style="margin-top:48px;font-size:0.85rem;opacity:0.4">
+            Cerrá esta ventana y avisale a Giorgio.
+          </div>
         </div>`;
-    }, 600);
+    }, 650);
   }
 
   show(0);
