@@ -16,6 +16,7 @@
       --radius-card: 12px;
       --radius-btn: 8px;
       --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --orange: #f0a500;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -85,7 +86,7 @@
     .step { display: none; }
     .step.active { display: block; }
 
-    h2 {
+    .step h2 {
       font-size: 1.6rem;
       font-weight: 800;
       margin-bottom: 8px;
@@ -157,7 +158,7 @@
       transition: all 0.15s;
     }
     .priority-btn.active-alta { background: var(--green); color: #000; border-color: var(--green); }
-    .priority-btn.active-media { background: #f0a500; color: #000; border-color: #f0a500; }
+    .priority-btn.active-media { background: var(--orange); color: #000; border-color: var(--orange); }
     .priority-btn.active-baja { background: var(--border); color: var(--white); }
 
     /* ── Text inputs / textareas ── */
@@ -186,7 +187,7 @@
     textarea:focus,
     select:focus { border-color: var(--green); }
     textarea { resize: vertical; min-height: 90px; }
-    select option { background: #1a1a1a; }
+    select option { background: var(--card-bg); }
 
     /* ── Sliders ── */
     .slider-wrap { margin: 16px 0; }
@@ -300,6 +301,7 @@
     .summary-block ul { padding-left: 16px; }
 
     /* ── Success / Error screens ── */
+    .screen-visible { display: flex !important; }
     #success-screen, #error-screen {
       display: none;
       flex-direction: column;
@@ -327,7 +329,7 @@
 
     @media (max-width: 520px) {
       .card-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
-      h2 { font-size: 1.3rem; }
+      .step h2 { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -354,7 +356,7 @@
   <div id="error-screen">
     <h1>Algo salió mal</h1>
     <p>Intentá de nuevo o escribinos a <strong>contacto@lab080.studio</strong></p>
-    <button class="btn btn-primary" style="margin-top:20px" onclick="document.getElementById('error-screen').style.display='none';document.getElementById('wizard').style.display='block';">Volver</button>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="document.getElementById('error-screen').classList.remove('screen-visible');document.getElementById('wizard').style.display='';">Volver</button>
   </div>
 
   <div id="nav-bar">
