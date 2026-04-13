@@ -347,8 +347,8 @@
   <div id="wizard">
     <!-- STEP 1 -->
     <div class="step active" id="step-1">
-      <h2>¿Qué productos querés desarrollar?</h2>
-      <p class="step-desc">Seleccioná todos los que apliquen para el primer drop. Podés ajustar la prioridad de cada uno.</p>
+      <h2>¿Qué productos quieres desarrollar?</h2>
+      <p class="step-desc">Selecciona todos los que apliquen para el primer drop. Puedes ajustar la prioridad de cada uno.</p>
 
       <div class="card-grid" id="productos-grid"></div>
 
@@ -365,13 +365,13 @@
     <!-- STEP 2 -->
     <div class="step" id="step-2">
       <h2>¿Qué rutas de diseño te interesan?</h2>
-      <p class="step-desc">Seleccioná una o más. Para cada ruta elegida, ajustá los sliders.</p>
+      <p class="step-desc">Selecciona una o más. Para cada ruta elegida, ajusta los sliders.</p>
 
       <div class="card-grid" id="disenio-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px,1fr))"></div>
 
       <div class="reveal-field" id="disenio-otros-wrap">
         <div class="field-wrap">
-          <label>Describí tu idea de diseño</label>
+          <label>Describe tu idea de diseño</label>
           <textarea id="disenio-otros" placeholder="Ej: quiero algo con inspiración japonesa..." oninput="state.disenioOtros = this.value"></textarea>
         </div>
       </div>
@@ -380,7 +380,7 @@
 
       <div class="field-wrap" style="margin-top:16px">
         <label>Referencias / Inspiración</label>
-        <textarea id="disenio-refs" placeholder="Links, marcas, o describí imágenes que te gusten..." oninput="state.disenioRefs = this.value"></textarea>
+        <textarea id="disenio-refs" placeholder="Links, marcas, o describe imágenes que te gusten..." oninput="state.disenioRefs = this.value"></textarea>
       </div>
 
       <p class="validation-msg" id="val-msg-2"></p>
@@ -390,7 +390,7 @@
     <!-- STEP 3 -->
     <div class="step" id="step-3">
       <h2>¿Dónde va a vivir la marca?</h2>
-      <p class="step-desc">Seleccioná todos los canales donde querés que RUNA tenga presencia.</p>
+      <p class="step-desc">Selecciona todos los canales donde quieres que RUNA tenga presencia.</p>
 
       <div class="card-grid" id="canales-grid"></div>
 
@@ -404,7 +404,7 @@
       <div class="field-wrap" id="canal-principal-wrap" style="display:none;margin-top:20px">
         <label>¿Cuál canal es el más importante para el lanzamiento?</label>
         <select id="canal-principal" onchange="state.canalPrincipal = this.value">
-          <option value="">— Elegí uno —</option>
+          <option value="">— Elige uno —</option>
         </select>
       </div>
 
@@ -414,7 +414,7 @@
     <!-- STEP 4 -->
     <div class="step" id="step-4">
       <h2>Ecommerce & Marketing</h2>
-      <p class="step-desc">Contanos cómo pensás vender y comunicar RUNA.</p>
+      <p class="step-desc">Cuéntanos cómo piensas vender y comunicar RUNA.</p>
 
       <div class="sub-heading">A — Venta Online</div>
 
@@ -503,7 +503,7 @@
     <!-- STEP 5 -->
     <div class="step" id="step-5">
       <h2>Resumen & Envío</h2>
-      <p class="step-desc">Revisá tus respuestas antes de enviarnos el kick-off.</p>
+      <p class="step-desc">Revisa tus respuestas antes de enviarnos el kick-off.</p>
 
       <div id="summary-container"></div>
 
@@ -626,18 +626,18 @@
 
       if (n === 1) {
         const anySelected = Object.values(state.productos).some(p => p.selected);
-        return anySelected ? hide() : show('Seleccioná al menos un producto para continuar.');
+        return anySelected ? hide() : show('Selecciona al menos un producto para continuar.');
       }
       if (n === 2) {
         const anySelected = Object.values(state.disenio).some(d => d.selected);
-        return anySelected ? hide() : show('Seleccioná al menos una ruta de diseño para continuar.');
+        return anySelected ? hide() : show('Selecciona al menos una ruta de diseño para continuar.');
       }
       if (n === 3) {
         const anySelected = Object.values(state.canales).some(v => v);
-        return anySelected ? hide() : show('Seleccioná al menos un canal para continuar.');
+        return anySelected ? hide() : show('Selecciona al menos un canal para continuar.');
       }
       if (n === 4) {
-        return state.ecommerce !== '' ? hide() : show('Respondé la pregunta de ecommerce para continuar.');
+        return state.ecommerce !== '' ? hide() : show('Responde la pregunta de ecommerce para continuar.');
       }
       return true;
     }
@@ -854,7 +854,7 @@
       { id: 'tipografia', label: 'Tipografía / Frases',   icon: '✍️', desc: '"You belong here", frases inspiracionales' },
       { id: 'abstracto',  label: 'Abstracto / Energía',   icon: '⚡', desc: 'Rayos, ritmo, movimiento, patrones' },
       { id: 'iconos',     label: 'Íconos Jiu-Jitsu',      icon: '🥋', desc: 'Cinturones, tape, açaí, grips' },
-      { id: 'otros',      label: 'Otros',                 icon: '💡', desc: 'Describí tu propia idea' },
+      { id: 'otros',      label: 'Otros',                 icon: '💡', desc: 'Describe tu propia idea' },
     ];
 
     function initDisenio() {
