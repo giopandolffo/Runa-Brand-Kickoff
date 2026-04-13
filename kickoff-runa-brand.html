@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RUNA BRAND — Kick-off</title>
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --card-bg: #161616;
+      --card-hover: #1E1E1E;
+      --green: #90D932;
+      --white: #FFFFFF;
+      --muted: #888888;
+      --border: #2A2A2A;
+      --radius-card: 12px;
+      --radius-btn: 8px;
+      --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Progress Bar ── */
+    #progress-bar-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--border);
+      z-index: 100;
+    }
+    #progress-bar {
+      height: 100%;
+      background: var(--green);
+      transition: width 0.4s ease;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-top: 40px;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .logo {
+      font-size: 2.8rem;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -2px;
+      color: var(--white);
+    }
+    .logo span { color: var(--green); }
+    .logo-sub {
+      font-size: 0.7rem;
+      letter-spacing: 6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── Step indicator ── */
+    #step-indicator {
+      margin-top: 32px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    #step-indicator strong { color: var(--green); }
+
+    /* ── Main container ── */
+    #wizard {
+      width: 100%;
+      max-width: 760px;
+      padding: 32px 24px 120px;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .step-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    /* ── Cards grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 16px 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+      position: relative;
+    }
+    .card:hover { background: var(--card-hover); }
+    .card.selected {
+      border-color: var(--green);
+      background: var(--card-hover);
+    }
+    .card .card-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .card .card-label { font-size: 0.82rem; font-weight: 600; }
+    .card .check {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 18px; height: 18px;
+      background: var(--green);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #000;
+      font-weight: 900;
+    }
+    .card.selected .check { display: flex; }
+
+    /* ── Priority badge ── */
+    .priority-wrap {
+      display: none;
+      margin-top: 8px;
+      gap: 4px;
+      justify-content: center;
+    }
+    .card.selected .priority-wrap { display: flex; }
+    .priority-btn {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .priority-btn.active-alta { background: var(--green); color: #000; border-color: var(--green); }
+    .priority-btn.active-media { background: #f0a500; color: #000; border-color: #f0a500; }
+    .priority-btn.active-baja { background: var(--border); color: var(--white); }
+
+    /* ── Text inputs / textareas ── */
+    .field-wrap { margin-bottom: 20px; }
+    .field-wrap label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-btn);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus { border-color: var(--green); }
+    textarea { resize: vertical; min-height: 90px; }
+    select option { background: #1a1a1a; }
+
+    /* ── Sliders ── */
+    .slider-wrap { margin: 16px 0; }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--green);
+    }
+
+    /* ── Radio / Checkbox groups ── */
+    .option-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .option-group.inline { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .option-label:hover { border-color: var(--muted); }
+    .option-label input { accent-color: var(--green); width: 16px; height: 16px; }
+    .option-label:has(input:checked) { border-color: var(--green); }
+
+    /* ── Sub-section headers ── */
+    .sub-heading {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green);
+      margin: 28px 0 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Navigation bar ── */
+    #nav-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.95);
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: var(--radius-btn);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 2px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--white); }
+    .btn-primary {
+      background: var(--green);
+      color: #000;
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-primary:disabled {
+      background: var(--border);
+      color: var(--muted);
+      cursor: not-allowed;
+      filter: none;
+    }
+    .btn-large { padding: 16px 48px; font-size: 1.1rem; width: 100%; margin-top: 24px; }
+
+    /* ── Reveal field ── */
+    .reveal-field { display: none; margin-top: 12px; }
+    .reveal-field.visible { display: block; }
+
+    /* ── Summary ── */
+    .summary-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .summary-block h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .summary-block p, .summary-block li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .summary-block ul { padding-left: 16px; }
+
+    /* ── Success / Error screens ── */
+    #success-screen, #error-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 80vh;
+      padding: 48px 24px;
+    }
+    #success-screen { color: #000; background: var(--green); border-radius: 16px; margin: 32px 24px; }
+    #error-screen { color: var(--white); }
+    #success-screen h1 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
+    #success-screen p { font-size: 1rem; opacity: 0.8; }
+    #error-screen h1 { font-size: 1.5rem; color: #ff4444; margin-bottom: 12px; }
+
+    /* ── Validation error ── */
+    .validation-msg {
+      color: #ff4444;
+      font-size: 0.82rem;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .validation-msg.visible { display: block; }
+
+    @media (max-width: 520px) {
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+      h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+  <header>
+    <div class="logo">r<span>u</span>na<sup style="font-size:0.4em;color:var(--muted)">®</sup></div>
+    <div class="logo-sub">Brand Kick-off</div>
+  </header>
+
+  <div id="step-indicator"></div>
+
+  <div id="wizard">
+    <!-- Steps injected in subsequent tasks -->
+  </div>
+
+  <div id="success-screen">
+    <h1>¡Gracias, Sebastián!</h1>
+    <p>Tu kick-off fue enviado correctamente.<br>Pronto te contactamos.</p>
+  </div>
+
+  <div id="error-screen">
+    <h1>Algo salió mal</h1>
+    <p>Intentá de nuevo o escribinos a <strong>contacto@lab080.studio</strong></p>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="document.getElementById('error-screen').style.display='none';document.getElementById('wizard').style.display='block';">Volver</button>
+  </div>
+
+  <div id="nav-bar">
+    <button class="btn btn-ghost" id="btn-prev" onclick="prevStep()">← Anterior</button>
+    <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Siguiente →</button>
+  </div>
+
+  <script>
+    // State object — populated as user fills in the form
+    const state = {
+      step: 1,
+      totalSteps: 5,
+      productos: {},      // { id: { selected: bool, priority: 'Alta'|'Media'|'Baja' } }
+      productosOtros: '',
+      disenio: {},        // { id: { selected: bool, sobrio: 5, minimal: 5 } }
+      disenioOtros: '',
+      disenioRefs: '',
+      canales: {},        // { id: bool }
+      canalesOtros: '',
+      canalPrincipal: '',
+      ecommerce: '',
+      plataformas: {},
+      plataformaOtra: '',
+      contenidoPropio: '',
+      frecuencia: '',
+      fotografo: '',
+      ads: {},
+      presupuesto: '',
+      comentarios: '',
+    };
+  </script>
+
+</body>
+</html>
