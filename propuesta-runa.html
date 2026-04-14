@@ -640,6 +640,15 @@
 
 </div>
 
+<!-- Form oculto para notificación email -->
+<iframe name="fs-frame" style="display:none" title="form target"></iframe>
+<form id="fs-notify" action="https://formspree.io/f/mojyqbel" method="POST" target="fs-frame" style="display:none">
+  <input type="hidden" name="_subject" value="RUNA — Sebastián eligió un plan">
+  <input type="hidden" name="cliente" value="Sebastián Weiss">
+  <input type="hidden" id="fs-plan" name="plan_elegido">
+  <input type="hidden" name="mensaje" value="Sebastián revisó la propuesta RUNA y eligió un plan.">
+</form>
+
 <!-- Nav -->
 <div id="nav">
   <button class="nb" onclick="prev()">←</button>
@@ -690,23 +699,12 @@
     hint.style.display = 'none';
   }
 
-  async function handleOK() {
+  function handleOK() {
     if (!selectedPlanName) return;
 
-    // Enviar notificación por email
-    try {
-      const fd = new FormData();
-      fd.append('_subject', 'RUNA — Sebastián eligió un plan');
-      fd.append('_replyto', 'no-reply@runa.com');
-      fd.append('cliente', 'Sebastián Weiss');
-      fd.append('plan_elegido', selectedPlanName);
-      fd.append('mensaje', 'Sebastián revisó la propuesta y eligió: ' + selectedPlanName);
-      await fetch('https://formspree.io/f/mojyqbel', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: fd
-      });
-    } catch(e) { /* si falla el mail, igual continúa */ }
+    // Enviar notificación por email (form submit a iframe oculto)
+    document.getElementById('fs-plan').value = selectedPlanName;
+    document.getElementById('fs-notify').submit();
 
     // Animación de confirmación
     document.body.style.transition = 'background 0.7s';
