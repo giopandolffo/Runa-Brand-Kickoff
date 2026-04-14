@@ -195,6 +195,47 @@
     .deliv-text { font-size: 0.9rem; color: rgba(255,255,255,0.85); flex: 1; }
     .deliv-type { font-size: 0.72rem; color: var(--muted); text-align: right; }
 
+    /* ── Pricing cards ── */
+    .pricing { display: flex; gap: 16px; margin-top: 28px; max-width: 940px; width: 100%; }
+    .plan {
+      flex: 1; background: var(--card);
+      border: 1px solid #1E1E1E; border-radius: 16px;
+      padding: 28px 24px; cursor: pointer;
+      transition: border-color 0.25s, transform 0.2s, background 0.25s;
+      position: relative;
+    }
+    .plan:hover { border-color: #3A3A3A; transform: translateY(-2px); }
+    .plan.selected {
+      border-color: var(--green);
+      background: rgba(144,217,50,0.06);
+    }
+    .plan.recommended { border-color: rgba(144,217,50,0.4); }
+    .plan-badge {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #000;
+      font-size: 0.6rem; font-weight: 900; letter-spacing: 3px;
+      text-transform: uppercase; padding: 3px 12px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .plan-price {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900; font-style: italic;
+      letter-spacing: -1px; line-height: 1;
+    }
+    .plan-price span { font-size: 0.9rem; font-weight: 400; font-style: normal; color: var(--muted); margin-left: 4px; }
+    .plan-divider { width: 100%; height: 1px; background: #1E1E1E; margin: 18px 0; }
+    .plan-items { display: flex; flex-direction: column; gap: 8px; }
+    .plan-item {
+      font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.4;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .plan-item::before { content: '✦'; color: var(--green); font-size: 0.6rem; margin-top: 2px; flex-shrink: 0; }
+    .plan.selected .plan-price { color: var(--green); }
+
     /* ── OK button ── */
     .ok-btn {
       margin-top: 40px; padding: 18px 64px;
@@ -206,6 +247,10 @@
       transition: filter 0.2s, transform 0.15s;
     }
     .ok-btn:hover { filter: brightness(1.08); transform: scale(1.02); }
+    .ok-btn:disabled {
+      background: #2A2A2A; color: #555; cursor: default;
+      filter: none; transform: none;
+    }
 
     /* ── Animations ── */
     .slide.active > * {
@@ -234,7 +279,7 @@
     <div class="eyebrow">RUNA-BRAND · 2025</div>
     <div class="h1">Tu marca.<br><em>Lo que sigue.</em></div>
     <p class="body" style="text-align:center;margin-left:auto;margin-right:auto">
-      Analizamos tus respuestas. Esto es lo que vimos<br>y lo que haremos juntos en los próximos tres días.
+      Analizamos tus respuestas. Esto es lo que vimos<br>y lo que haremos juntos.
     </p>
   </div>
 
@@ -258,7 +303,7 @@
       </div>
       <div class="qcard">
         <span class="qtopic">Contenido</span>
-        <span class="qtext">Vas a contratar a alguien. 3–4 posts por semana. Hoy no tenés fotógrafo.</span>
+        <span class="qtext">Vas a contratar a alguien. 3–4 posts por semana. Hoy no tienes fotógrafo.</span>
       </div>
     </div>
   </div>
@@ -272,17 +317,17 @@
       <div class="insight">
         <div class="insight-icon">🏹</div>
         <div class="insight-h">JJF es la puerta, no el techo.</div>
-        <div class="insight-p">La collab con Jiu-Jitsu Fest te da 1.000–1.500 compradores el día uno. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo. Si te quedás en jiu-jitsu, el límite llega rápido.</div>
+        <div class="insight-p">La collab con Jiu-Jitsu Fest te da 1.000–1.500 compradores el día uno. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo. Si te quedas en jiu-jitsu, el límite llega rápido.</div>
       </div>
       <div class="insight">
         <div class="insight-icon">✂️</div>
         <div class="insight-h">Dos líneas. Dos voces. Un nombre.</div>
-        <div class="insight-p">La collab JJF y la marca RUNA hablan distinto. Si las mezclás sin separación, ninguna convence. Hay que dejarlas claras desde el diseño.</div>
+        <div class="insight-p">La collab JJF y la marca RUNA hablan distinto. Si las mezclas sin separación, ninguna convence. Hay que dejarlas claras desde el diseño.</div>
       </div>
       <div class="insight">
         <div class="insight-icon">📷</div>
-        <div class="insight-h">No necesitás fotógrafo hoy.</div>
-        <div class="insight-p">Con IA podemos tener campaña completa en 48 horas — locación, modelos, productos. Lanzás primero. Cuando el producto esté físico, validamos con shooting real.</div>
+        <div class="insight-h">No necesitas fotógrafo hoy.</div>
+        <div class="insight-p">Con IA podemos tener campaña completa — locación, modelos, productos. Lanzas primero. Cuando el producto esté físico, validamos con shooting real.</div>
       </div>
     </div>
   </div>
@@ -300,10 +345,10 @@
     </p>
   </div>
 
-  <!-- 5. DÍA 1 — FRASES -->
+  <!-- 5. FRASES -->
   <div class="slide">
     <div class="wm">1</div>
-    <div class="eyebrow">Día 1</div>
+    <div class="eyebrow">Estrategia de voz</div>
     <div class="h2">Las frases<br>de <em>tu marca.</em></div>
     <div class="phrases">
       <div class="phrase">
@@ -333,10 +378,10 @@
     </div>
   </div>
 
-  <!-- 6. DÍA 1 — ESTILOS -->
+  <!-- 6. ESTILOS -->
   <div class="slide">
-    <div class="wm">1</div>
-    <div class="eyebrow">Día 1</div>
+    <div class="wm">2</div>
+    <div class="eyebrow">Identidad visual</div>
     <div class="h2">3 caminos<br>de <em>diseño.</em></div>
     <div class="styles">
       <div class="style">
@@ -375,23 +420,23 @@
     </div>
   </div>
 
-  <!-- 7. DÍA 2 — CAMPAÑA SIN FOTÓGRAFO -->
+  <!-- 7. CAMPAÑA SIN FOTÓGRAFO -->
   <div class="slide">
-    <div class="wm">2</div>
-    <div class="eyebrow">Día 2</div>
+    <div class="wm">3</div>
+    <div class="eyebrow">Campaña</div>
     <div class="h2">Campaña completa.<br><em>Sin fotógrafo.<br>Sin esperar.</em></div>
     <div class="bar"></div>
     <p class="body">
-      Con IA generamos todas las fotos de tu lanzamiento — locación, modelos, productos — en 48 horas.
-      Tenés material listo para Instagram y tu tienda <strong>antes de producir una sola prenda.</strong>
+      Con IA generamos todas las fotos de tu lanzamiento — locación, modelos, productos.
+      Tienes material listo para Instagram y tu tienda <strong>antes de producir una sola prenda.</strong>
       Cuando el producto físico esté, lo validamos con shooting real.
     </p>
   </div>
 
-  <!-- 8. DÍA 2 — PIEZAS -->
+  <!-- 8. PIEZAS -->
   <div class="slide">
-    <div class="wm">2</div>
-    <div class="eyebrow">Día 2 · Lo que vas a tener</div>
+    <div class="wm">3</div>
+    <div class="eyebrow">Lo que vas a tener</div>
     <div class="h2"><em>16 piezas</em><br>listas para publicar.</div>
     <div class="cards" style="margin-top:28px;max-width:860px">
       <div class="card">
@@ -407,19 +452,19 @@
       <div class="card">
         <div class="card-num">Formatos</div>
         <div class="card-title">Listos para subir</div>
-        <div class="card-body">Feed cuadrado · Vertical Stories · Banner horizontal<br><br>Instagram, tienda online y WhatsApp desde el día uno.</div>
+        <div class="card-body">Feed cuadrado · Vertical Stories · Banner horizontal<br><br>Instagram, tienda online y WhatsApp desde el primer día.</div>
       </div>
     </div>
   </div>
 
-  <!-- 9. DÍA 3 — EL DECK -->
+  <!-- 9. EL DECK -->
   <div class="slide">
-    <div class="wm">3</div>
-    <div class="eyebrow">Día 3</div>
-    <div class="h2">Un deck que<br>podés <em>mostrar.</em></div>
+    <div class="wm">4</div>
+    <div class="eyebrow">Entregable final</div>
+    <div class="h2">Un deck que<br>puedes <em>mostrar.</em></div>
     <div class="bar"></div>
     <p class="body">
-      Al final de los tres días tenés una presentación completa para mostrársela a tu equipo, al festival, a inversores o al fabricante.
+      Al terminar tienes una presentación completa para mostrársela a tu equipo, al festival, a inversores o al fabricante.
       <strong>Frases aprobadas. Estilos definidos. Campaña visual lista.</strong>
     </p>
     <div class="cards" style="margin-top:24px;max-width:640px">
@@ -435,14 +480,64 @@
     </div>
   </div>
 
-  <!-- 10. OK -->
+  <!-- 10. PRECIOS -->
+  <div class="slide">
+    <div class="wm">$</div>
+    <div class="eyebrow">Elige tu plan</div>
+    <div class="h2">¿Con qué<br><em>quieres empezar?</em></div>
+    <div class="pricing">
+
+      <div class="plan" onclick="selectPlan(this, 'Esencial — USD 890')" id="plan-a">
+        <div class="plan-name">Esencial</div>
+        <div class="plan-price">USD 890<span>+ IVA</span></div>
+        <div class="plan-divider"></div>
+        <div class="plan-items">
+          <div class="plan-item">Frases para cada línea (RUNA + JJF)</div>
+          <div class="plan-item">1 camino de diseño + mockup</div>
+          <div class="plan-item">8 piezas de campaña con IA</div>
+          <div class="plan-item">Formatos para Instagram</div>
+        </div>
+      </div>
+
+      <div class="plan recommended" onclick="selectPlan(this, 'Completo — USD 1.590')" id="plan-b">
+        <div class="plan-badge">Recomendado</div>
+        <div class="plan-name">Completo</div>
+        <div class="plan-price">USD 1.590<span>+ IVA</span></div>
+        <div class="plan-divider"></div>
+        <div class="plan-items">
+          <div class="plan-item">Frases para cada línea (RUNA + JJF)</div>
+          <div class="plan-item">3 caminos de diseño con mockups</div>
+          <div class="plan-item">16 piezas de campaña con IA (2 mundos)</div>
+          <div class="plan-item">Deck para mostrárselo a tu equipo</div>
+          <div class="plan-item">Formatos para Instagram, tienda y WhatsApp</div>
+        </div>
+      </div>
+
+      <div class="plan" onclick="selectPlan(this, 'Total — USD 2.490')" id="plan-c">
+        <div class="plan-name">Total</div>
+        <div class="plan-price">USD 2.490<span>+ IVA</span></div>
+        <div class="plan-divider"></div>
+        <div class="plan-items">
+          <div class="plan-item">Todo el plan Completo</div>
+          <div class="plan-item">Adaptación específica para JJF</div>
+          <div class="plan-item">Piezas adicionales para Stories y Reels</div>
+          <div class="plan-item">Guía de contenido para el primer mes</div>
+          <div class="plan-item">Soporte durante el lanzamiento</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 11. OK -->
   <div class="slide center">
     <div class="eyebrow">Todo listo</div>
-    <div class="h1">3 días.<br><em>Tu marca.</em></div>
+    <div class="h1">Tu marca.<br><em>Empieza hoy.</em></div>
     <p class="body" style="text-align:center;margin-left:auto;margin-right:auto;margin-top:24px">
-      Si estás de acuerdo con este plan,<br>presioná OK y empezamos.
+      Si estás de acuerdo con este plan,<br>presiona OK y empezamos.
     </p>
-    <button class="ok-btn" onclick="handleOK()">OK — EMPEZAMOS</button>
+    <button class="ok-btn" id="ok-btn" onclick="handleOK()" disabled>OK — EMPEZAMOS</button>
+    <p id="ok-hint" style="margin-top:14px;font-size:0.75rem;color:var(--muted)">← Elige un plan primero</p>
   </div>
 
 </div>
@@ -450,7 +545,7 @@
 <!-- Nav -->
 <div id="nav">
   <button class="nb" onclick="prev()">←</button>
-  <span id="ctr">01 / 10</span>
+  <span id="ctr">01 / 11</span>
   <button class="nb" onclick="next()">→</button>
 </div>
 
@@ -458,6 +553,7 @@
   const slides = document.querySelectorAll('.slide');
   const total  = slides.length;
   let cur = 0;
+  let selectedPlanName = null;
 
   function show(n) {
     if (n < 0 || n >= total) return;
@@ -486,7 +582,18 @@
     if (dx >  50) prev();
   });
 
+  function selectPlan(el, name) {
+    document.querySelectorAll('.plan').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedPlanName = name;
+    const btn = document.getElementById('ok-btn');
+    const hint = document.getElementById('ok-hint');
+    btn.disabled = false;
+    hint.style.display = 'none';
+  }
+
   function handleOK() {
+    if (!selectedPlanName) return;
     document.body.style.transition = 'background 0.7s';
     document.body.style.background = '#90D932';
     setTimeout(() => {
@@ -498,8 +605,11 @@
           <div style="margin-top:28px;font-size:1rem;opacity:0.6;letter-spacing:4px;text-transform:uppercase">
             Plan confirmado
           </div>
+          <div style="margin-top:16px;font-size:0.9rem;font-weight:700;opacity:0.8;letter-spacing:1px">
+            ${selectedPlanName}
+          </div>
           <div style="margin-top:48px;font-size:0.85rem;opacity:0.4">
-            Cerrá esta ventana y avisale a Giorgio.
+            Cierra esta ventana y avísale a Giorgio.
           </div>
         </div>`;
     }, 650);
