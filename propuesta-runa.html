@@ -695,15 +695,16 @@
 
     // Enviar notificación por email
     try {
+      const fd = new FormData();
+      fd.append('_subject', 'RUNA — Sebastián eligió un plan');
+      fd.append('_replyto', 'no-reply@runa.com');
+      fd.append('cliente', 'Sebastián Weiss');
+      fd.append('plan_elegido', selectedPlanName);
+      fd.append('mensaje', 'Sebastián revisó la propuesta y eligió: ' + selectedPlanName);
       await fetch('https://formspree.io/f/mjgjveap', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'RUNA — Sebastián eligió un plan',
-          cliente: 'Sebastián Weiss',
-          plan_elegido: selectedPlanName,
-          mensaje: `Sebastián Weiss revisó la propuesta RUNA y eligió el plan: ${selectedPlanName}`
-        })
+        headers: { 'Accept': 'application/json' },
+        body: fd
       });
     } catch(e) { /* si falla el mail, igual continúa */ }
 
