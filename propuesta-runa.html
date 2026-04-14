@@ -26,6 +26,9 @@
       font-family: var(--font);
       height: 100vh;
       overflow: hidden;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M0 30 C15 12 45 12 60 30 C75 48 105 48 120 30' stroke='%2390D932' stroke-width='0.7' fill='none' opacity='0.07'/%3E%3C/svg%3E");
+      background-size: 120px 60px;
+      background-repeat: repeat;
     }
 
     /* ── Progress ── */
@@ -51,18 +54,27 @@
 
     /* ── Nav ── */
     #nav {
-      position: fixed; bottom: 32px; right: 48px;
-      display: flex; align-items: center; gap: 16px; z-index: 200;
+      position: fixed; bottom: 28px;
+      left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 12px; z-index: 200;
     }
     .nb {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       border: 1px solid #2A2A2A;
       background: rgba(255,255,255,0.04);
-      color: var(--white); font-size: 15px;
-      cursor: pointer; transition: background 0.2s;
+      color: var(--muted); font-size: 14px;
+      cursor: pointer; transition: all 0.2s;
     }
-    .nb:hover { background: rgba(255,255,255,0.1); }
-    #ctr { font-size: 12px; color: var(--muted); letter-spacing: 2px; }
+    .nb:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+    .nb-next {
+      width: auto; padding: 0 28px; border-radius: 40px;
+      background: var(--green); border: none;
+      color: #000; font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 3px; text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nb-next:hover { filter: brightness(1.1); color: #000; }
+    #ctr { font-size: 11px; color: #333; letter-spacing: 2px; }
 
     /* Slide number watermark */
     .wm {
@@ -312,11 +324,8 @@
       .slide-pricing { padding-top: 52px !important; padding-bottom: 90px !important; }
 
       /* Nav */
-      #nav {
-        bottom: 14px; right: 50%; left: 50%;
-        transform: translateX(-50%);
-        width: max-content;
-      }
+      #nav { bottom: 14px; }
+      .nb-next { padding: 0 18px; font-size: 0.65rem; letter-spacing: 2px; }
 
       /* Watermark */
       .wm { font-size: clamp(5rem, 28vw, 10rem); }
@@ -584,8 +593,7 @@
         </div>
       </div>
 
-      <div class="plan recommended" onclick="selectPlan(this, 'Lanzamiento — $590.000')" id="plan-b">
-        <div class="plan-badge">Recomendado</div>
+      <div class="plan" onclick="selectPlan(this, 'Lanzamiento — $590.000')" id="plan-b">
         <div class="plan-name">Lanzamiento</div>
         <div class="plan-price">$590.000<span>CLP</span></div>
         <div class="plan-divider"></div>
@@ -594,6 +602,7 @@
           <div class="plan-item">8 fotos de campaña con IA</div>
           <div class="plan-item">2 UCG modelos IA</div>
           <div class="plan-item">6 posts listos para publicar</div>
+          <div class="plan-item">1 reel</div>
         </div>
       </div>
 
@@ -629,8 +638,8 @@
 <!-- Nav -->
 <div id="nav">
   <button class="nb" onclick="prev()">←</button>
-  <span id="ctr">01 / 11</span>
-  <button class="nb" onclick="next()">→</button>
+  <span id="ctr">01 / 10</span>
+  <button class="nb nb-next" onclick="next()">Siguiente →</button>
 </div>
 
 <script>
