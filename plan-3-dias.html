@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RUNA — Lo que sigue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:    #0A0A0A;
@@ -142,7 +145,10 @@
       flex: 1; background: var(--card); border-radius: 14px;
       padding: 28px 22px; border-top: 3px solid var(--green);
     }
-    .insight-icon { font-size: 1.6rem; margin-bottom: 14px; }
+    .insight-icon {
+      font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 16px; font-weight: 700;
+    }
     .insight-h { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
     .insight-p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
 
@@ -153,7 +159,9 @@
       padding: 20px 22px; border: 1px solid #1E1E1E;
     }
     .phrase-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .phrase-text { font-size: 1.15rem; font-weight: 800; font-style: italic; line-height: 1.3; }
+    .phrase-text { font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 800; font-style: italic; line-height: 1.25; }
+    .phrase.runa { border-left: 2px solid var(--green); border-color: var(--green); }
+    .phrase.jjf  { border-left: 2px solid rgba(144,217,50,0.3); }
 
     /* ── Style cards ── */
     .styles { display: flex; gap: 16px; margin-top: 28px; max-width: 920px; width: 100%; }
@@ -209,7 +217,12 @@
       border-color: var(--green);
       background: rgba(144,217,50,0.06);
     }
-    .plan.recommended { border-color: rgba(144,217,50,0.4); }
+    .plan.recommended {
+      border-color: rgba(144,217,50,0.5);
+      transform: scale(1.03);
+      background: rgba(144,217,50,0.04);
+    }
+    .plan.recommended:hover { transform: scale(1.03) translateY(-2px); }
     .plan-badge {
       position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
       background: var(--green); color: #000;
@@ -285,7 +298,7 @@
 
   <!-- 2. LO QUE NOS DIJISTE -->
   <div class="slide">
-    <div class="wm">S</div>
+    <div class="wm">2</div>
     <div class="eyebrow">Sebastián Weiss · Kick-off</div>
     <div class="h2">Lo que<br><em>nos dijiste.</em></div>
     <div class="quotes">
@@ -310,22 +323,22 @@
 
   <!-- 3. LO QUE VIMOS -->
   <div class="slide">
-    <div class="wm">→</div>
+    <div class="wm">3</div>
     <div class="eyebrow">Nuestro análisis</div>
     <div class="h2">Lo que<br><em>nosotros vimos.</em></div>
     <div class="insights">
       <div class="insight">
-        <div class="insight-icon">🏹</div>
+        <div class="insight-icon">01 ——</div>
         <div class="insight-h">JJF es la puerta, no el techo.</div>
         <div class="insight-p">La collab con Jiu-Jitsu Fest te da 1.000–1.500 compradores el día uno. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo. Si te quedas en jiu-jitsu, el límite llega rápido.</div>
       </div>
       <div class="insight">
-        <div class="insight-icon">✂️</div>
+        <div class="insight-icon">02 ——</div>
         <div class="insight-h">Dos líneas. Dos voces. Un nombre.</div>
         <div class="insight-p">La collab JJF y la marca RUNA hablan distinto. Si las mezclas sin separación, ninguna convence. Hay que dejarlas claras desde el diseño.</div>
       </div>
       <div class="insight">
-        <div class="insight-icon">📷</div>
+        <div class="insight-icon">03 ——</div>
         <div class="insight-h">No necesitas fotógrafo hoy.</div>
         <div class="insight-p">Con IA podemos tener campaña completa — locación, modelos, productos. Lanzas primero. Cuando el producto esté físico, validamos con shooting real.</div>
       </div>
@@ -334,7 +347,7 @@
 
   <!-- 4. LA ESTRATEGIA -->
   <div class="slide">
-    <div class="wm">↑</div>
+    <div class="wm">4</div>
     <div class="eyebrow">Estrategia de marca</div>
     <div class="h2">Una marca deportiva<br>que empieza en el mat.<br><em>No termina ahí.</em></div>
     <div class="bar"></div>
@@ -351,27 +364,27 @@
     <div class="eyebrow">Estrategia de voz</div>
     <div class="h2">Las frases<br>de <em>tu marca.</em></div>
     <div class="phrases">
-      <div class="phrase">
+      <div class="phrase runa">
         <div class="phrase-label">RUNA · Ancla</div>
         <div class="phrase-text">"You belong here."</div>
       </div>
-      <div class="phrase">
+      <div class="phrase runa">
         <div class="phrase-label">RUNA · Comunidad</div>
         <div class="phrase-text">"Together, we are stronger."</div>
       </div>
-      <div class="phrase">
+      <div class="phrase runa">
         <div class="phrase-label">RUNA · Movimiento</div>
         <div class="phrase-text">"Forged in friction."</div>
       </div>
-      <div class="phrase">
+      <div class="phrase jjf">
         <div class="phrase-label">JJF Collab</div>
         <div class="phrase-text">"Tap or be tapped."</div>
       </div>
-      <div class="phrase">
+      <div class="phrase jjf">
         <div class="phrase-label">JJF Collab</div>
         <div class="phrase-text">"Leave it on the mat."</div>
       </div>
-      <div class="phrase">
+      <div class="phrase jjf">
         <div class="phrase-label">JJF Collab</div>
         <div class="phrase-text">"The mat doesn't lie."</div>
       </div>
@@ -422,7 +435,7 @@
 
   <!-- 7. CAMPAÑA SIN FOTÓGRAFO -->
   <div class="slide">
-    <div class="wm">3</div>
+    <div class="wm">7</div>
     <div class="eyebrow">Campaña</div>
     <div class="h2">Campaña completa.<br><em>Sin fotógrafo.<br>Sin esperar.</em></div>
     <div class="bar"></div>
@@ -431,6 +444,20 @@
       Tienes material listo para Instagram y tu tienda <strong>antes de producir una sola prenda.</strong>
       Cuando el producto físico esté, lo validamos con shooting real.
     </p>
+    <div style="display:flex;gap:24px;margin-top:32px">
+      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">16</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">piezas listas</div>
+      </div>
+      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">2</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">mundos visuales</div>
+      </div>
+      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">0</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">fotógrafos</div>
+      </div>
+    </div>
   </div>
 
   <!-- 8. PIEZAS -->
@@ -481,8 +508,8 @@
   </div>
 
   <!-- 10. PRECIOS -->
-  <div class="slide">
-    <div class="wm">$</div>
+  <div class="slide" style="padding-top:48px;padding-bottom:80px;justify-content:flex-start;overflow-y:auto">
+    <div class="wm">10</div>
     <div class="eyebrow">Elige tu plan</div>
     <div class="h2">¿Con qué<br><em>quieres empezar?</em></div>
     <div class="pricing">
