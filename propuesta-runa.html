@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RUNA — Lo que sigue</title>
+  <title>RUNA — Propuesta de marca</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
@@ -219,10 +219,10 @@
     }
     .plan.recommended {
       border-color: rgba(144,217,50,0.5);
-      transform: scale(1.03);
-      background: rgba(144,217,50,0.04);
+      transform: scale(1.05);
+      background: rgba(144,217,50,0.05);
     }
-    .plan.recommended:hover { transform: scale(1.03) translateY(-2px); }
+    .plan.recommended:hover { transform: scale(1.05) translateY(-2px); }
     .plan-badge {
       position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
       background: var(--green); color: #000;
@@ -279,6 +279,27 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(144,217,50,0); }
+      50%       { box-shadow: 0 0 24px 6px rgba(144,217,50,0.35); }
+    }
+
+    /* ── Cover gradient glow ── */
+    .cover-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%,
+        rgba(144,217,50,0.07) 0%, transparent 70%);
+    }
+
+    /* ── Gradient number ── */
+    .grad-num {
+      background: linear-gradient(135deg, var(--green) 0%, #c8ff4d 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Pulse CTA ── */
+    .ok-btn:not(:disabled) { animation: pulse-glow 2.4s ease-in-out infinite; }
   </style>
 </head>
 <body>
@@ -289,6 +310,7 @@
 
   <!-- 1. COVER -->
   <div class="slide center">
+    <div class="cover-glow"></div>
     <div class="eyebrow">RUNA-BRAND · 2025</div>
     <div class="h1">Tu marca.<br><em>Lo que sigue.</em></div>
     <p class="body" style="text-align:center;margin-left:auto;margin-right:auto">
@@ -360,7 +382,7 @@
 
   <!-- 5. FRASES -->
   <div class="slide">
-    <div class="wm">1</div>
+    <div class="wm">5</div>
     <div class="eyebrow">Estrategia de voz</div>
     <div class="h2">Las frases<br>de <em>tu marca.</em></div>
     <div class="phrases">
@@ -393,7 +415,7 @@
 
   <!-- 6. ESTILOS -->
   <div class="slide">
-    <div class="wm">2</div>
+    <div class="wm">6</div>
     <div class="eyebrow">Identidad visual</div>
     <div class="h2">3 caminos<br>de <em>diseño.</em></div>
     <div class="styles">
@@ -446,15 +468,15 @@
     </p>
     <div style="display:flex;gap:24px;margin-top:32px">
       <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
-        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">16</div>
+        <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">16</div>
         <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">piezas listas</div>
       </div>
       <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
-        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">2</div>
+        <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">2</div>
         <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">mundos visuales</div>
       </div>
       <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
-        <div style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;color:var(--green);line-height:1">0</div>
+        <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">0</div>
         <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">fotógrafos</div>
       </div>
     </div>
@@ -462,7 +484,7 @@
 
   <!-- 8. PIEZAS -->
   <div class="slide">
-    <div class="wm">3</div>
+    <div class="wm">8</div>
     <div class="eyebrow">Lo que vas a tener</div>
     <div class="h2"><em>16 piezas</em><br>listas para publicar.</div>
     <div class="cards" style="margin-top:28px;max-width:860px">
@@ -486,7 +508,7 @@
 
   <!-- 9. EL DECK -->
   <div class="slide">
-    <div class="wm">4</div>
+    <div class="wm">9</div>
     <div class="eyebrow">Entregable final</div>
     <div class="h2">Un deck que<br>puedes <em>mostrar.</em></div>
     <div class="bar"></div>
