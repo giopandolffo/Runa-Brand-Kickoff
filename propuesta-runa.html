@@ -300,6 +300,66 @@
 
     /* ── Pulse CTA ── */
     .ok-btn:not(:disabled) { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+    /* ═══════════════════════════════
+       RESPONSIVE — MOBILE FIRST
+       ═══════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* Slide base */
+      .slide { padding: 56px 24px 80px; }
+      .slide.center { padding: 56px 24px 80px; }
+      .slide-pricing { padding-top: 52px !important; padding-bottom: 90px !important; }
+
+      /* Nav */
+      #nav {
+        bottom: 14px; right: 50%; left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+      }
+
+      /* Watermark */
+      .wm { font-size: clamp(5rem, 28vw, 10rem); }
+
+      /* Cards row → stack */
+      .cards     { flex-direction: column; gap: 12px; }
+      .insights  { flex-direction: column; gap: 12px; }
+      .styles    { flex-direction: column; gap: 12px; }
+
+      /* Pricing — stack vertically */
+      .pricing { flex-direction: column; gap: 16px; max-width: 100%; }
+      .plan.recommended { transform: scale(1); }
+      .plan.recommended:hover { transform: translateY(-2px); }
+
+      /* Phrase grid → single column */
+      .phrases { grid-template-columns: 1fr; }
+
+      /* Quotes — tighten up */
+      .qcard { flex-direction: column; gap: 6px; }
+      .qtopic { min-width: unset; }
+
+      /* Stat row in slide 7 */
+      .stat-row { gap: 10px; }
+      .stat-row > div { min-width: unset; flex: 1; padding: 14px 12px; }
+
+      /* OK button */
+      .ok-btn { padding: 16px 36px; font-size: 0.9rem; letter-spacing: 2px; }
+
+      /* Heading adjustments */
+      .h1 { font-size: clamp(2.6rem, 12vw, 5rem); letter-spacing: -2px; }
+      .h2 { font-size: clamp(1.8rem, 8vw, 3rem); letter-spacing: -1px; }
+
+      /* Body text */
+      .body { font-size: 0.95rem; }
+    }
+
+    @media (max-width: 480px) {
+      .slide { padding: 48px 20px 76px; }
+      .insight { padding: 20px 16px; }
+      .card   { padding: 18px 16px; }
+      .plan   { padding: 20px 16px; }
+      .plan-price { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
@@ -466,7 +526,7 @@
       Tienes material listo para Instagram y tu tienda <strong>antes de producir una sola prenda.</strong>
       Cuando el producto físico esté, lo validamos con shooting real.
     </p>
-    <div style="display:flex;gap:24px;margin-top:32px">
+    <div class="stat-row" style="display:flex;gap:24px;margin-top:32px">
       <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
         <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">16</div>
         <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">piezas listas</div>
@@ -482,31 +542,7 @@
     </div>
   </div>
 
-  <!-- 8. PIEZAS -->
-  <div class="slide">
-    <div class="wm">8</div>
-    <div class="eyebrow">Lo que vas a tener</div>
-    <div class="h2"><em>16 piezas</em><br>listas para publicar.</div>
-    <div class="cards" style="margin-top:28px;max-width:860px">
-      <div class="card">
-        <div class="card-num">Mundo 1 · El mat</div>
-        <div class="card-title">Autenticidad deportiva</div>
-        <div class="card-body">2 fotos hero · 3 fotos detalle · 1 foto de grupo<br><br>Tatami, luz lateral, gritty editorial. Lo que vive en el jiu-jitsu.</div>
-      </div>
-      <div class="card">
-        <div class="card-num">Mundo 2 · La calle</div>
-        <div class="card-title">Más allá del deporte</div>
-        <div class="card-body">2 fotos hero · 3 mockups producto · 1 banner web<br><br>Calle latinoamericana, golden hour, lifestyle. Donde RUNA crece.</div>
-      </div>
-      <div class="card">
-        <div class="card-num">Formatos</div>
-        <div class="card-title">Listos para subir</div>
-        <div class="card-body">Feed cuadrado · Vertical Stories · Banner horizontal<br><br>Instagram, tienda online y WhatsApp desde el primer día.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 9. EL DECK -->
+  <!-- 8. EL DECK -->
   <div class="slide">
     <div class="wm">9</div>
     <div class="eyebrow">Entregable final</div>
@@ -529,56 +565,55 @@
     </div>
   </div>
 
-  <!-- 10. PRECIOS -->
-  <div class="slide" style="padding-top:48px;padding-bottom:80px;justify-content:flex-start;overflow-y:auto">
-    <div class="wm">10</div>
-    <div class="eyebrow">Elige tu plan</div>
-    <div class="h2">¿Con qué<br><em>quieres empezar?</em></div>
+  <!-- 9. PRECIOS -->
+  <div class="slide slide-pricing" style="justify-content:flex-start;overflow-y:auto">
+    <div class="wm">9</div>
+    <div class="eyebrow">Elige tu alcance</div>
+    <div class="h2">¿Hasta dónde<br><em>llegamos?</em></div>
     <div class="pricing">
 
-      <div class="plan" onclick="selectPlan(this, 'Esencial — USD 890')" id="plan-a">
-        <div class="plan-name">Esencial</div>
-        <div class="plan-price">USD 890<span>+ IVA</span></div>
+      <div class="plan" onclick="selectPlan(this, 'Diseño — $390.000')" id="plan-a">
+        <div class="plan-name">Diseño</div>
+        <div class="plan-price">$390.000<span>CLP</span></div>
         <div class="plan-divider"></div>
         <div class="plan-items">
-          <div class="plan-item">Frases para cada línea (RUNA + JJF)</div>
-          <div class="plan-item">1 camino de diseño + mockup</div>
-          <div class="plan-item">8 piezas de campaña con IA</div>
-          <div class="plan-item">Formatos para Instagram</div>
+          <div class="plan-item">Diseño de la ropa acordada</div>
+          <div class="plan-item">Mockups de producto</div>
+          <div class="plan-item">Identidad visual para Instagram</div>
+          <div class="plan-item">Frases por línea (RUNA + JJF)</div>
         </div>
       </div>
 
-      <div class="plan recommended" onclick="selectPlan(this, 'Completo — USD 1.590')" id="plan-b">
+      <div class="plan recommended" onclick="selectPlan(this, 'Lanzamiento — $590.000')" id="plan-b">
         <div class="plan-badge">Recomendado</div>
-        <div class="plan-name">Completo</div>
-        <div class="plan-price">USD 1.590<span>+ IVA</span></div>
+        <div class="plan-name">Lanzamiento</div>
+        <div class="plan-price">$590.000<span>CLP</span></div>
         <div class="plan-divider"></div>
         <div class="plan-items">
-          <div class="plan-item">Frases para cada línea (RUNA + JJF)</div>
-          <div class="plan-item">3 caminos de diseño con mockups</div>
-          <div class="plan-item">16 piezas de campaña con IA (2 mundos)</div>
-          <div class="plan-item">Deck para mostrárselo a tu equipo</div>
-          <div class="plan-item">Formatos para Instagram, tienda y WhatsApp</div>
+          <div class="plan-item">Todo el plan Diseño</div>
+          <div class="plan-item">8 fotos de campaña con IA</div>
+          <div class="plan-item">2 UCG modelos IA</div>
+          <div class="plan-item">6 posts listos para publicar</div>
         </div>
       </div>
 
-      <div class="plan" onclick="selectPlan(this, 'Total — USD 2.490')" id="plan-c">
-        <div class="plan-name">Total</div>
-        <div class="plan-price">USD 2.490<span>+ IVA</span></div>
+      <div class="plan" onclick="selectPlan(this, 'Completo — $790.000')" id="plan-c">
+        <div class="plan-name">Completo</div>
+        <div class="plan-price">$790.000<span>CLP</span></div>
         <div class="plan-divider"></div>
         <div class="plan-items">
-          <div class="plan-item">Todo el plan Completo</div>
-          <div class="plan-item">Adaptación específica para JJF</div>
-          <div class="plan-item">Piezas adicionales para Stories y Reels</div>
-          <div class="plan-item">Guía de contenido para el primer mes</div>
-          <div class="plan-item">Soporte durante el lanzamiento</div>
+          <div class="plan-item">Todo el plan Lanzamiento</div>
+          <div class="plan-item">12 fotos de campaña con IA</div>
+          <div class="plan-item">3 UCG modelos IA</div>
+          <div class="plan-item">2 reels</div>
+          <div class="plan-item">Look &amp; feel web</div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- 11. OK -->
+  <!-- 10. OK -->
   <div class="slide center">
     <div class="eyebrow">Todo listo</div>
     <div class="h1">Tu marca.<br><em>Empieza hoy.</em></div>
