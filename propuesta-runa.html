@@ -702,7 +702,11 @@
   function handleOK() {
     if (!selectedPlanName) return;
 
-    // Enviar notificación por email (form submit a iframe oculto)
+    // Notificación por WhatsApp
+    const msg = encodeURIComponent('Hola Giorgio, revisé la propuesta RUNA y elegí el plan: ' + selectedPlanName);
+    window.open('https://wa.me/56991509244?text=' + msg, '_blank');
+
+    // Notificación por email (respaldo)
     document.getElementById('fs-plan').value = selectedPlanName;
     document.getElementById('fs-notify').submit();
 
