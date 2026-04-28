@@ -55,7 +55,12 @@
         rgba(144,217,50,0.08) 0%, transparent 65%);
       pointer-events: none;
     }
-    #cover img { width: clamp(200px, 40vw, 380px); margin-bottom: 40px; position: relative; }
+    .cover-logo-wrap { position: relative; width: clamp(200px, 40vw, 380px); margin-bottom: 40px; }
+    .cover-logo-wrap img.logo-white { width: 100%; display: block; }
+    .cover-logo-wrap img.logo-mark {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: contain;
+    }
     #cover .cover-sub {
       font-size: 0.7rem; letter-spacing: 8px; text-transform: uppercase;
       color: var(--ceniza); margin-bottom: 8px;
@@ -70,6 +75,158 @@
     }
     #cover .scroll-hint::after {
       content: ''; width: 1px; height: 32px; background: #333;
+    }
+
+    /* ══════════════════════════
+       BRAND FOUNDATION
+    ══════════════════════════ */
+    #brand-foundation {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--carbon);
+    }
+    .mv-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; max-width: 1200px; margin-top: 40px;
+    }
+    .mv-card {
+      background: var(--noche); padding: 48px 40px;
+      position: relative; overflow: hidden;
+    }
+    .mv-card:first-child { border-radius: 14px 0 0 14px; }
+    .mv-card:last-child  { border-radius: 0 14px 14px 0; }
+    .mv-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%; background: var(--verde);
+    }
+    .mv-eyebrow {
+      font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--verde); margin-bottom: 20px;
+    }
+    .mv-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.9; color: var(--blanco);
+      margin-bottom: 24px; letter-spacing: -1px;
+    }
+    .mv-body {
+      font-size: 1rem; color: var(--ceniza);
+      line-height: 1.75; max-width: 460px;
+    }
+
+    /* 4 Pilares */
+    #pilares {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--noche);
+    }
+    .pilares-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: 0.9;
+      margin-bottom: 56px; max-width: 900px;
+    }
+    .pilares-headline em { font-style: italic; color: var(--verde); }
+    .pilares-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; max-width: 1200px;
+    }
+    .pilar-card {
+      background: var(--carbon); border-radius: 14px;
+      padding: 36px 28px; position: relative; overflow: hidden;
+      border: 1px solid #222;
+      transition: border-color 0.2s;
+    }
+    .pilar-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 2px solid var(--verde);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px; font-size: 1.4rem;
+    }
+    .pilar-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 900; font-style: italic;
+      color: var(--blanco); margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .pilar-desc {
+      font-size: 0.82rem; color: var(--ceniza); line-height: 1.65;
+    }
+    .pilar-number {
+      position: absolute; top: 20px; right: 20px;
+      font-size: 4rem; font-weight: 900; color: #161616;
+      font-family: var(--font-display); line-height: 1;
+    }
+
+    /* Filosofía del Diseño */
+    #filosofia {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: #0E0E0E;
+    }
+    .filosofia-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; max-width: 1200px; margin-top: 40px;
+    }
+    .filosofia-quote {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.88; letter-spacing: -2px;
+    }
+    .filosofia-quote em { color: var(--verde); font-style: italic; }
+    .filosofia-items { display: flex; flex-direction: column; gap: 32px; }
+    .filosofia-item {}
+    .filosofia-item-label {
+      font-size: 1rem; font-weight: 800; color: var(--blanco);
+      margin-bottom: 6px;
+    }
+    .filosofia-item-label em { color: var(--verde); font-style: italic; }
+    .filosofia-item-desc {
+      font-size: 0.88rem; color: var(--ceniza); line-height: 1.65;
+    }
+    .filosofia-divider {
+      width: 32px; height: 2px; background: var(--verde);
+      margin-bottom: 10px;
+    }
+
+    /* Inspiración Uruz */
+    #inspiracion {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--carbon);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 80px; align-items: center; max-width: none;
+    }
+    .inspiracion-content { max-width: 680px; }
+    .inspiracion-tag {
+      font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--verde); margin-bottom: 24px;
+    }
+    .inspiracion-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.88; letter-spacing: -3px;
+      margin-bottom: 32px;
+    }
+    .inspiracion-title em { color: var(--verde); }
+    .inspiracion-body {
+      font-size: 1.05rem; color: var(--ceniza); line-height: 1.8;
+      max-width: 560px;
+    }
+    .inspiracion-mark {
+      width: clamp(120px, 18vw, 220px); opacity: 0.9;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .mv-grid { grid-template-columns: 1fr; gap: 2px; }
+      .mv-card:first-child { border-radius: 14px 14px 0 0; }
+      .mv-card:last-child  { border-radius: 0 0 14px 14px; }
+      .pilares-grid { grid-template-columns: 1fr 1fr; }
+      .filosofia-grid { grid-template-columns: 1fr; }
+      #inspiracion { grid-template-columns: 1fr; }
+      .inspiracion-mark { display: none; }
+    }
+    @media (max-width: 480px) {
+      .pilares-grid { grid-template-columns: 1fr; }
     }
 
     /* ══════════════════════════
@@ -349,25 +506,182 @@
     }
     #footer img { height: 28px; opacity: 0.5; }
     #footer p { font-size: 0.72rem; color: #333; }
+
+    /* ══════════════════════════
+       DOWNLOAD BUTTON
+    ══════════════════════════ */
+    #download-btn {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      background: var(--verde); color: var(--noche);
+      font-family: var(--font-body); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 14px 24px; border-radius: 40px;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 8px 32px rgba(144,217,50,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    #download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(144,217,50,0.5);
+    }
+    #download-btn svg { width: 16px; height: 16px; }
+
+    /* ══════════════════════════
+       PRINT / PDF STYLES
+    ══════════════════════════ */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      #download-btn { display: none !important; }
+      #cover .scroll-hint { display: none; }
+
+      section, footer {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      #cover { height: 100vh; page-break-after: always; }
+      #brand-foundation { page-break-after: always; }
+      #pilares { page-break-after: always; }
+      #filosofia { page-break-after: always; }
+      #inspiracion { page-break-after: always; }
+      #style-tile { page-break-after: always; }
+      #colors { page-break-after: always; }
+      #typography { page-break-after: always; }
+      #logo-usage { page-break-after: always; }
+      #voice { page-break-after: always; }
+      #applications { page-break-after: always; }
+
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body>
+
+<a id="download-btn" href="RUNA-Brand-Identity.pdf" download="RUNA-Brand-Identity.pdf">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Descargar PDF
+</a>
 
 <!-- ══════════════════════════
      1. COVER
 ══════════════════════════ -->
 <section id="cover">
-  <img src="LOGOS/RUNA-07.png" alt="RUNA Logo">
+  <div class="cover-logo-wrap">
+    <img class="logo-white" src="LOGOS/RUNA-12.png" alt="RUNA Logo">
+    <img class="logo-mark" src="LOGOS/RUNA-10.png" alt="">
+  </div>
   <div class="cover-sub">Brand Identity System</div>
   <div class="cover-year">2025 · Confidencial</div>
   <div class="scroll-hint">Scroll</div>
 </section>
 
 <!-- ══════════════════════════
+     BRAND FOUNDATION — Misión + Visión
+══════════════════════════ -->
+<section id="brand-foundation">
+  <div class="section-label">01 — Fundamentos de Marca</div>
+  <div class="mv-grid">
+    <div class="mv-card">
+      <div class="mv-eyebrow">Misión</div>
+      <div class="mv-title">Por qué<br>existimos</div>
+      <p class="mv-body">Crear indumentaria deportiva que combine rendimiento, estilo y comunidad para quienes entrenan con propósito. Cada pieza de RUNA está diseñada para acompañar la disciplina, el esfuerzo y la pertenencia.</p>
+    </div>
+    <div class="mv-card">
+      <div class="mv-eyebrow">Visión</div>
+      <div class="mv-title">A dónde<br>vamos</div>
+      <p class="mv-body">Ser la marca de referencia en Latinoamérica para atletas de artes marciales y deportes de contacto, reconocida por su identidad visual poderosa y su espíritu auténtico de comunidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     LOS 4 PILARES
+══════════════════════════ -->
+<section id="pilares">
+  <div class="section-label" style="color:var(--ceniza)">Los Pilares</div>
+  <h2 class="pilares-headline">Los <em>4 Pilares</em><br>de Runa</h2>
+  <div class="pilares-grid">
+    <div class="pilar-card">
+      <div class="pilar-number">01</div>
+      <div class="pilar-icon">📈</div>
+      <div class="pilar-name">Crecimiento</div>
+      <p class="pilar-desc">Superación personal, confianza y capacidad de salir adelante. Cada entrenamiento es un paso hacia una mejor versión.</p>
+    </div>
+    <div class="pilar-card">
+      <div class="pilar-number">02</div>
+      <div class="pilar-icon">🤝</div>
+      <div class="pilar-name">Comunidad</div>
+      <p class="pilar-desc">Personas y pertenencia, ser parte de algo especial. RUNA no es solo ropa — es una tribu de personas que comparten valores.</p>
+    </div>
+    <div class="pilar-card">
+      <div class="pilar-number">03</div>
+      <div class="pilar-icon">⚖️</div>
+      <div class="pilar-name">Equilibrio</div>
+      <p class="pilar-desc">Bienestar integral que conecta cuerpo, mente y espíritu. El rendimiento sin equilibrio no es sostenible.</p>
+    </div>
+    <div class="pilar-card">
+      <div class="pilar-number">04</div>
+      <div class="pilar-icon">🙏</div>
+      <div class="pilar-name">Respeto</div>
+      <p class="pilar-desc">Valores, disciplina y humildad en cada interacción. El respeto al rival, al compañero y a uno mismo es la base de todo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     FILOSOFÍA DEL DISEÑO
+══════════════════════════ -->
+<section id="filosofia">
+  <div class="section-label">Filosofía del Diseño</div>
+  <div class="filosofia-grid">
+    <div class="filosofia-quote">
+      Crear una identidad<br><em>poderosa</em> pero cercana,<br>única, fresca y<br><em>reconocible.</em>
+    </div>
+    <div class="filosofia-items">
+      <div class="filosofia-item">
+        <div class="filosofia-divider"></div>
+        <div class="filosofia-item-label">"<em>Pensar</em> fuera de la caja"</div>
+        <p class="filosofia-item-desc">Alejarse de los códigos visuales tradicionales del Jiu-Jitsu. RUNA no es una marca de artes marciales más.</p>
+      </div>
+      <div class="filosofia-item">
+        <div class="filosofia-divider"></div>
+        <div class="filosofia-item-label">"Flow y <em>elegancia</em>"</div>
+        <p class="filosofia-item-desc">Tipografía con flow, inspirada en estilos modernos y fluidos. Las formas de las letras evocan movimiento y energía.</p>
+      </div>
+      <div class="filosofia-item">
+        <div class="filosofia-divider"></div>
+        <div class="filosofia-item-label">"<em>Potencia</em> visual"</div>
+        <p class="filosofia-item-desc">Una marca que genere impacto inmediato y deseo de pertenencia. Que se vea desde el otro lado de la cancha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     INSPIRACIÓN — La Runa Uruz
+══════════════════════════ -->
+<section id="inspiracion">
+  <div class="inspiracion-content">
+    <div class="inspiracion-tag">Inspiración · Origen del nombre</div>
+    <h2 class="inspiracion-title">La Runa<br><em>Uruz</em></h2>
+    <p class="inspiracion-body">La <strong style="color:var(--blanco)">Runa Uruz</strong> representa fuerza primitiva, resistencia y nuevos comienzos. Simboliza la capacidad de superar obstáculos y la energía necesaria para transformarse. El logotipo de RUNA toma esta forma ancestral y la convierte en una tipografía moderna con flow, conectando pasado y futuro.</p>
+  </div>
+  <img class="inspiracion-mark" src="LOGOS/RUNA-10.png" alt="Runa Uruz mark">
+</section>
+
+<!-- ══════════════════════════
      2. BRAND STYLE TILE
 ══════════════════════════ -->
 <section id="style-tile">
-  <div class="section-label">02 — Brand Style Tile</div>
+  <div class="section-label">05 — Brand Style Tile</div>
   <div class="tile-grid">
 
     <div class="tile-left">

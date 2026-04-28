@@ -1,6 +1,7 @@
 
 # Large binaries / local assets
-*.pdf
+# *.pdf — excluido para permitir RUNA-Brand-Identity.pdf
+"PRESENTACION RUNA.pdf"
 *.m4a
 *.mp3
 *.zip
