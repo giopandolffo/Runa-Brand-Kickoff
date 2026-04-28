@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RUNA — Brand Identity System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde:   #90D932;
+      --noche:   #0A0A0A;
+      --carbon:  #1C1C1C;
+      --blanco:  #FFFFFF;
+      --ceniza:  #888888;
+      --crema:   #F4F3EE;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--noche);
+      color: var(--blanco);
+    }
+
+    /* ── Section labels ── */
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 6px; text-transform: uppercase;
+      color: var(--ceniza); margin-bottom: 48px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: #222;
+    }
+
+    /* ══════════════════════════
+       1. COVER
+    ══════════════════════════ */
+    #cover {
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      background: var(--noche); text-align: center;
+      padding: 48px; position: relative; overflow: hidden;
+    }
+    #cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%,
+        rgba(144,217,50,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #cover img { width: clamp(200px, 40vw, 380px); margin-bottom: 40px; position: relative; }
+    #cover .cover-sub {
+      font-size: 0.7rem; letter-spacing: 8px; text-transform: uppercase;
+      color: var(--ceniza); margin-bottom: 8px;
+    }
+    #cover .cover-year {
+      font-size: 0.7rem; letter-spacing: 4px; color: #333;
+    }
+    #cover .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
+      color: #333; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    #cover .scroll-hint::after {
+      content: ''; width: 1px; height: 32px; background: #333;
+    }
+
+    /* ══════════════════════════
+       2. BRAND STYLE TILE
+    ══════════════════════════ */
+    #style-tile {
+      background: var(--crema); color: var(--noche);
+      padding: 80px clamp(32px, 8vw, 100px);
+    }
+    #style-tile .section-label { color: #aaa9a3; }
+    #style-tile .section-label::after { background: #dddcd8; }
+    .tile-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: start; max-width: 1200px;
+    }
+    .tile-left .tile-logo {
+      width: clamp(140px, 24vw, 260px); margin-bottom: 40px;
+    }
+    .tile-divider { width: 100%; height: 1px; background: #ccc; margin-bottom: 32px; }
+    .swatches { display: flex; gap: 12px; }
+    .swatch { flex: 1; }
+    .swatch-color {
+      width: 100%; aspect-ratio: 1; border-radius: 6px; margin-bottom: 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .swatch-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 2px; color: var(--noche); }
+    .swatch-hex  { font-size: 0.65rem; color: #888; font-family: monospace; }
+    .swatch-role { font-size: 0.6rem; color: #aaa; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+
+    .tile-right .tile-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.88; letter-spacing: -2px;
+      color: var(--noche); margin-bottom: 32px;
+    }
+    .tile-font-label {
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: #aaa; margin-bottom: 6px;
+    }
+    .tile-font-name {
+      font-size: 0.88rem; font-weight: 700; color: var(--noche);
+      margin-bottom: 4px;
+    }
+    .tile-font-use { font-size: 0.78rem; color: #888; margin-bottom: 24px; }
+    .tile-body-sample {
+      font-size: 0.95rem; line-height: 1.7; color: #555;
+      max-width: 480px; border-left: 2px solid var(--verde);
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .tile-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ══════════════════════════
+       3. COLOR SYSTEM
+    ══════════════════════════ */
+    #colors {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--noche);
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; max-width: 1200px;
+    }
+    .color-card {
+      border-radius: 14px; overflow: hidden;
+    }
+    .color-block { height: 160px; }
+    .color-meta {
+      background: var(--carbon); padding: 20px;
+    }
+    .color-meta-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+    .color-meta-hex  { font-size: 0.78rem; font-family: monospace; color: var(--ceniza); margin-bottom: 4px; }
+    .color-meta-use  { font-size: 0.68rem; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+    .color-meta-pantone { font-size: 0.68rem; color: #444; margin-top: 4px; }
+
+    /* ══════════════════════════
+       4. TYPOGRAPHY
+    ══════════════════════════ */
+    #typography {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: #0E0E0E;
+    }
+    .type-section { margin-bottom: 80px; max-width: 1200px; }
+    .type-sample-display {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 11rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.88; letter-spacing: -3px;
+      margin: 24px 0;
+    }
+    .type-sample-display .green { color: var(--verde); }
+    .type-meta {
+      display: flex; gap: 40px; margin-top: 16px;
+      padding-top: 16px; border-top: 1px solid #1E1E1E;
+    }
+    .type-meta-item { }
+    .type-meta-label { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 4px; }
+    .type-meta-value { font-size: 0.82rem; color: var(--ceniza); }
+
+    .type-scale { display: flex; flex-direction: column; gap: 20px; max-width: 1200px; margin-top: 48px; }
+    .type-row {
+      display: grid; grid-template-columns: 80px 1fr 200px;
+      align-items: center; gap: 24px;
+      padding-bottom: 20px; border-bottom: 1px solid #151515;
+    }
+    .type-row-tag { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; }
+    .type-row-sample { }
+    .type-row-spec { font-size: 0.72rem; color: #444; text-align: right; font-family: monospace; }
+
+    /* Body font section */
+    .body-demo {
+      background: var(--carbon); border-radius: 14px; padding: 40px;
+      max-width: 1200px; margin-top: 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    }
+    .body-demo-col h4 {
+      font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--verde); margin-bottom: 20px;
+    }
+    .body-demo-col p { font-size: 1rem; line-height: 1.7; color: #999; }
+    .body-demo-col .bold-sample { font-weight: 700; color: var(--blanco); font-size: 1.2rem; margin-bottom: 12px; }
+
+    @media (max-width: 768px) {
+      .type-row { grid-template-columns: 60px 1fr; }
+      .type-row-spec { display: none; }
+      .body-demo { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════
+       5. LOGO USAGE
+    ══════════════════════════ */
+    #logo-usage {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--noche);
+    }
+    .logo-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px; max-width: 1200px;
+    }
+    .logo-cell {
+      border-radius: 14px; padding: 48px 32px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 24px;
+    }
+    .logo-cell img { width: clamp(120px, 18vw, 200px); }
+    .logo-cell-label {
+      font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ceniza); text-align: center;
+    }
+    .logo-cell.on-white   { background: #FFFFFF; }
+    .logo-cell.on-green   { background: var(--verde); }
+    .logo-cell.on-dark    { background: var(--noche); border: 1px solid #1E1E1E; }
+    .logo-cell.on-carbon  { background: var(--carbon); }
+
+    .clearspace {
+      background: var(--carbon); border-radius: 14px; padding: 40px;
+      max-width: 1200px; margin-top: 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .clearspace-visual {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--noche); border-radius: 10px; padding: 40px;
+      position: relative;
+    }
+    .clearspace-visual img { width: 160px; }
+    .clearspace-visual::before {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px dashed rgba(144,217,50,0.3);
+      border-radius: 4px; pointer-events: none;
+    }
+    .clearspace-text h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .clearspace-text p { font-size: 0.85rem; color: var(--ceniza); line-height: 1.7; }
+    .clearspace-text ul { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .clearspace-text li { font-size: 0.82rem; color: var(--ceniza); display: flex; gap: 10px; align-items: flex-start; }
+    .clearspace-text li::before { content: '✦'; color: var(--verde); font-size: 0.6rem; margin-top: 3px; }
+
+    @media (max-width: 768px) {
+      .clearspace { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════
+       6. VOICE & PHRASES
+    ══════════════════════════ */
+    #voice {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: var(--verde);
+    }
+    #voice .section-label { color: rgba(0,0,0,0.4); }
+    #voice .section-label::after { background: rgba(0,0,0,0.15); }
+    .voice-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 8rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.88; color: var(--noche);
+      margin-bottom: 64px; max-width: 900px;
+      letter-spacing: -2px;
+    }
+    .phrases-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px; max-width: 1200px;
+    }
+    .phrase-card {
+      background: rgba(0,0,0,0.12); border-radius: 12px;
+      padding: 24px; border: 1px solid rgba(0,0,0,0.08);
+    }
+    .phrase-line { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 10px; }
+    .phrase-copy { font-size: 1.1rem; font-weight: 800; font-style: italic; color: var(--noche); line-height: 1.3; }
+
+    .voice-rules {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; max-width: 1200px; margin-top: 48px;
+    }
+    .voice-do, .voice-dont {
+      background: rgba(0,0,0,0.1); border-radius: 12px; padding: 28px;
+    }
+    .voice-do h4   { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--noche); margin-bottom: 16px; }
+    .voice-dont h4 { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 16px; }
+    .voice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .voice-list li { font-size: 0.85rem; color: rgba(0,0,0,0.7); display: flex; gap: 10px; }
+    .voice-list li span { flex-shrink: 0; font-weight: 900; }
+
+    @media (max-width: 768px) {
+      .voice-rules { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════
+       7. APPLICATIONS
+    ══════════════════════════ */
+    #applications {
+      padding: 80px clamp(32px, 8vw, 100px);
+      background: #0E0E0E;
+    }
+    .app-intro { max-width: 680px; margin-bottom: 64px; }
+    .app-intro p { font-size: 1rem; color: var(--ceniza); line-height: 1.7; }
+    .app-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px; max-width: 1200px;
+    }
+    .app-card {
+      background: var(--carbon); border-radius: 14px;
+      overflow: hidden;
+    }
+    .app-card-top {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 4rem; font-weight: 900;
+      font-style: italic; letter-spacing: -2px; position: relative; overflow: hidden;
+    }
+    .app-card-top .app-watermark {
+      position: absolute; font-size: 10rem; opacity: 0.05;
+      font-weight: 900; font-style: italic; line-height: 1;
+      right: -10px; bottom: -20px;
+    }
+    .app-card-body { padding: 24px; }
+    .app-cat { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--verde); margin-bottom: 8px; }
+    .app-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .app-desc { font-size: 0.82rem; color: var(--ceniza); line-height: 1.6; }
+    .app-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .app-tag {
+      font-size: 0.65rem; padding: 3px 10px;
+      border: 1px solid #2A2A2A; border-radius: 20px; color: #555;
+    }
+
+    /* ══════════════════════════
+       8. FOOTER
+    ══════════════════════════ */
+    #footer {
+      padding: 48px clamp(32px, 8vw, 100px);
+      background: var(--noche);
+      border-top: 1px solid #111;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    #footer img { height: 28px; opacity: 0.5; }
+    #footer p { font-size: 0.72rem; color: #333; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════
+     1. COVER
+══════════════════════════ -->
+<section id="cover">
+  <img src="LOGOS/RUNA-07.png" alt="RUNA Logo">
+  <div class="cover-sub">Brand Identity System</div>
+  <div class="cover-year">2025 · Confidencial</div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ══════════════════════════
+     2. BRAND STYLE TILE
+══════════════════════════ -->
+<section id="style-tile">
+  <div class="section-label">02 — Brand Style Tile</div>
+  <div class="tile-grid">
+
+    <div class="tile-left">
+      <img class="tile-logo" src="LOGOS/RUNA-01.png" alt="RUNA Wordmark">
+      <div class="tile-divider"></div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#90D932"></div>
+          <div class="swatch-name">Campo Verde</div>
+          <div class="swatch-hex">#90D932</div>
+          <div class="swatch-role">Primario</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#0A0A0A;border-color:#ccc"></div>
+          <div class="swatch-name">Noche</div>
+          <div class="swatch-hex">#0A0A0A</div>
+          <div class="swatch-role">Fondo</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#FFFFFF;border-color:#ccc"></div>
+          <div class="swatch-name">Blanco</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-role">Texto</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-right">
+      <div class="tile-headline">BUILT<br>FOR<br>BATTLE.</div>
+      <div class="tile-font-label">Display / Headlines</div>
+      <div class="tile-font-name">Barlow Condensed Black Italic</div>
+      <div class="tile-font-use">Titulares, frases de marca, campañas</div>
+      <div class="tile-font-label">Body / UI</div>
+      <div class="tile-font-name">Inter Regular · Bold</div>
+      <div class="tile-font-use">Texto corrido, interfaz, etiquetas</div>
+      <div class="tile-body-sample">
+        Una marca deportiva que empieza en el mat. Construida para atletas que no se detienen en una sola disciplina — jiu-jitsu, surf, snow, calle.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     3. COLOR SYSTEM
+══════════════════════════ -->
+<section id="colors">
+  <div class="section-label">03 — Sistema de color</div>
+  <div class="color-grid">
+
+    <div class="color-card">
+      <div class="color-block" style="background:#90D932"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Campo Verde</div>
+        <div class="color-meta-hex">#90D932 · RGB 144, 217, 50</div>
+        <div class="color-meta-pantone">Pantone 375 C</div>
+        <div class="color-meta-use">Logo · Acentos · CTAs · Hovers</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-block" style="background:#0A0A0A"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Noche</div>
+        <div class="color-meta-hex">#0A0A0A · RGB 10, 10, 10</div>
+        <div class="color-meta-pantone">Black 6 C</div>
+        <div class="color-meta-use">Fondo principal · Prendas oscuras</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-block" style="background:#1C1C1C"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Carbón</div>
+        <div class="color-meta-hex">#1C1C1C · RGB 28, 28, 28</div>
+        <div class="color-meta-pantone">Black 3 C</div>
+        <div class="color-meta-use">Cards · Fondos secundarios</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-block" style="background:#FFFFFF"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Blanco</div>
+        <div class="color-meta-hex">#FFFFFF · RGB 255, 255, 255</div>
+        <div class="color-meta-pantone">White</div>
+        <div class="color-meta-use">Texto · Logo invertido · Fondos claros</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-block" style="background:#888888"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Ceniza</div>
+        <div class="color-meta-hex">#888888 · RGB 136, 136, 136</div>
+        <div class="color-meta-pantone">Cool Gray 7 C</div>
+        <div class="color-meta-use">Texto secundario · Labels · Muted</div>
+      </div>
+    </div>
+
+    <div class="color-card">
+      <div class="color-block" style="background:#F5620F"></div>
+      <div class="color-meta">
+        <div class="color-meta-name">Fuego</div>
+        <div class="color-meta-hex">#F5620F · RGB 245, 98, 15</div>
+        <div class="color-meta-pantone">Orange 021 C</div>
+        <div class="color-meta-use">JJF Collab · Urgencia · Destacados</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     4. TYPOGRAPHY
+══════════════════════════ -->
+<section id="typography">
+  <div class="section-label">04 — Sistema tipográfico</div>
+
+  <div class="type-section">
+    <div class="type-meta">
+      <div class="type-meta-item">
+        <div class="type-meta-label">Familia</div>
+        <div class="type-meta-value">Barlow Condensed</div>
+      </div>
+      <div class="type-meta-item">
+        <div class="type-meta-label">Pesos</div>
+        <div class="type-meta-value">700 Bold · 900 Black</div>
+      </div>
+      <div class="type-meta-item">
+        <div class="type-meta-label">Uso</div>
+        <div class="type-meta-value">Display · Headlines · Frases de marca</div>
+      </div>
+    </div>
+    <div class="type-sample-display">FORGED<br>IN <span class="green">FRICTION.</span></div>
+  </div>
+
+  <div class="type-scale">
+    <div class="type-row">
+      <div class="type-row-tag">Display</div>
+      <div style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;font-style:italic;letter-spacing:-1px">BUILT FOR BATTLE</div>
+      <div class="type-row-spec">Barlow Condensed Black Italic · 80px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-row-tag">H1</div>
+      <div style="font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;font-style:italic">YOU BELONG HERE</div>
+      <div class="type-row-spec">Barlow Condensed Black Italic · 56px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-row-tag">H2</div>
+      <div style="font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:700">TAP OR BE TAPPED</div>
+      <div class="type-row-spec">Barlow Condensed Bold · 40px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-row-tag">H3</div>
+      <div style="font-family:var(--font-body);font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700">RUNA Sports Collection</div>
+      <div class="type-row-spec">Inter Bold · 28px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-row-tag">Body</div>
+      <div style="font-size:1rem;color:var(--ceniza);line-height:1.6">Una marca deportiva construida para quienes no se detienen en una sola disciplina.</div>
+      <div class="type-row-spec">Inter Regular · 16px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-row-tag">Label</div>
+      <div style="font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:#555">RUNA × JJF COLLAB · 2025</div>
+      <div class="type-row-spec">Inter Regular · 11px · LS 4px</div>
+    </div>
+  </div>
+
+  <div class="body-demo">
+    <div class="body-demo-col">
+      <h4>Inter — Texto corrido</h4>
+      <div class="bold-sample">Una marca que empieza en el mat.</div>
+      <p>La collab con Jiu-Jitsu Fest es la puerta. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo, calle. Diseñada para atletas que entrenan de verdad.</p>
+    </div>
+    <div class="body-demo-col">
+      <h4>Pesos disponibles</h4>
+      <p style="font-weight:400;margin-bottom:8px;color:#777">Regular 400 — Texto corrido, descripciones, UI</p>
+      <p style="font-weight:500;margin-bottom:8px;color:#999">Medium 500 — Botones, navegación, labels</p>
+      <p style="font-weight:700;margin-bottom:8px;color:#bbb">Bold 700 — Subtítulos, énfasis, precios</p>
+      <p style="font-weight:900;color:#fff">Black 900 — CTAs, números destacados</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     5. LOGO USAGE
+══════════════════════════ -->
+<section id="logo-usage">
+  <div class="section-label">05 — Uso del logo</div>
+
+  <div class="logo-grid">
+    <div class="logo-cell on-white">
+      <img src="LOGOS/RUNA-01.png" alt="Logo sobre blanco">
+      <div class="logo-cell-label" style="color:#888">Sobre blanco</div>
+    </div>
+    <div class="logo-cell on-green">
+      <img src="LOGOS/RUNA-03.png" alt="Logo sobre verde">
+      <div class="logo-cell-label" style="color:rgba(0,0,0,0.5)">Sobre Campo Verde</div>
+    </div>
+    <div class="logo-cell on-dark">
+      <img src="LOGOS/RUNA-07.png" alt="Logo sobre negro">
+      <div class="logo-cell-label">Sobre Noche</div>
+    </div>
+    <div class="logo-cell on-carbon">
+      <img src="LOGOS/RUNA-07.png" alt="Logo sobre carbón">
+      <div class="logo-cell-label">Sobre Carbón</div>
+    </div>
+  </div>
+
+  <div class="clearspace">
+    <div class="clearspace-visual">
+      <img src="LOGOS/RUNA-01.png" alt="RUNA clearspace">
+    </div>
+    <div class="clearspace-text">
+      <h3>Espacio de respiro</h3>
+      <p>El logo siempre necesita espacio mínimo a su alrededor para respirar y mantener su impacto visual.</p>
+      <ul>
+        <li>El clearspace mínimo equivale a la altura de la "r" del wordmark</li>
+        <li>No colocar sobre fondos con texturas complejas o imágenes muy saturadas</li>
+        <li>No deformar, rotar ni cambiar los colores del acento verde</li>
+        <li>No usar el logo a menos de 80px de ancho en digital</li>
+        <li>En serigrafía, respetar mínimo 25mm de ancho</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     6. VOZ & FRASES
+══════════════════════════ -->
+<section id="voice">
+  <div class="section-label">06 — Voz de marca</div>
+  <div class="voice-headline">DIRECTO.<br>ATLÉTICO.<br>REAL.</div>
+
+  <div class="phrases-grid">
+    <div class="phrase-card">
+      <div class="phrase-line">RUNA · Tagline</div>
+      <div class="phrase-copy">"Built for battle."</div>
+    </div>
+    <div class="phrase-card">
+      <div class="phrase-line">RUNA · Comunidad</div>
+      <div class="phrase-copy">"You belong here."</div>
+    </div>
+    <div class="phrase-card">
+      <div class="phrase-line">RUNA · Movimiento</div>
+      <div class="phrase-copy">"Forged in friction."</div>
+    </div>
+    <div class="phrase-card">
+      <div class="phrase-line">RUNA · Fuerza</div>
+      <div class="phrase-copy">"Together, we are stronger."</div>
+    </div>
+    <div class="phrase-card">
+      <div class="phrase-line">JJF Collab</div>
+      <div class="phrase-copy">"Tap or be tapped."</div>
+    </div>
+    <div class="phrase-card">
+      <div class="phrase-line">JJF Collab</div>
+      <div class="phrase-copy">"The mat doesn't lie."</div>
+    </div>
+  </div>
+
+  <div class="voice-rules">
+    <div class="voice-do">
+      <h4>✦ &nbsp;Hacemos</h4>
+      <ul class="voice-list">
+        <li><span>→</span>Frases cortas y directas. Sin rodeos.</li>
+        <li><span>→</span>Inglés para frases de marca, español para comunicar.</li>
+        <li><span>→</span>Hablar de la comunidad, no solo del producto.</li>
+        <li><span>→</span>Confianza sin arrogancia. Fuerza sin bravuconería.</li>
+        <li><span>→</span>Honest sobre lo que somos: una marca que empieza en el mat.</li>
+      </ul>
+    </div>
+    <div class="voice-dont">
+      <h4>✕ &nbsp;No hacemos</h4>
+      <ul class="voice-list">
+        <li><span>→</span>Jerga corporativa: "innovador", "disruptivo", "sinergia".</li>
+        <li><span>→</span>Promesas vacías sin sustento.</li>
+        <li><span>→</span>Tono agresivo o intimidante.</li>
+        <li><span>→</span>Clichés de gym: "sin dolor no hay gloria".</li>
+        <li><span>→</span>Pretender ser global cuando somos locales.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     7. APLICACIONES
+══════════════════════════ -->
+<section id="applications">
+  <div class="section-label">07 — Aplicaciones de marca</div>
+  <div class="app-intro">
+    <p>Conceptos de aplicación para las dos líneas de la marca. Cada pieza respeta el sistema de color y tipografía, diferenciando visualmente RUNA Sports de la collab JJF.</p>
+  </div>
+
+  <div class="app-grid">
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:#0A0A0A;color:#90D932">
+        RUNA
+        <div class="app-watermark" style="color:rgba(144,217,50,0.06)">A</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">RUNA Sports · Ruta A</div>
+        <div class="app-name">Polera Tipográfica</div>
+        <div class="app-desc">Fondo negro. "BUILT FOR BATTLE" en Barlow Condensed Black Italic al pecho. Acento verde en el logo. Sin ilustraciones.</div>
+        <div class="app-tags">
+          <span class="app-tag">Polera</span>
+          <span class="app-tag">Hoodie</span>
+          <span class="app-tag">Gorra</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:#1C1C1C;color:#F5620F">
+        JJF
+        <div class="app-watermark" style="color:rgba(245,98,15,0.07)">B</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">JJF Collab · Ruta B</div>
+        <div class="app-name">Íconos + Cultura</div>
+        <div class="app-desc">Ilustración lineal: cinturón, tape, kimono. Composición tipo patch o escudo. Acento naranjo #F5620F sobre negro.</div>
+        <div class="app-tags">
+          <span class="app-tag">Calcetines</span>
+          <span class="app-tag">Tote</span>
+          <span class="app-tag">Protector</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:#90D932;color:#0A0A0A">
+        C
+        <div class="app-watermark" style="color:rgba(0,0,0,0.06)">C</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">Cápsula · Ruta C</div>
+        <div class="app-name">Patrón Repetido</div>
+        <div class="app-desc">Íconos pequeños en repetición allover print o banda lateral. Fondo Campo Verde #90D932. Une las dos líneas en piezas de lifestyle.</div>
+        <div class="app-tags">
+          <span class="app-tag">Toalla</span>
+          <span class="app-tag">Calcetines pack</span>
+          <span class="app-tag">Bolso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:#111;color:#fff;font-family:var(--font-body);font-size:1.8rem;font-style:normal;gap:8px;flex-direction:column">
+        <div style="font-size:0.6rem;letter-spacing:4px;color:#555;font-weight:400">INSTAGRAM</div>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--verde)">@runa</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">Digital · Instagram</div>
+        <div class="app-name">Identidad Visual IG</div>
+        <div class="app-desc">Feed: alternancia negro puro / verde / imagen. Stories con marco tipográfico. Highlights con ícono blanco sobre negro.</div>
+        <div class="app-tags">
+          <span class="app-tag">Feed 1080×1080</span>
+          <span class="app-tag">Story 1080×1920</span>
+          <span class="app-tag">Reel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:linear-gradient(135deg,#0A0A0A 60%,#90D932);color:#fff">
+        WEB
+        <div class="app-watermark" style="color:rgba(255,255,255,0.04)">W</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">Digital · Web</div>
+        <div class="app-name">Look &amp; Feel Web</div>
+        <div class="app-desc">Fondo Noche #0A0A0A. Hero con tipografía display a pantalla completa. CTA en verde. Cards en Carbón. Mobile-first.</div>
+        <div class="app-tags">
+          <span class="app-tag">Hero</span>
+          <span class="app-tag">Tienda</span>
+          <span class="app-tag">Mobile</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-card-top" style="background:#0A0A0A;flex-direction:column;gap:4px">
+        <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;font-style:italic;color:#fff;letter-spacing:-1px">RUNA×JJF</div>
+        <div style="font-size:0.6rem;letter-spacing:4px;color:#90D932">BUILT FOR BATTLE</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-cat">Evento · JJF 2025</div>
+        <div class="app-name">Collab Banner</div>
+        <div class="app-desc">Banner para el Jiu-Jitsu Fest. Wordmark RUNA + logo JJF separados por "×" en verde. Tagline debajo en espaciado amplio.</div>
+        <div class="app-tags">
+          <span class="app-tag">Banner 3×1m</span>
+          <span class="app-tag">Flyer A4</span>
+          <span class="app-tag">Digital</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     FOOTER
+══════════════════════════ -->
+<footer id="footer">
+  <img src="LOGOS/RUNA-07.png" alt="RUNA">
+  <p>Brand Identity System 2025 · Confidencial · lab080.studio</p>
+</footer>
+
+</body>
+</html>
