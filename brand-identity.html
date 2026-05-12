@@ -13,15 +13,44 @@
       --noche:   #0A0A0A;
       --carbon:  #1C1C1C;
       --blanco:  #FFFFFF;
-      --ceniza:  #888888;
+      --ceniza:  #9C9C9C;
+      --ceniza-light: #666666;
       --crema:   #F4F3EE;
       --font-display: 'Barlow Condensed', sans-serif;
       --font-body:    'Inter', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
+
+    /* ── Keyframes ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.5; }
+    }
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(144,217,50,0.4); }
+      50%      { box-shadow: 0 0 0 8px rgba(144,217,50,0); }
+    }
 
     body {
       font-family: var(--font-body);
@@ -31,12 +60,16 @@
 
     /* ── Section labels ── */
     .section-label {
-      font-size: 0.65rem; letter-spacing: 6px; text-transform: uppercase;
+      font-size: 0.7rem; letter-spacing: 6px; text-transform: uppercase;
       color: var(--ceniza); margin-bottom: 48px;
       display: flex; align-items: center; gap: 16px;
     }
     .section-label::after {
       content: ''; flex: 1; height: 1px; background: #222;
+      transform-origin: left;
+    }
+    .section-label.reveal.visible::after {
+      animation: lineGrow 0.8s var(--ease-out-expo) forwards;
     }
 
     /* ══════════════════════════
@@ -51,27 +84,33 @@
     #cover::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 50%,
-        rgba(144,217,50,0.08) 0%, transparent 65%);
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, rgba(255,255,255,0.02) 0%, transparent 65%);
       pointer-events: none;
     }
-    .cover-logo-wrap { position: relative; width: clamp(200px, 40vw, 380px); margin-bottom: 40px; }
+    .cover-logo-wrap {
+      position: relative; width: clamp(200px, 40vw, 380px); margin-bottom: 40px;
+      animation: scaleIn 1s var(--ease-out-expo) 0.1s both;
+    }
     .cover-logo-wrap img.logo-white { width: 100%; display: block; }
     .cover-logo-wrap img.logo-mark {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: contain;
     }
     #cover .cover-sub {
-      font-size: 0.7rem; letter-spacing: 8px; text-transform: uppercase;
+      font-size: 0.75rem; letter-spacing: 8px; text-transform: uppercase;
       color: var(--ceniza); margin-bottom: 8px;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.4s both;
     }
     #cover .cover-year {
-      font-size: 0.7rem; letter-spacing: 4px; color: #333;
+      font-size: 0.75rem; letter-spacing: 4px; color: #777;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.6s both;
     }
     #cover .scroll-hint {
       position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
       font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
-      color: #333; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: #777; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: fadeIn 1s var(--ease-out-expo) 1.2s both;
     }
     #cover .scroll-hint::after {
       content: ''; width: 1px; height: 32px; background: #333;
@@ -96,10 +135,10 @@
     .mv-card:last-child  { border-radius: 0 14px 14px 0; }
     .mv-card::before {
       content: ''; position: absolute; top: 0; left: 0;
-      width: 3px; height: 100%; background: var(--verde);
+      width: 100%; height: 3px; background: var(--verde);
     }
     .mv-eyebrow {
-      font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase;
+      font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
       color: var(--verde); margin-bottom: 20px;
     }
     .mv-title {
@@ -134,7 +173,13 @@
       background: var(--carbon); border-radius: 14px;
       padding: 36px 28px; position: relative; overflow: hidden;
       border: 1px solid #222;
-      transition: border-color 0.2s;
+      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.25s, box-shadow 0.25s;
+    }
+    .pilar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--verde);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
     }
     .pilar-icon {
       width: 52px; height: 52px; border-radius: 50%;
@@ -173,7 +218,6 @@
     }
     .filosofia-quote em { color: var(--verde); font-style: italic; }
     .filosofia-items { display: flex; flex-direction: column; gap: 32px; }
-    .filosofia-item {}
     .filosofia-item-label {
       font-size: 1rem; font-weight: 800; color: var(--blanco);
       margin-bottom: 6px;
@@ -196,7 +240,7 @@
     }
     .inspiracion-content { max-width: 680px; }
     .inspiracion-tag {
-      font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase;
+      font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase;
       color: var(--verde); margin-bottom: 24px;
     }
     .inspiracion-title {
@@ -236,7 +280,7 @@
       background: var(--crema); color: var(--noche);
       padding: 80px clamp(32px, 8vw, 100px);
     }
-    #style-tile .section-label { color: #aaa9a3; }
+    #style-tile .section-label { color: var(--ceniza-light); }
     #style-tile .section-label::after { background: #dddcd8; }
     .tile-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -252,9 +296,9 @@
       width: 100%; aspect-ratio: 1; border-radius: 6px; margin-bottom: 10px;
       border: 1px solid rgba(0,0,0,0.06);
     }
-    .swatch-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 2px; color: var(--noche); }
-    .swatch-hex  { font-size: 0.65rem; color: #888; font-family: monospace; }
-    .swatch-role { font-size: 0.6rem; color: #aaa; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+    .swatch-name { font-size: 0.75rem; font-weight: 700; margin-bottom: 2px; color: var(--noche); }
+    .swatch-hex  { font-size: 0.7rem; color: #666; font-family: monospace; }
+    .swatch-role { font-size: 0.65rem; color: var(--ceniza-light); margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
 
     .tile-right .tile-headline {
       font-family: var(--font-display);
@@ -264,14 +308,14 @@
       color: var(--noche); margin-bottom: 32px;
     }
     .tile-font-label {
-      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
-      color: #aaa; margin-bottom: 6px;
+      font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ceniza-light); margin-bottom: 6px;
     }
     .tile-font-name {
       font-size: 0.88rem; font-weight: 700; color: var(--noche);
       margin-bottom: 4px;
     }
-    .tile-font-use { font-size: 0.78rem; color: #888; margin-bottom: 24px; }
+    .tile-font-use { font-size: 0.78rem; color: #777; margin-bottom: 24px; }
     .tile-body-sample {
       font-size: 0.95rem; line-height: 1.7; color: #555;
       max-width: 480px; border-left: 2px solid var(--verde);
@@ -286,25 +330,79 @@
        3. COLOR SYSTEM
     ══════════════════════════ */
     #colors {
-      padding: 80px clamp(32px, 8vw, 100px);
+      padding: 0;
       background: var(--noche);
     }
-    .color-grid {
+    .colors-header {
+      padding: 80px clamp(32px, 8vw, 100px) 40px;
+    }
+    /* Mosaico principal */
+    .color-mosaic {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px; max-width: 1200px;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 60vh 30vh 10vh;
+      gap: 3px;
     }
-    .color-card {
-      border-radius: 14px; overflow: hidden;
+    .cm-block {
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-start;
+      padding: 24px 28px;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo), filter 0.25s;
     }
-    .color-block { height: 160px; }
-    .color-meta {
-      background: var(--carbon); padding: 20px;
+    .cm-block.cm-verde  { transition-delay: 0s; }
+    .cm-block.cm-noche  { transition-delay: 0.12s; }
+    .cm-block.cm-blanco { transition-delay: 0.24s; }
+    .cm-block.cm-fuego  { transition-delay: 0.36s; }
+    .cm-block.in-view { opacity: 1; transform: translateY(0); }
+    .cm-block:hover { filter: brightness(1.06); }
+    /* Layout areas */
+    .cm-verde   { grid-column: 1; grid-row: 1 / 3; }
+    .cm-noche   { grid-column: 2; grid-row: 1; }
+    .cm-blanco  { grid-column: 2; grid-row: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 0; }
+    .cm-fuego   { grid-column: 1 / 3; grid-row: 3; align-items: center; padding: 0 28px; }
+    .cm-blanco-inner, .cm-ceniza-inner {
+      position: relative; padding: 20px 22px;
+      display: flex; align-items: flex-start;
+      transition: filter 0.25s;
     }
-    .color-meta-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
-    .color-meta-hex  { font-size: 0.78rem; font-family: monospace; color: var(--ceniza); margin-bottom: 4px; }
-    .color-meta-use  { font-size: 0.68rem; color: #555; text-transform: uppercase; letter-spacing: 1px; }
-    .color-meta-pantone { font-size: 0.68rem; color: #444; margin-top: 4px; }
+    .cm-blanco-inner:hover, .cm-ceniza-inner:hover { filter: brightness(0.96); }
+
+    /* Info chip */
+    .cm-info {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .cm-pantone {
+      font-family: var(--font-display); font-weight: 900; font-style: italic;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      line-height: 1; letter-spacing: -1px;
+      margin-bottom: 16px; margin-top: auto;
+    }
+    .cm-verde .cm-pantone { position: absolute; bottom: 28px; left: 28px; }
+    .cm-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; opacity: 0.6; }
+    .cm-row { font-size: 0.7rem; font-family: monospace; line-height: 1.8; }
+    .cm-row span { display: inline-block; width: 40px; opacity: 0.55; }
+
+    /* Color backgrounds */
+    .cm-verde  { background: #90D932; color: #0A0A0A; }
+    .cm-noche  { background: #0A0A0A; color: #fff; }
+    .cm-blanco-inner { background: #FFFFFF; color: #0A0A0A; }
+    .cm-ceniza-inner { background: #E8E8E8; color: #0A0A0A; }
+    .cm-fuego  { background: #F5620F; color: #1C0800; }
+
+    /* Fuego strip layout */
+    .cm-fuego .cm-info { flex-direction: row; align-items: center; gap: 40px; width: 100%; }
+    .cm-fuego .cm-label { margin-bottom: 0; font-size: 0.65rem; letter-spacing: 5px; }
+    .cm-fuego .cm-rows-inline { display: flex; gap: 32px; }
+    .cm-fuego .cm-row { font-size: 0.68rem; }
+
+    @media (max-width: 768px) {
+      .color-mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .cm-verde  { grid-column: 1; grid-row: auto; min-height: 280px; }
+      .cm-noche  { grid-column: 1; grid-row: auto; min-height: 180px; }
+      .cm-blanco { grid-column: 1; grid-row: auto; min-height: 140px; }
+      .cm-fuego  { grid-column: 1; grid-row: auto; min-height: 80px; }
+    }
 
     /* ══════════════════════════
        4. TYPOGRAPHY
@@ -320,6 +418,10 @@
       font-weight: 900; font-style: italic;
       line-height: 0.88; letter-spacing: -3px;
       margin: 24px 0;
+      position: relative;
+    }
+    .type-sample-display.reveal.visible {
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.1s both;
     }
     .type-sample-display .green { color: var(--verde); }
     .type-meta {
@@ -327,7 +429,7 @@
       padding-top: 16px; border-top: 1px solid #1E1E1E;
     }
     .type-meta-item { }
-    .type-meta-label { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 4px; }
+    .type-meta-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
     .type-meta-value { font-size: 0.82rem; color: var(--ceniza); }
 
     .type-scale { display: flex; flex-direction: column; gap: 20px; max-width: 1200px; margin-top: 48px; }
@@ -336,9 +438,9 @@
       align-items: center; gap: 24px;
       padding-bottom: 20px; border-bottom: 1px solid #151515;
     }
-    .type-row-tag { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; }
+    .type-row-tag { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #888; }
     .type-row-sample { }
-    .type-row-spec { font-size: 0.72rem; color: #444; text-align: right; font-family: monospace; }
+    .type-row-spec { font-size: 0.75rem; color: #999; text-align: right; font-family: monospace; }
 
     /* Body font section */
     .body-demo {
@@ -346,11 +448,11 @@
       max-width: 1200px; margin-top: 48px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
     }
-    .body-demo-col h4 {
+    .body-demo-col h3 {
       font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
       color: var(--verde); margin-bottom: 20px;
     }
-    .body-demo-col p { font-size: 1rem; line-height: 1.7; color: #999; }
+    .body-demo-col p { font-size: 1rem; line-height: 1.7; color: #B3B3B3; }
     .body-demo-col .bold-sample { font-weight: 700; color: var(--blanco); font-size: 1.2rem; margin-bottom: 12px; }
 
     @media (max-width: 768px) {
@@ -437,7 +539,7 @@
       background: rgba(0,0,0,0.12); border-radius: 12px;
       padding: 24px; border: 1px solid rgba(0,0,0,0.08);
     }
-    .phrase-line { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 10px; }
+    .phrase-line { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 10px; }
     .phrase-copy { font-size: 1.1rem; font-weight: 800; font-style: italic; color: var(--noche); line-height: 1.3; }
 
     .voice-rules {
@@ -460,40 +562,6 @@
     /* ══════════════════════════
        7. APPLICATIONS
     ══════════════════════════ */
-    #applications {
-      padding: 80px clamp(32px, 8vw, 100px);
-      background: #0E0E0E;
-    }
-    .app-intro { max-width: 680px; margin-bottom: 64px; }
-    .app-intro p { font-size: 1rem; color: var(--ceniza); line-height: 1.7; }
-    .app-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 16px; max-width: 1200px;
-    }
-    .app-card {
-      background: var(--carbon); border-radius: 14px;
-      overflow: hidden;
-    }
-    .app-card-top {
-      height: 200px; display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 4rem; font-weight: 900;
-      font-style: italic; letter-spacing: -2px; position: relative; overflow: hidden;
-    }
-    .app-card-top .app-watermark {
-      position: absolute; font-size: 10rem; opacity: 0.05;
-      font-weight: 900; font-style: italic; line-height: 1;
-      right: -10px; bottom: -20px;
-    }
-    .app-card-body { padding: 24px; }
-    .app-cat { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--verde); margin-bottom: 8px; }
-    .app-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .app-desc { font-size: 0.82rem; color: var(--ceniza); line-height: 1.6; }
-    .app-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-    .app-tag {
-      font-size: 0.65rem; padding: 3px 10px;
-      border: 1px solid #2A2A2A; border-radius: 20px; color: #555;
-    }
-
     /* ══════════════════════════
        8. FOOTER
     ══════════════════════════ */
@@ -505,7 +573,94 @@
       flex-wrap: wrap; gap: 16px;
     }
     #footer img { height: 28px; opacity: 0.5; }
-    #footer p { font-size: 0.72rem; color: #333; }
+    #footer p { font-size: 0.72rem; color: #888; }
+
+    /* ══════════════════════════
+       SCROLL PROGRESS BAR
+    ══════════════════════════ */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--verde); width: 100%; z-index: 9999;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.1s linear;
+    }
+
+    /* ══════════════════════════
+       SECTION NAV DOTS
+    ══════════════════════════ */
+    #section-nav {
+      position: fixed; right: 24px; top: 50%;
+      transform: translateY(-50%); z-index: 999;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      cursor: pointer; border: none; padding: 0;
+      transition: background 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .nav-dot:hover { background: rgba(255,255,255,0.5); transform: scale(1.4); }
+    .nav-dot.active {
+      background: var(--verde); transform: scale(1.3);
+      animation: pulseDot 2s var(--ease-out-expo) infinite;
+    }
+    .nav-dot::after {
+      content: attr(data-label);
+      position: absolute; right: 18px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--blanco); white-space: nowrap;
+      background: rgba(0,0,0,0.7); padding: 4px 10px; border-radius: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .nav-dot:hover::after { opacity: 1; }
+    @media (max-width: 768px) { #section-nav { display: none; } }
+
+    /* ══════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left.visible  { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px);  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.88); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .d1 { transition-delay: 0.05s; }
+    .d2 { transition-delay: 0.12s; }
+    .d3 { transition-delay: 0.19s; }
+    .d4 { transition-delay: 0.26s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-left, .reveal-right, .reveal-scale,
+      .cm-block, .cover-logo-wrap,
+      #cover .cover-sub, #cover .cover-year, #cover .scroll-hint,
+      .type-sample-display {
+        opacity: 1 !important; transform: none !important;
+        animation: none !important; transition: none !important;
+      }
+      .nav-dot.active { animation: none !important; }
+    }
+
+    /* ══════════════════════════
+       HOVER MICRO-INTERACTIONS
+    ══════════════════════════ */
+    .logo-cell { transition: transform 0.25s ease; }
+    .logo-cell:hover { transform: scale(1.03); }
+    .mv-card { transition: border-left-color 0.25s; }
+    .mv-card:hover::before { background: #b8f055; }
+
+    /* Cover parallax layer */
+    #cover .cover-logo-wrap { will-change: transform; }
 
     /* ══════════════════════════
        DOWNLOAD BUTTON
@@ -518,15 +673,83 @@
       padding: 14px 24px; border-radius: 40px;
       border: none; cursor: pointer;
       display: flex; align-items: center; gap: 10px;
-      box-shadow: 0 8px 32px rgba(144,217,50,0.35);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
       transition: transform 0.15s, box-shadow 0.15s;
       text-decoration: none;
+      animation: fadeUp 0.8s var(--ease-out-expo) 1.6s both;
     }
     #download-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(144,217,50,0.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
     #download-btn svg { width: 16px; height: 16px; }
+
+    /* ══════════════════════════
+       CLOTHING CATALOG
+    ══════════════════════════ */
+    .clothing-intro { max-width: 800px; margin-bottom: 48px; }
+    .clothing-intro h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem,6vw,4.5rem);
+      font-weight: 900; font-style: italic;
+      line-height: 0.9; margin-bottom: 16px;
+    }
+    .clothing-intro h2 em { color: var(--verde); font-style: italic; }
+    .clothing-intro p { font-size: 0.95rem; color: var(--ceniza); line-height: 1.7; }
+    .prod-section-title {
+      font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 5px; text-transform: uppercase; color: var(--verde);
+      margin: 48px 0 24px; display: flex; align-items: center; gap: 12px;
+    }
+    .prod-section-title::after { content: ''; flex: 1; height: 1px; background: #222; }
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px; margin-bottom: 40px;
+    }
+    .prod-card {
+      background: var(--carbon); border-radius: 14px;
+      border: 1px solid #222; overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .prod-card:hover { border-color: var(--verde); transform: translateY(-4px); }
+    .prod-visual {
+      background: var(--noche); border-bottom: 1px solid #222;
+      padding: 16px; display: flex; align-items: center;
+      justify-content: center; min-height: 200px;
+    }
+    .prod-visual svg { width: 100%; max-width: 280px; height: auto; display: block; }
+    .prod-header {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: 14px 18px 8px;
+    }
+    .prod-header h3 { font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; }
+    .prod-tag {
+      font-family: var(--font-body); font-size: 0.55rem;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+    }
+    .tag-statement { background: #fff; color: #000; }
+    .tag-pattern  { background: var(--verde); color: #000; }
+    .tag-tecnico  { background: #fff; color: #000; border: 1px solid var(--verde); }
+    .tag-fuego    { background: var(--fuego); color: #fff; }
+    .tag-runas    { background: #000; color: var(--verde); border: 1px solid var(--verde); }
+    .prod-specs {
+      padding: 8px 18px 12px;
+      display: grid; gap: 2px;
+    }
+    .prod-spec { display: flex; justify-content: space-between; font-size: 0.68rem; }
+    .prod-spec .lbl { color: #666; }
+    .prod-spec .val { color: #bbb; text-align: right; max-width: 55%; }
+    .prod-spec .val.grn { color: var(--verde); }
+    .prod-spec .val.fgo { color: var(--fuego); }
+    .prod-desc {
+      padding: 10px 18px 14px;
+      font-size: 0.75rem; color: var(--ceniza); line-height: 1.55;
+      border-top: 1px solid #1a1a1a;
+    }
+    .prod-desc strong { color: #ccc; }
 
     /* ══════════════════════════
        PRINT / PDF STYLES
@@ -550,7 +773,6 @@
       #typography { page-break-after: always; }
       #logo-usage { page-break-after: always; }
       #voice { page-break-after: always; }
-      #applications { page-break-after: always; }
 
       @page {
         size: A4 landscape;
@@ -561,9 +783,25 @@
 </head>
 <body>
 
+<div id="scroll-progress" role="progressbar" aria-label="Progreso de lectura"></div>
+
+<nav id="section-nav" aria-label="Navegación de secciones">
+  <button class="nav-dot" data-target="cover"            data-label="Inicio"       aria-label="Ir a Inicio"></button>
+  <button class="nav-dot" data-target="brand-foundation" data-label="Misión"       aria-label="Ir a Misión y Visión"></button>
+  <button class="nav-dot" data-target="pilares"          data-label="Pilares"      aria-label="Ir a 4 Pilares"></button>
+  <button class="nav-dot" data-target="filosofia"        data-label="Filosofía"    aria-label="Ir a Filosofía"></button>
+  <button class="nav-dot" data-target="inspiracion"      data-label="Inspiración"  aria-label="Ir a Inspiración"></button>
+  <button class="nav-dot" data-target="style-tile"       data-label="Style Tile"   aria-label="Ir a Style Tile"></button>
+  <button class="nav-dot" data-target="colors"           data-label="Colores"      aria-label="Ir a Colores"></button>
+  <button class="nav-dot" data-target="typography"       data-label="Tipografía"   aria-label="Ir a Tipografía"></button>
+  <button class="nav-dot" data-target="logo-usage"       data-label="Logo"         aria-label="Ir a Uso del Logo"></button>
+  <button class="nav-dot" data-target="voice"            data-label="Voz"          aria-label="Ir a Voz de Marca"></button>
+  <button class="nav-dot" data-target="clothing"         data-label="Colección"    aria-label="Ir a Colección Drop 02"></button>
+</nav>
+
 <a id="download-btn" href="RUNA-Brand-Identity.pdf" download="RUNA-Brand-Identity.pdf">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <path d="M21 15v4a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-4"/>
     <polyline points="7 10 12 15 17 10"/>
     <line x1="12" y1="15" x2="12" y2="3"/>
   </svg>
@@ -606,30 +844,30 @@
      LOS 4 PILARES
 ══════════════════════════ -->
 <section id="pilares">
-  <div class="section-label" style="color:var(--ceniza)">Los Pilares</div>
+  <div class="section-label" style="color:var(--ceniza)">02 — Los 4 Pilares</div>
   <h2 class="pilares-headline">Los <em>4 Pilares</em><br>de Runa</h2>
   <div class="pilares-grid">
     <div class="pilar-card">
       <div class="pilar-number">01</div>
-      <div class="pilar-icon">📈</div>
+      <div class="pilar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90D932" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
       <div class="pilar-name">Crecimiento</div>
       <p class="pilar-desc">Superación personal, confianza y capacidad de salir adelante. Cada entrenamiento es un paso hacia una mejor versión.</p>
     </div>
     <div class="pilar-card">
       <div class="pilar-number">02</div>
-      <div class="pilar-icon">🤝</div>
+      <div class="pilar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90D932" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <div class="pilar-name">Comunidad</div>
       <p class="pilar-desc">Personas y pertenencia, ser parte de algo especial. RUNA no es solo ropa — es una tribu de personas que comparten valores.</p>
     </div>
     <div class="pilar-card">
       <div class="pilar-number">03</div>
-      <div class="pilar-icon">⚖️</div>
+      <div class="pilar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90D932" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><path d="M4 6l8-3 8 3"/><path d="M4 6l4 8H0L4 6z"/><path d="M20 6l4 8h-8l4-8z"/></svg></div>
       <div class="pilar-name">Equilibrio</div>
       <p class="pilar-desc">Bienestar integral que conecta cuerpo, mente y espíritu. El rendimiento sin equilibrio no es sostenible.</p>
     </div>
     <div class="pilar-card">
       <div class="pilar-number">04</div>
-      <div class="pilar-icon">🙏</div>
+      <div class="pilar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90D932" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
       <div class="pilar-name">Respeto</div>
       <p class="pilar-desc">Valores, disciplina y humildad en cada interacción. El respeto al rival, al compañero y a uno mismo es la base de todo.</p>
     </div>
@@ -640,7 +878,7 @@
      FILOSOFÍA DEL DISEÑO
 ══════════════════════════ -->
 <section id="filosofia">
-  <div class="section-label">Filosofía del Diseño</div>
+  <div class="section-label">03 — Filosofía del Diseño</div>
   <div class="filosofia-grid">
     <div class="filosofia-quote">
       Crear una identidad<br><em>poderosa</em> pero cercana,<br>única, fresca y<br><em>reconocible.</em>
@@ -669,6 +907,7 @@
      INSPIRACIÓN — La Runa Uruz
 ══════════════════════════ -->
 <section id="inspiracion">
+  <div class="section-label" style="color:var(--ceniza)">04 — Inspiración · Origen del nombre</div>
   <div class="inspiracion-content">
     <div class="inspiracion-tag">Inspiración · Origen del nombre</div>
     <h2 class="inspiracion-title">La Runa<br><em>Uruz</em></h2>
@@ -729,66 +968,62 @@
      3. COLOR SYSTEM
 ══════════════════════════ -->
 <section id="colors">
-  <div class="section-label">03 — Sistema de color</div>
-  <div class="color-grid">
+  <div class="colors-header">
+    <div class="section-label">06 — Sistema de color</div>
+  </div>
 
-    <div class="color-card">
-      <div class="color-block" style="background:#90D932"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Campo Verde</div>
-        <div class="color-meta-hex">#90D932 · RGB 144, 217, 50</div>
-        <div class="color-meta-pantone">Pantone 375 C</div>
-        <div class="color-meta-use">Logo · Acentos · CTAs · Hovers</div>
+  <div class="color-mosaic">
+
+    <!-- Campo Verde — bloque grande izquierda -->
+    <div class="cm-block cm-verde">
+      <div class="cm-info">
+        <div class="cm-label">PANTONE 375 C</div>
+        <div class="cm-row"><span>CMYK</span> 58  0  77  0</div>
+        <div class="cm-row"><span>RGB</span>  144  217  50</div>
+        <div class="cm-row"><span>HEX</span>  #90D932</div>
+      </div>
+      <div class="cm-pantone">Campo<br>Verde</div>
+    </div>
+
+    <!-- Noche — bloque grande derecha superior -->
+    <div class="cm-block cm-noche">
+      <div class="cm-info">
+        <div class="cm-label">Black 6 C</div>
+        <div class="cm-row"><span>CMYK</span> 0  0  0  96</div>
+        <div class="cm-row"><span>RGB</span>  10  10  10</div>
+        <div class="cm-row"><span>HEX</span>  #0A0A0A</div>
       </div>
     </div>
 
-    <div class="color-card">
-      <div class="color-block" style="background:#0A0A0A"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Noche</div>
-        <div class="color-meta-hex">#0A0A0A · RGB 10, 10, 10</div>
-        <div class="color-meta-pantone">Black 6 C</div>
-        <div class="color-meta-use">Fondo principal · Prendas oscuras</div>
+    <!-- Blanco + Ceniza — derecha inferior -->
+    <div class="cm-block cm-blanco">
+      <div class="cm-blanco-inner">
+        <div class="cm-info">
+          <div class="cm-label">Blanco</div>
+          <div class="cm-row"><span>CMYK</span> 0  0  0  0</div>
+          <div class="cm-row"><span>RGB</span>  255  255  255</div>
+          <div class="cm-row"><span>HEX</span>  #FFFFFF</div>
+        </div>
+      </div>
+      <div class="cm-ceniza-inner">
+        <div class="cm-info">
+          <div class="cm-label">Ceniza</div>
+          <div class="cm-row"><span>CMYK</span> 0  0  0  47</div>
+          <div class="cm-row"><span>RGB</span>  136  136  136</div>
+          <div class="cm-row"><span>HEX</span>  #888888</div>
+        </div>
       </div>
     </div>
 
-    <div class="color-card">
-      <div class="color-block" style="background:#1C1C1C"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Carbón</div>
-        <div class="color-meta-hex">#1C1C1C · RGB 28, 28, 28</div>
-        <div class="color-meta-pantone">Black 3 C</div>
-        <div class="color-meta-use">Cards · Fondos secundarios</div>
-      </div>
-    </div>
-
-    <div class="color-card">
-      <div class="color-block" style="background:#FFFFFF"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Blanco</div>
-        <div class="color-meta-hex">#FFFFFF · RGB 255, 255, 255</div>
-        <div class="color-meta-pantone">White</div>
-        <div class="color-meta-use">Texto · Logo invertido · Fondos claros</div>
-      </div>
-    </div>
-
-    <div class="color-card">
-      <div class="color-block" style="background:#888888"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Ceniza</div>
-        <div class="color-meta-hex">#888888 · RGB 136, 136, 136</div>
-        <div class="color-meta-pantone">Cool Gray 7 C</div>
-        <div class="color-meta-use">Texto secundario · Labels · Muted</div>
-      </div>
-    </div>
-
-    <div class="color-card">
-      <div class="color-block" style="background:#F5620F"></div>
-      <div class="color-meta">
-        <div class="color-meta-name">Fuego</div>
-        <div class="color-meta-hex">#F5620F · RGB 245, 98, 15</div>
-        <div class="color-meta-pantone">Orange 021 C</div>
-        <div class="color-meta-use">JJF Collab · Urgencia · Destacados</div>
+    <!-- Fuego — franja inferior completa -->
+    <div class="cm-block cm-fuego">
+      <div class="cm-info">
+        <div class="cm-label">Fuego · Orange 021 C · JJF Collab</div>
+        <div class="cm-rows-inline">
+          <div class="cm-row"><span>CMYK</span> 0  66  93  4</div>
+          <div class="cm-row"><span>RGB</span>  245  98  15</div>
+          <div class="cm-row"><span>HEX</span>  #F5620F</div>
+        </div>
       </div>
     </div>
 
@@ -799,7 +1034,7 @@
      4. TYPOGRAPHY
 ══════════════════════════ -->
 <section id="typography">
-  <div class="section-label">04 — Sistema tipográfico</div>
+  <div class="section-label">07 — Sistema tipográfico</div>
 
   <div class="type-section">
     <div class="type-meta">
@@ -854,16 +1089,16 @@
 
   <div class="body-demo">
     <div class="body-demo-col">
-      <h4>Inter — Texto corrido</h4>
+      <h3>Inter — Texto corrido</h3>
       <div class="bold-sample">Una marca que empieza en el mat.</div>
       <p>La collab con Jiu-Jitsu Fest es la puerta. Pero RUNA tiene que poder ir más lejos — surf, snow, atletismo, calle. Diseñada para atletas que entrenan de verdad.</p>
     </div>
     <div class="body-demo-col">
-      <h4>Pesos disponibles</h4>
-      <p style="font-weight:400;margin-bottom:8px;color:#777">Regular 400 — Texto corrido, descripciones, UI</p>
+      <h3>Pesos disponibles</h3>
+      <p style="font-weight:400;margin-bottom:8px;color:#999">Regular 400 — Texto corrido, descripciones, UI</p>
       <p style="font-weight:500;margin-bottom:8px;color:#999">Medium 500 — Botones, navegación, labels</p>
-      <p style="font-weight:700;margin-bottom:8px;color:#bbb">Bold 700 — Subtítulos, énfasis, precios</p>
-      <p style="font-weight:900;color:#fff">Black 900 — CTAs, números destacados</p>
+      <p style="font-weight:700;margin-bottom:8px;color:#B3B3B3">Bold 700 — Subtítulos, énfasis, precios</p>
+      <p style="font-weight:900;color:#ccc">Black 900 — CTAs, números destacados</p>
     </div>
   </div>
 </section>
@@ -872,23 +1107,23 @@
      5. LOGO USAGE
 ══════════════════════════ -->
 <section id="logo-usage">
-  <div class="section-label">05 — Uso del logo</div>
+  <div class="section-label">08 — Uso del logo</div>
 
   <div class="logo-grid">
     <div class="logo-cell on-white">
       <img src="LOGOS/RUNA-01.png" alt="Logo sobre blanco">
-      <div class="logo-cell-label" style="color:#888">Sobre blanco</div>
+      <div class="logo-cell-label" style="color:#666">Sobre blanco</div>
     </div>
     <div class="logo-cell on-green">
-      <img src="LOGOS/RUNA-03.png" alt="Logo sobre verde">
+      <img src="LOGOS/RUNA-11.png" alt="Logo sobre verde">
       <div class="logo-cell-label" style="color:rgba(0,0,0,0.5)">Sobre Campo Verde</div>
     </div>
     <div class="logo-cell on-dark">
-      <img src="LOGOS/RUNA-07.png" alt="Logo sobre negro">
+      <img src="LOGOS/RUNA-12.png" alt="Logo sobre negro">
       <div class="logo-cell-label">Sobre Noche</div>
     </div>
     <div class="logo-cell on-carbon">
-      <img src="LOGOS/RUNA-07.png" alt="Logo sobre carbón">
+      <img src="LOGOS/RUNA-10.png" alt="Logo sobre carbón">
       <div class="logo-cell-label">Sobre Carbón</div>
     </div>
   </div>
@@ -915,7 +1150,7 @@
      6. VOZ & FRASES
 ══════════════════════════ -->
 <section id="voice">
-  <div class="section-label">06 — Voz de marca</div>
+  <div class="section-label">09 — Voz de marca</div>
   <div class="voice-headline">DIRECTO.<br>ATLÉTICO.<br>REAL.</div>
 
   <div class="phrases-grid">
@@ -969,120 +1204,931 @@
   </div>
 </section>
 
-<!-- ══════════════════════════
-     7. APLICACIONES
-══════════════════════════ -->
-<section id="applications">
-  <div class="section-label">07 — Aplicaciones de marca</div>
-  <div class="app-intro">
-    <p>Conceptos de aplicación para las dos líneas de la marca. Cada pieza respeta el sistema de color y tipografía, diferenciando visualmente RUNA Sports de la collab JJF.</p>
+<!-- ═══════════════════════════════════════════
+     7. CATÁLOGO DROP 02 — FRICTION COLLECTION
+═══════════════════════════════════════════ -->
+<section id="clothing">
+  <div class="section-label">10 — Colección Friction · Drop 02</div>
+  <div class="clothing-intro">
+    <h2>« <em>Friction</em> is the forge. »</h2>
+    <p>7 categorías · 35 productos · 5 líneas de diseño: Statement, Pattern, Técnico, Fuego, Runas. Cada pieza con ficha técnica y diseño vectorial.</p>
   </div>
 
-  <div class="app-grid">
+  <!-- ═══ 1. POLERONES ═══ -->
+  <div class="prod-section-title">Polerones — 5 diseños</div>
+  <div class="prod-grid">
 
-    <div class="app-card">
-      <div class="app-card-top" style="background:#0A0A0A;color:#90D932">
-        RUNA
-        <div class="app-watermark" style="color:rgba(144,217,50,0.06)">A</div>
+    <!-- A: Statement -->
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 100 L45 70 L95 55 L115 80 L140 70 L165 80 L185 55 L235 70 L220 100 L215 115 L215 290 L65 290 L65 115Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 80 Q140 60 165 80 Q165 45 140 38 Q115 45 115 80Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="95" y="200" width="90" height="35" rx="4" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="140" y="125" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+          <text x="140" y="170" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="18" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="-1">FORGED</text>
+          <text x="140" y="190" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="18" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="-1">IN FRICTION</text>
+        </svg>
       </div>
-      <div class="app-card-body">
-        <div class="app-cat">RUNA Sports · Ruta A</div>
-        <div class="app-name">Polera Tipográfica</div>
-        <div class="app-desc">Fondo negro. "BUILT FOR BATTLE" en Barlow Condensed Black Italic al pecho. Acento verde en el logo. Sin ilustraciones.</div>
-        <div class="app-tags">
-          <span class="app-tag">Polera</span>
-          <span class="app-tag">Hoodie</span>
-          <span class="app-tag">Gorra</span>
-        </div>
+      <div class="prod-header"><h3>Polerón A — «FRICTION»</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 380gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Oversized · Boxey</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Acento</span><span class="val grn">Verde #90D932</span></div>
+        <div class="prod-spec"><span class="lbl">Estampado</span><span class="val">Serigrafía plastisol · Pecho + Espalda</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Front:</strong> Logo RUNA verde pecho izquierdo 8cm.<br>
+        <strong>Back:</strong> "FRICTION" vertical masivo blanco (60cm) tracking -2.<br>
+        <strong>Hood:</strong> Doble capa, cordón plano verde.
       </div>
     </div>
 
-    <div class="app-card">
-      <div class="app-card-top" style="background:#1C1C1C;color:#F5620F">
-        JJF
-        <div class="app-watermark" style="color:rgba(245,98,15,0.07)">B</div>
+    <!-- B: Pattern -->
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#1C1C1C"/>
+          <path d="M60 100 L45 70 L95 55 L115 80 L140 70 L165 80 L185 55 L235 70 L220 100 L215 115 L215 290 L65 290 L65 115Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 80 Q140 60 165 80 Q165 45 140 38 Q115 45 115 80Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <defs><pattern id="r2" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><text x="0" y="13" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#90D932" opacity="0.2">R</text></pattern></defs>
+          <path d="M65 115 L215 115 L215 290 L65 290Z" fill="url(#r2)"/>
+          <text x="140" y="145" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="4">RUNA</text>
+          <line x1="100" y1="155" x2="180" y2="155" stroke="#90D932" stroke-width="1"/>
+        </svg>
       </div>
-      <div class="app-card-body">
-        <div class="app-cat">JJF Collab · Ruta B</div>
-        <div class="app-name">Íconos + Cultura</div>
-        <div class="app-desc">Ilustración lineal: cinturón, tape, kimono. Composición tipo patch o escudo. Acento naranjo #F5620F sobre negro.</div>
-        <div class="app-tags">
-          <span class="app-tag">Calcetines</span>
-          <span class="app-tag">Tote</span>
-          <span class="app-tag">Protector</span>
-        </div>
+      <div class="prod-header"><h3>Polerón B — Runa Allover</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 380gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Full Zip</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Isotipo RUNA allover · Verde 12%</span></div>
+        <div class="prod-spec"><span class="lbl">Cierre</span><span class="val">YKK negro mate · Bidireccional</span></div>
+        <div class="prod-spec"><span class="lbl">Forro Capucha</span><span class="val grn">Verde sólido #90D932</span></div>
       </div>
-    </div>
-
-    <div class="app-card">
-      <div class="app-card-top" style="background:#90D932;color:#0A0A0A">
-        C
-        <div class="app-watermark" style="color:rgba(0,0,0,0.06)">C</div>
-      </div>
-      <div class="app-card-body">
-        <div class="app-cat">Cápsula · Ruta C</div>
-        <div class="app-name">Patrón Repetido</div>
-        <div class="app-desc">Íconos pequeños en repetición allover print o banda lateral. Fondo Campo Verde #90D932. Une las dos líneas en piezas de lifestyle.</div>
-        <div class="app-tags">
-          <span class="app-tag">Toalla</span>
-          <span class="app-tag">Calcetines pack</span>
-          <span class="app-tag">Bolso</span>
-        </div>
+      <div class="prod-desc">
+        <strong>Body:</strong> Patrón allover módulo "R" en diagonal, verde 12% opacidad.<br>
+        <strong>Hood lining:</strong> Verde sólido, destello al bajar capucha.
       </div>
     </div>
 
-    <div class="app-card">
-      <div class="app-card-top" style="background:#111;color:#fff;font-family:var(--font-body);font-size:1.8rem;font-style:normal;gap:8px;flex-direction:column">
-        <div style="font-size:0.6rem;letter-spacing:4px;color:#555;font-weight:400">INSTAGRAM</div>
-        <div style="font-size:2.5rem;font-weight:900;color:var(--verde)">@runa</div>
+    <!-- C: Técnico -->
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 100 L45 70 L95 55 L115 80 L140 70 L165 80 L185 55 L235 70 L220 100 L215 115 L215 290 L65 290 L65 115Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 80 Q140 60 165 80 Q165 45 140 38 Q115 45 115 80Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="90" y="120" width="100" height="45" fill="#90D932" opacity="0.08" rx="3"/>
+          <text x="140" y="140" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+          <line x1="90" y1="165" x2="190" y2="165" stroke="#90D932" stroke-width="2" stroke-dasharray="4,3"/>
+          <line x1="90" y1="170" x2="190" y2="170" stroke="#90D932" stroke-width="1" stroke-dasharray="2,4"/>
+        </svg>
       </div>
-      <div class="app-card-body">
-        <div class="app-cat">Digital · Instagram</div>
-        <div class="app-name">Identidad Visual IG</div>
-        <div class="app-desc">Feed: alternancia negro puro / verde / imagen. Stories con marco tipográfico. Highlights con ícono blanco sobre negro.</div>
-        <div class="app-tags">
-          <span class="app-tag">Feed 1080×1080</span>
-          <span class="app-tag">Story 1080×1920</span>
-          <span class="app-tag">Reel</span>
-        </div>
+      <div class="prod-header"><h3>Polerón C — Dynamic Motion</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 380gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Pullover</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Isotipo RUNA + efecto movimiento</span></div>
+        <div class="prod-spec"><span class="lbl">Capucha</span><span class="val grn">Forro verde sólido</span></div>
       </div>
-    </div>
-
-    <div class="app-card">
-      <div class="app-card-top" style="background:linear-gradient(135deg,#0A0A0A 60%,#90D932);color:#fff">
-        WEB
-        <div class="app-watermark" style="color:rgba(255,255,255,0.04)">W</div>
-      </div>
-      <div class="app-card-body">
-        <div class="app-cat">Digital · Web</div>
-        <div class="app-name">Look &amp; Feel Web</div>
-        <div class="app-desc">Fondo Noche #0A0A0A. Hero con tipografía display a pantalla completa. CTA en verde. Cards en Carbón. Mobile-first.</div>
-        <div class="app-tags">
-          <span class="app-tag">Hero</span>
-          <span class="app-tag">Tienda</span>
-          <span class="app-tag">Mobile</span>
-        </div>
+      <div class="prod-desc">
+        <strong>Body:</strong> Patrón isotipo RUNA módulo "R" con ondas de velocidad diagonales — flujo cinético.<br>
+        <strong>Hood lining:</strong> Verde sólido.
       </div>
     </div>
 
-    <div class="app-card">
-      <div class="app-card-top" style="background:#0A0A0A;flex-direction:column;gap:4px">
-        <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;font-style:italic;color:#fff;letter-spacing:-1px">RUNA×JJF</div>
-        <div style="font-size:0.6rem;letter-spacing:4px;color:#90D932">BUILT FOR BATTLE</div>
+    <!-- D: Fuego -->
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 100 L45 70 L95 55 L115 80 L140 70 L165 80 L185 55 L235 70 L220 100 L215 115 L215 290 L65 290 L65 115Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 80 Q140 60 165 80 Q165 45 140 38 Q115 45 115 80Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="85" y="120" width="110" height="18" fill="#F5620F" rx="0"/>
+          <text x="140" y="134" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="9" font-weight="900" font-style="italic" fill="#000" letter-spacing="5">RUNA</text>
+          <text x="140" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="14" font-weight="900" font-style="italic" fill="#F5620F" letter-spacing="-1">RUNA</text>
+        </svg>
       </div>
-      <div class="app-card-body">
-        <div class="app-cat">Evento · JJF 2025</div>
-        <div class="app-name">Collab Banner</div>
-        <div class="app-desc">Banner para el Jiu-Jitsu Fest. Wordmark RUNA + logo JJF separados por "×" en verde. Tagline debajo en espaciado amplio.</div>
-        <div class="app-tags">
-          <span class="app-tag">Banner 3×1m</span>
-          <span class="app-tag">Flyer A4</span>
-          <span class="app-tag">Digital</span>
-        </div>
+      <div class="prod-header"><h3>Polerón D — Fuego</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 380gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Pullover</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Panel Pecho</span><span class="val fgo">Franja fuego #F5620F 12cm</span></div>
+        <div class="prod-spec"><span class="lbl">Estampado</span><span class="val fgo">"RUNA" fuego tracking 6</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Chest band:</strong> Franja horizontal fuego 12cm cruzando pecho con "RUNA".<br>
+        <strong>Back:</strong> Logo RUNA fuego grande (20cm) centro espalda.<br>
+        <strong>Cordón:</strong> Naranjo, agujetas metálicas.
+      </div>
+    </div>
+
+    <!-- E: Runas -->
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 100 L45 70 L95 55 L115 80 L140 70 L165 80 L185 55 L235 70 L220 100 L215 115 L215 290 L65 290 L65 115Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 80 Q140 60 165 80 Q165 45 140 38 Q115 45 115 80Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="140" y="155" text-anchor="middle" font-size="28" font-weight="900" fill="#90D932">ᚢ ᚱ ᛉ</text>
+          <text x="140" y="185" text-anchor="middle" font-size="12" fill="#F5620F" opacity="0.8">ᚨ ᚺ</text>
+          <circle cx="140" cy="155" r="30" fill="none" stroke="#90D932" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polerón E — Runa Uruz</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 380gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Oversized · Pullover</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Estampado</span><span class="val grn">Símbolos rúnicos · Verde + fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Runas</span><span class="val">ᚢ Uruz · ᚱ Raido · ᛉ Algiz</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Front:</strong> Círculo de runas en verde #90D932 (25cm).<br>
+        <strong>Back:</strong> Runa Uruz (ᚢ) masiva en fuego #F5620F (40cm).<br>
+        <strong>Sleeve:</strong> "RUNA" en tipografía rúnica.
       </div>
     </div>
 
   </div>
+
+  <!-- ═══ 2. BUZO COMPLETO ═══ -->
+  <div class="prod-section-title">Buzo Completo — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 90 L45 60 L95 45 L115 70 L140 60 L165 70 L185 45 L235 60 L220 90 L215 105 L215 260 L65 260 L65 105Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <path d="M115 70 Q140 50 165 70 Q165 35 140 28 Q115 35 115 70Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="95" y="180" width="90" height="30" rx="3" fill="#111" stroke="#2a2a2a"/>
+          <text x="140" y="115" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+          <text x="140" y="145" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="-0.5">BUILT FOR</text>
+          <text x="140" y="158" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="-0.5">BATTLE</text>
+          <!-- pants -->
+          <rect x="65" y="260" width="36" height="55" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="179" y="260" width="36" height="55" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="83" y="288" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="5" font-weight="900" fill="#90D932" transform="rotate(-90,83,288)">FRICTION</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Buzo A — Built for Battle</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 320gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Set completo</span></div>
+        <div class="prod-spec"><span class="lbl">Color</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Hoodie Back</span><span class="val">"BUILT FOR BATTLE" 40cm</span></div>
+        <div class="prod-spec"><span class="lbl">Pants Leg</span><span class="val grn">"FRICTION" vertical 25cm</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Front:</strong> Logo RUNA bordado pecho 3cm verde.<br>
+        <strong>Back:</strong> "BUILT FOR BATTLE" masivo blanco.<br>
+        <strong>Pants:</strong> "FRICTION" vertical pierna izq.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#1C1C1C"/>
+          <path d="M60 90 L45 60 L95 45 L115 70 L140 60 L165 70 L185 45 L235 60 L220 90 L215 105 L215 260 L65 260 L65 105Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <defs><pattern id="rombo" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><polygon points="10,0 20,10 10,20 0,10" fill="#90D932" opacity="0.15"/><polygon points="10,0 20,10 10,20 0,10" fill="#F5620F" opacity="0.08" transform="translate(10,10)"/></pattern></defs>
+          <path d="M65 105 L215 105 L215 260 L65 260Z" fill="url(#rombo)"/>
+          <rect x="65" y="260" width="36" height="55" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="179" y="260" width="36" height="55" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Buzo B — Geometric Runa</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 320gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Set completo</span></div>
+        <div class="prod-spec"><span class="lbl">Color</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Rombos geométricos verde+fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Cargo</span><span class="val">Bolso + cinta reflectante</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Body:</strong> Rombos geométricos inspirados runa Uruz, verde+fuego.<br>
+        <strong>Pants:</strong> Bolsillo cargo con cinta reflectante RUNA.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 90 L45 60 L95 45 L115 70 L140 60 L165 70 L185 45 L235 60 L220 90 L215 105 L215 260 L65 260 L65 105Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="55" y="105" width="8" height="155" fill="#90D932" opacity="0.6" rx="2"/>
+          <rect x="65" y="105" width="3" height="155" fill="#F5620F" opacity="0.6"/>
+          <rect x="212" y="105" width="8" height="155" fill="#90D932" opacity="0.6" rx="2"/>
+          <rect x="207" y="105" width="3" height="155" fill="#F5620F" opacity="0.6"/>
+          <rect x="65" y="263" width="36" height="52" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="179" y="263" width="36" height="52" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="55" y="265" width="6" height="50" fill="#90D932" opacity="0.6"/>
+          <rect x="219" y="265" width="6" height="50" fill="#90D932" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Buzo C — Racing Stripe</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 320gsm + Nylon</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Slim · Set completo</span></div>
+        <div class="prod-spec"><span class="lbl">Color</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Stripe</span><span class="val grn">Triple: verde+negro+fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Reflectante</span><span class="val">Logo RUNA pecho+pantorrilla</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Body:</strong> Triple stripe lateral completo (verde 1cm + negro 0.5cm + fuego 1cm).<br>
+        <strong>Hoodie:</strong> Full zip, cuello stand, bolsillos cremallera.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#0A0A0A"/>
+          <path d="M60 90 L45 60 L95 45 L115 70 L140 60 L165 70 L185 45 L235 60 L220 90 L215 105 L215 260 L65 260 L65 105Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="55" y="105" width="8" height="155" fill="#F5620F" opacity="0.7" rx="2"/>
+          <rect x="65" y="105" width="3" height="155" fill="#FFF" opacity="0.7"/>
+          <rect x="70" y="105" width="5" height="155" fill="#F5620F" opacity="0.7" rx="2"/>
+          <rect x="212" y="105" width="8" height="155" fill="#F5620F" opacity="0.7" rx="2"/>
+          <rect x="202" y="105" width="3" height="155" fill="#FFF" opacity="0.7"/>
+          <rect x="197" y="105" width="5" height="155" fill="#F5620F" opacity="0.7" rx="2"/>
+          <text x="140" y="150" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="14" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">RUNA</text>
+          <rect x="65" y="263" width="36" height="52" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="179" y="263" width="36" height="52" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Buzo D — Albiceleste</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 320gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Set completo</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Stripe</span><span class="val fgo">Fuego+blanco+fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Espalda</span><span class="val fgo">Logo RUNA tipo bandera</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Stripe:</strong> Triple fuego+blanco+fuego estilo Adidas con "RUNA" vertical.<br>
+        <strong>Back:</strong> Logo RUNA masivo estilo bandera argentina.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="320" fill="#1C1C1C"/>
+          <path d="M60 90 L45 60 L95 45 L115 70 L140 60 L165 70 L185 45 L235 60 L220 90 L215 105 L215 260 L65 260 L65 105Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <defs><pattern id="runas-buzo" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><text x="2" y="22" font-size="14" fill="#90D932" opacity="0.15">ᚢ</text></pattern></defs>
+          <path d="M65 105 L215 105 L215 260 L65 260Z" fill="url(#runas-buzo)"/>
+          <text x="140" y="175" text-anchor="middle" font-size="22" fill="#F5620F" opacity="0.8">ᚢ</text>
+          <rect x="65" y="260" width="36" height="55" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+          <rect x="179" y="260" width="36" height="55" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Buzo E — Runas Set</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 320gsm · French Terry</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Set completo</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Runas allover verde+fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Pantalón</span><span class="val">Runas verticales piernas</span></div>
+      </div>
+      <div class="prod-desc">
+        <strong>Body:</strong> Símbolos rúnicos (ᚢ ᚱ ᛉ ᚨ) allover verde + fuego.<br>
+        <strong>Back:</strong> Runa Uruz (ᚢ) masiva centro.<br>
+        <strong>Pants:</strong> Columnas de runas verticales.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ 3. CALCETINES ═══ -->
+  <div class="prod-section-title">Calcetines — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="260" fill="#0A0A0A"/>
+          <path d="M55 30 L55 180 Q55 215 75 225 L135 230 Q155 230 155 212 L155 195 Q155 185 145 185 L115 185 L115 30Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1.5"/>
+          <rect x="55" y="30" width="55" height="20" rx="0" fill="#90D932"/>
+          <rect x="110" y="30" width="45" height="20" rx="0" fill="#0A0A0A"/>
+          <text x="85" y="130" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="9" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+          <rect x="55" y="225" width="100" height="8" rx="3" fill="#111"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Calcetín A — Wordmark</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón peinado 200 agujas</span></div>
+        <div class="prod-spec"><span class="lbl">Altura</span><span class="val">Crew · 18cm</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Puño</span><span class="val grn">Verde #90D932 · 4cm</span></div>
+        <div class="prod-spec"><span class="lbl">Texto</span><span class="val">"RUNA" vertical tracking 4</span></div>
+      </div>
+      <div class="prod-desc">
+        Puño verde sólido 4cm, "RUNA" vertical blanco costado tracking 4. Refuerzo talón.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="260" fill="#1C1C1C"/>
+          <path d="M55 30 L55 180 Q55 215 75 225 L135 230 Q155 230 155 212 L155 195 Q155 185 145 185 L115 185 L115 30Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1.5"/>
+          <defs><pattern id="grid-r" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse"><text x="1" y="12" font-family="'Barlow Condensed',sans-serif" font-size="6" font-weight="900" font-style="italic" fill="#90D932" opacity="0.4">R</text></pattern></defs>
+          <rect x="55" y="55" width="100" height="120" fill="url(#grid-r)"/>
+          <rect x="55" y="30" width="100" height="20" fill="#0A0A0A" stroke="#90D932" stroke-width="1"/>
+          <rect x="55" y="225" width="100" height="8" rx="3" fill="#111"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Calcetín B — Runa Grid</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón peinado 200 agujas</span></div>
+        <div class="prod-spec"><span class="lbl">Altura</span><span class="val">Crew · 18cm</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Grid "R" verde cada 3cm</span></div>
+        <div class="prod-spec"><span class="lbl">Talón</span><span class="val grn">Verde sólido</span></div>
+      </div>
+      <div class="prod-desc">
+        Grid allover de "R" verde sobre carbón. Puño negro ribete verde. Talón verde sólido.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="260" fill="#0A0A0A"/>
+          <path d="M55 30 L55 180 Q55 215 75 225 L135 230 Q155 230 155 212 L155 195 Q155 185 145 185 L115 185 L115 30Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1.5"/>
+          <rect x="55" y="30" width="100" height="15" fill="#90D932"/>
+          <rect x="55" y="45" width="100" height="3" fill="#F5620F"/>
+          <rect x="55" y="48" width="100" height="15" fill="#0A0A0A"/>
+          <rect x="55" y="225" width="100" height="8" rx="3" fill="#111"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Calcetín C — Performance Stripe</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón + Elastano 15%</span></div>
+        <div class="prod-spec"><span class="lbl">Altura</span><span class="val">No-show</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Bandas</span><span class="val">3: verde+negro+fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Talón</span><span class="val">Gel antideslizante</span></div>
+      </div>
+      <div class="prod-desc">
+        3 bandas (verde+negro+fuego). Logo RUNA bordado empeine. Gel heel grip.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="260" fill="#0A0A0A"/>
+          <path d="M55 30 L55 180 Q55 215 75 225 L135 230 Q155 230 155 212 L155 195 Q155 185 145 185 L115 185 L115 30Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1.5"/>
+          <rect x="55" y="30" width="100" height="20" fill="#F5620F"/>
+          <text x="85" y="100" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" fill="#F5620F" letter-spacing="1">TAP OR BE</text>
+          <text x="85" y="112" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" fill="#F5620F" letter-spacing="1">TAPPED</text>
+          <text x="85" y="150" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="900" fill="#90D932">BJJ</text>
+          <rect x="55" y="225" width="100" height="8" rx="3" fill="#111"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Calcetín D — JJF</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón peinado 200 agujas</span></div>
+        <div class="prod-spec"><span class="lbl">Altura</span><span class="val">Crew · 18cm</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Tema</span><span class="val fgo">Cinturón BJJ · Açaí · Shaka</span></div>
+        <div class="prod-spec"><span class="lbl">Textos</span><span class="val">"TAP OR BE TAPPED"</span></div>
+      </div>
+      <div class="prod-desc">
+        Cinturón BJJ empeine, fruto açaí, mano shaka. Puño fuego "TAP OR BE TAPPED".
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="260" fill="#0A0A0A"/>
+          <path d="M55 30 L55 180 Q55 215 75 225 L135 230 Q155 230 155 212 L155 195 Q155 185 145 185 L115 185 L115 30Z" fill="#FFF" stroke="#ddd" stroke-width="1.5"/>
+          <rect x="55" y="30" width="100" height="20" fill="#0A0A0A"/>
+          <text x="85" y="110" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="6" fill="#0A0A0A">HELIO GRACIE</text>
+          <text x="85" y="140" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="18" fill="#0A0A0A" opacity="0.1">ᚢ</text>
+          <text x="60" y="130" text-anchor="middle" font-size="14" fill="#90D932">ᚢ</text>
+          <text x="110" y="140" text-anchor="middle" font-size="14" fill="#90D932">ᚱ</text>
+          <rect x="55" y="225" width="100" height="8" rx="3" fill="#eee"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Calcetín E — Helio Gracie</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón peinado 200 agujas</span></div>
+        <div class="prod-spec"><span class="lbl">Altura</span><span class="val">Crew · 18cm</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Blanco #FFFFFF</span></div>
+        <div class="prod-spec"><span class="lbl">Diseño</span><span class="val">Helio Gracie vintage + runas</span></div>
+        <div class="prod-spec"><span class="lbl">Runas</span><span class="val grn">ᚢ ᚱ bordadas en verde</span></div>
+      </div>
+      <div class="prod-desc">
+        Retrato Helio Gracie vintage sepia. Runas ᚢ (Uruz) y ᚱ (Raido) bordadas. Puño negro "RUNA · EST. 2024".
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ 4. POLERAS ═══ -->
+  <div class="prod-section-title">Poleras — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="260" fill="#0A0A0A"/>
+          <path d="M60 70 L45 50 L85 35 L105 55 L120 45 L135 55 L155 35 L195 50 L180 70 L176 80 L176 230 L64 230 L64 80Z" fill="#1C1C1C" stroke="#2a2a2a"/>
+          <path d="M105 55 Q120 65 135 55" fill="none" stroke="#2a2a2a"/>
+          <text x="120" y="130" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="1">YOU BELONG</text>
+          <text x="120" y="145" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="1">HERE</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polera A — You Belong Here</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 240gsm</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Oversized · Drop shoulder</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Front</span><span class="val">"YOU BELONG HERE" tracking 4</span></div>
+        <div class="prod-spec"><span class="lbl">Back</span><span class="val grn">Logo RUNA verde 25cm</span></div>
+      </div>
+      <div class="prod-desc">
+        "YOU BELONG HERE" blanco tracking 4. Cuello rib verde 2cm. Logo RUNA 25cm espalda.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="260" fill="#FFF"/>
+          <path d="M60 70 L45 50 L85 35 L105 55 L120 45 L135 55 L155 35 L195 50 L180 70 L176 80 L176 230 L64 230 L64 80Z" fill="#FFF" stroke="#ddd"/>
+          <defs><pattern id="micro-r" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse"><text x="2" y="13" font-family="'Barlow Condensed',sans-serif" font-size="5" font-weight="900" font-style="italic" fill="#90D932" opacity="0.15">R</text></pattern></defs>
+          <path d="M64 80 L176 80 L176 230 L64 230Z" fill="url(#micro-r)"/>
+          <text x="120" y="110" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="900" fill="#0A0A0A" letter-spacing="3">RUNA</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polera B — Micro R Allover</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 240gsm</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Blanco #FFFFFF</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Micro "R" allover 8% opacidad</span></div>
+        <div class="prod-spec"><span class="lbl">Logo</span><span class="val">Bordado negro pecho 4cm</span></div>
+      </div>
+      <div class="prod-desc">
+        Patrón micro "R" verde sutil 8%. Logo RUNA bordado negro 4cm. Solo visible de cerca.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="260" fill="#1C1C1C"/>
+          <path d="M60 70 L45 50 L85 35 L105 55 L120 45 L135 55 L155 35 L195 50 L180 70 L176 80 L176 230 L64 230 L64 80Z" fill="#0A0A0A" stroke="#2a2a2a"/>
+          <rect x="60" y="80" width="8" height="150" fill="#90D932"/>
+          <rect x="172" y="80" width="8" height="150" fill="#90D932"/>
+          <text x="120" y="120" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="3">RUNA</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polera C — Side Panel</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 240gsm + Nylon mesh</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Slim · Performance</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Paneles</span><span class="val grn">Mesh verde laterales</span></div>
+        <div class="prod-spec"><span class="lbl">Costuras</span><span class="val">Planas flatlock verde</span></div>
+      </div>
+      <div class="prod-desc">
+        Mesh verde lateral transpirable. Costuras flatlock verde. Logo RUNA reflectante pecho.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="260" fill="#0A0A0A"/>
+          <path d="M60 70 L45 50 L85 35 L105 55 L120 45 L135 55 L155 35 L195 50 L180 70 L176 80 L176 230 L64 230 L64 80Z" fill="#1C1C1C" stroke="#2a2a2a"/>
+          <path d="M105 55 Q120 65 135 55" fill="none" stroke="#F5620F" stroke-width="1.5"/>
+          <text x="120" y="130" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="14" font-weight="900" font-style="italic" fill="#F5620F" letter-spacing="-0.5">FRICTION</text>
+          <text x="120" y="190" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#F5620F" opacity="0.8">RUNA</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polera D — Friction Fuego</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 240gsm</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Oversized</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Front</span><span class="val fgo">"FRICTION" fuego 18cm tracking 6</span></div>
+        <div class="prod-spec"><span class="lbl">Back</span><span class="val fgo">Logo RUNA fuego 20cm</span></div>
+      </div>
+      <div class="prod-desc">
+        "FRICTION" fuego #F5620F tracking 6. Cuello rib fuego. Logo RUNA 20cm espalda.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="260" fill="#0A0A0A"/>
+          <path d="M60 70 L45 50 L85 35 L105 55 L120 45 L135 55 L155 35 L195 50 L180 70 L176 80 L176 230 L64 230 L64 80Z" fill="#0A0A0A" stroke="#90D932" stroke-width="1.5"/>
+          <text x="108" y="120" text-anchor="middle" font-size="22" fill="#90D932">ᚢ</text>
+          <text x="132" y="130" text-anchor="middle" font-size="18" fill="#F5620F">ᚱ</text>
+          <text x="105" y="145" text-anchor="middle" font-size="14" fill="#90D932">ᛉ</text>
+          <text x="135" y="150" text-anchor="middle" font-size="14" fill="#F5620F">ᚨ</text>
+          <text x="120" y="165" text-anchor="middle" font-size="12" fill="#90D932">ᚺ</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Polera E — Runaᛉ</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Algodón 240gsm</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Runas</span><span class="val grn">ᚢᚱᛉᚨᚺ frontales</span></div>
+        <div class="prod-spec"><span class="lbl">Back</span><span class="val">Runa Algiz ᛉ masiva 30cm</span></div>
+      </div>
+      <div class="prod-desc">
+        Columna vertical 5 runas alternando verde+fuego. Espalda: runa Algiz ᛉ masiva 30cm.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ 5. CORTA VIENTO ═══ -->
+  <div class="prod-section-title">Corta Viento — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L50 70 L100 55 L120 80 L130 75 L140 80 L160 55 L210 70 L190 90 L185 105 L185 250 L75 250 L75 105Z" fill="#1C1C1C" stroke="#2a2a2a"/>
+          <rect x="75" y="105" width="110" height="3" fill="#90D932"/>
+          <text x="130" y="145" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="1">FORGED IN</text>
+          <text x="130" y="160" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="1">FRICTION</text>
+          <rect x="170" y="80" width="12" height="165" fill="#90D932" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Corta Viento A — Forged</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Nylon Ripstop DWR</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Espalda</span><span class="val">"FORGED IN FRICTION" masivo</span></div>
+        <div class="prod-spec"><span class="lbl">Pecho</span><span class="val grn">Logo RUNA reflectante 6cm</span></div>
+      </div>
+      <div class="prod-desc">
+        "FORGED IN FRICTION" tracking 4 espalda. Logo reflectante pecho 6cm. YKK impermeable.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L50 70 L100 55 L120 80 L130 75 L140 80 L160 55 L210 70 L190 90 L185 105 L185 250 L75 250 L75 105Z" fill="#1C1C1C" stroke="#2a2a2a"/>
+          <defs><pattern id="camo-r" x="0" y="0" width="28" height="20" patternUnits="userSpaceOnUse"><text x="0" y="18" font-size="16" fill="#90D932" opacity="0.1">ᚢ</text></pattern></defs>
+          <path d="M75 108 L185 108 L185 250 L75 250Z" fill="url(#camo-r)"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Corta Viento B — Camo Runa</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Nylon Ripstop DWR</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular · Packable ~180g</span></div>
+        <div class="prod-spec"><span class="lbl">Patrón</span><span class="val grn">Camuflaje con runa Uruz</span></div>
+      </div>
+      <div class="prod-desc">
+        Camuflaje con forma de runa Uruz en verde+gris. Capucha plegable. Se guarda en su bolsillo.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L50 70 L100 55 L120 80 L130 75 L140 80 L160 55 L210 70 L190 90 L185 105 L185 250 L75 250 L75 105Z" fill="#1C1C1C" stroke="#2a2a2a"/>
+          <path d="M100 55 L160 55 L160 105 L100 105Z" fill="#90D932" opacity="0.7"/>
+          <rect x="75" y="120" width="110" height="10" fill="#F5620F" opacity="0.8"/>
+          <rect x="180" y="105" width="8" height="145" fill="#90D932" opacity="0.5"/>
+          <rect x="72" y="105" width="8" height="145" fill="#90D932" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Corta Viento C — Color Block</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Nylon Ripstop DWR</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Hombros</span><span class="val grn">Paneles verdes</span></div>
+        <div class="prod-spec"><span class="lbl">Pecho</span><span class="val">Franja fuego 10cm</span></div>
+      </div>
+      <div class="prod-desc">
+        Hombros verdes, franja fuego 10cm pecho, mangas stripe verde. Capucha forro verde.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#F5620F"/>
+          <path d="M70 90 L50 70 L100 55 L120 80 L130 75 L140 80 L160 55 L210 70 L190 90 L185 105 L185 250 L75 250 L75 105Z" fill="#F5620F" stroke="#0A0A0A" stroke-width="1.5"/>
+          <path d="M100 55 L160 55 L160 105 L100 105Z" fill="#0A0A0A" opacity="0.3"/>
+          <text x="130" y="150" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="14" font-weight="900" font-style="italic" fill="#0A0A0A" opacity="0.9">RUNA</text>
+          <rect x="185" y="80" width="10" height="165" fill="#0A0A0A" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Corta Viento D — Fuego</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Nylon Ripstop DWR</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val fgo">Fuego #F5620F</span></div>
+        <div class="prod-spec"><span class="lbl">Yoke</span><span class="val">Negro contraste</span></div>
+        <div class="prod-spec"><span class="lbl">Detalles</span><span class="val">Reflectantes fuego</span></div>
+      </div>
+      <div class="prod-desc">
+        Corta viento fuego dominante. Hombros negros. Cremallera YKK. Logos reflectantes.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L50 70 L100 55 L120 80 L130 75 L140 80 L160 55 L210 70 L190 90 L185 105 L185 250 L75 250 L75 105Z" fill="#1C1C1C" stroke="#90D932" stroke-width="1.5"/>
+          <circle cx="130" cy="150" r="28" fill="none" stroke="#90D932" stroke-width="1.5" opacity="0.8"/>
+          <text x="130" y="147" text-anchor="middle" font-size="20" font-family="sans-serif" font-weight="900" fill="#90D932">ᚢᚱᛉ</text>
+          <text x="130" y="220" text-anchor="middle" font-size="28" font-family="sans-serif" font-weight="900" fill="#90D932" opacity="0.8">ᚢ</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Corta Viento E — Runa Shield</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Nylon Ripstop DWR</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Regular</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Pecho</span><span class="val grn">Escudo runas reflectante</span></div>
+        <div class="prod-spec"><span class="lbl">Espalda</span><span class="val">Runa Uruz masiva reflectante</span></div>
+      </div>
+      <div class="prod-desc">
+        Escudo circular de runas (ᚢᚱᛉ) reflectante pecho. Runa Uruz masiva espalda.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ 6. BASKETBALL JERSEY ═══ -->
+  <div class="prod-section-title">Basketball Jersey — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M80 80 L65 60 L110 45 L125 65 L130 60 L135 65 L150 45 L195 60 L180 80 L173 90 L173 250 L87 250 L87 90Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <path d="M87 90 L80 80 L65 60 L110 45 L125 65 L115 90Z" fill="#90D932"/>
+          <path d="M173 90 L180 80 L195 60 L150 45 L135 65 L145 90Z" fill="#90D932"/>
+          <path d="M125 65 Q130 75 135 65" fill="none" stroke="#90D932" stroke-width="1.5"/>
+          <text x="130" y="135" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="48" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">02</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>BBall A — #FRICTION</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 100% Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Loose Basketball</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Paneles</span><span class="val grn">Verde + blanco laterales</span></div>
+      </div>
+      <div class="prod-desc">
+        "RUNA" tracking 8. Espalda "FRICTION" + #02. Paneles verde+blanco.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#FFF"/>
+          <path d="M80 80 L65 60 L110 45 L125 65 L130 60 L135 65 L150 45 L195 60 L180 80 L173 90 L173 250 L87 250 L87 90Z" fill="#FFF" stroke="#ddd" stroke-width="1.5"/>
+          <path d="M87 90 L173 250 L87 250Z" fill="#90D932" opacity="0.1"/>
+          <path d="M173 90 L173 250 L87 250Z" fill="#F5620F" opacity="0.08"/>
+          <text x="130" y="135" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="48" font-weight="900" font-style="italic" fill="#0A0A0A" opacity="0.9">03</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>BBall B — Side Runa</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 100% Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Loose Basketball</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Blanco #FFFFFF</span></div>
+        <div class="prod-spec"><span class="lbl">Laterales</span><span class="val grn">Patrón Runa verde+fuego</span></div>
+      </div>
+      <div class="prod-desc">
+        Patrón Runa en paneles laterales verde+fuego. "RUNA" + #03. Corte loose.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#1C1C1C"/>
+          <path d="M80 80 L65 60 L110 45 L125 65 L130 60 L135 65 L150 45 L195 60 L180 80 L173 90 L173 250 L87 250 L87 90Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <path d="M87 90 L80 80 L65 60 L110 45 L125 65 L115 90Z" fill="#90D932"/>
+          <path d="M87 250 L115 90 L87 90Z" fill="#F5620F" opacity="0.8"/>
+          <path d="M173 90 L180 80 L195 60 L150 45 L135 65 L145 90Z" fill="#90D932"/>
+          <path d="M173 250 L145 90 L173 90Z" fill="#F5620F" opacity="0.8"/>
+          <text x="130" y="135" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="48" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">07</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>BBall C — Contrast Panels</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 100% Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Loose Basketball</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Carbón #1C1C1C</span></div>
+        <div class="prod-spec"><span class="lbl">Yoke</span><span class="val grn">Verde + ribete fuego</span></div>
+        <div class="prod-spec"><span class="lbl">Laterales</span><span class="val fgo">Fuego #F5620F</span></div>
+      </div>
+      <div class="prod-desc">
+        Yoke verde con ribete fuego. Laterales fuego. "RUNA" + #07. Dobladillo bicolor.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#F5620F"/>
+          <path d="M80 80 L65 60 L110 45 L125 65 L130 60 L135 65 L150 45 L195 60 L180 80 L173 90 L173 250 L87 250 L87 90Z" fill="#F5620F" stroke="#0A0A0A" stroke-width="2"/>
+          <path d="M87 90 L80 80 L65 60 L110 45 L125 65 L115 90Z" fill="#0A0A0A"/>
+          <path d="M173 90 L180 80 L195 60 L150 45 L135 65 L145 90Z" fill="#0A0A0A"/>
+          <text x="130" y="135" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="48" font-weight="900" font-style="italic" fill="#0A0A0A" opacity="0.9">13</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>BBall D — Fuego</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 100% Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Loose Basketball</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val fgo">Fuego #F5620F</span></div>
+        <div class="prod-spec"><span class="lbl">Paneles</span><span class="val">Negro laterales</span></div>
+      </div>
+      <div class="prod-desc">
+        Jersey fuego dominante. Paneles negro contraste. "RUNA" + #13. V-cut rib negro.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M80 80 L65 60 L110 45 L125 65 L130 60 L135 65 L150 45 L195 60 L180 80 L173 90 L173 250 L87 250 L87 90Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <text x="130" y="135" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="5">RUNA</text>
+          <text x="130" y="155" text-anchor="middle" font-size="10" fill="#90D932">ᚢ ᚱ ᛉ</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="48" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">05</text>
+          <text x="200" y="200" text-anchor="middle" font-size="14" fill="#90D932" opacity="0.8">ᛉ</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>BBall E — Runa</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 100% Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Loose Basketball</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Paneles</span><span class="val grn">Runas verde lateral</span></div>
+      </div>
+      <div class="prod-desc">
+        "RUNA" + runas ᚢᚱᛉ bajo texto. Espalda #05 + ᛉ. Paneles runas verticales.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ 7. FOOTBALL / HOCKEY JERSEY ═══ -->
+  <div class="prod-section-title">Football / Hockey Jersey — 5 diseños</div>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L55 70 L100 55 L120 75 L130 70 L140 75 L160 55 L205 70 L190 90 L183 100 L183 250 L77 250 L77 100Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <path d="M120 75 L100 55 L130 45 L160 55 L140 75Z" fill="#90D932"/>
+          <rect x="77" y="120" width="106" height="12" fill="#90D932"/>
+          <rect x="77" y="140" width="106" height="5" fill="#FFF" opacity="0.9"/>
+          <text x="130" y="105" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="4">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="42" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">07</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Gridiron A — Battle</h3><span class="prod-tag tag-statement">Statement</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 240gsm Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Football Loose</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Front</span><span class="val">"BATTLE" tracking 6</span></div>
+        <div class="prod-spec"><span class="lbl">Yoke</span><span class="val grn">Verde + stripe blanco</span></div>
+      </div>
+      <div class="prod-desc">
+        "BATTLE" 15cm tracking 6. Yoke verde+blanco. Espalda "RUNA" arco + #07.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#FFF"/>
+          <path d="M70 90 L55 70 L100 55 L120 75 L130 70 L140 75 L160 55 L205 70 L190 90 L183 100 L183 250 L77 250 L77 100Z" fill="#FFF" stroke="#ddd" stroke-width="1.5"/>
+          <defs><pattern id="runa-yoke" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><text x="0" y="11" font-family="'Barlow Condensed',sans-serif" font-size="5" font-weight="900" font-style="italic" fill="#90D932" opacity="0.3">R</text></pattern></defs>
+          <path d="M120 75 L100 55 L130 45 L160 55 L140 75Z" fill="url(#runa-yoke)"/>
+          <text x="130" y="115" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="42" font-weight="900" font-style="italic" fill="#0A0A0A" opacity="0.9">23</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Gridiron B — Shoulder Runa</h3><span class="prod-tag tag-pattern">Pattern</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 240gsm Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Football Loose</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Blanco #FFFFFF</span></div>
+        <div class="prod-spec"><span class="lbl">Yoke</span><span class="val grn">Patrón Runa allover</span></div>
+      </div>
+      <div class="prod-desc">
+        Yoke patrón Runa allover. "RUNA" + #23. Mangas franjas verde+negro.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L55 70 L100 55 L120 75 L130 70 L140 75 L160 55 L205 70 L190 90 L183 100 L183 250 L77 250 L77 100Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <rect x="77" y="115" width="106" height="4" fill="#90D932"/>
+          <rect x="77" y="119" width="106" height="4" fill="#FFF"/>
+          <rect x="77" y="123" width="106" height="4" fill="#0A0A0A"/>
+          <text x="130" y="145" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="42" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">01</text>
+          <rect x="215" y="150" width="14" height="14" rx="3" fill="#F5620F"/>
+          <text x="222" y="160" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="900" fill="#FFF">C</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Gridiron C — Classic Stripe</h3><span class="prod-tag tag-tecnico">Técnico</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 240gsm Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Football Loose</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Rayas</span><span class="val">Verde+blanco+negro pecho</span></div>
+        <div class="prod-spec"><span class="lbl">Parche</span><span class="val fgo">Capitán "C" fuego</span></div>
+      </div>
+      <div class="prod-desc">
+        Rayas clásicas verde+blanco+negro. Parche capitán "C" fuego manga. "RUNA" + #01.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#F5620F"/>
+          <path d="M70 90 L55 70 L100 55 L120 75 L130 70 L140 75 L160 55 L205 70 L190 90 L183 100 L183 250 L77 250 L77 100Z" fill="#F5620F" stroke="#0A0A0A" stroke-width="2"/>
+          <path d="M120 75 L100 55 L130 45 L160 55 L140 75Z" fill="#0A0A0A" opacity="0.4"/>
+          <text x="130" y="115" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="5">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="42" font-weight="900" font-style="italic" fill="#0A0A0A" opacity="0.9">17</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Gridiron D — Fuego</h3><span class="prod-tag tag-fuego">Fuego</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 240gsm Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Football Loose</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val fgo">Fuego #F5620F</span></div>
+        <div class="prod-spec"><span class="lbl">Yoke</span><span class="val">Negro #0A0A0A</span></div>
+      </div>
+      <div class="prod-desc">
+        Jersey fuego dominante. Yoke negro. "RUNA" + #17. Rayas negras mangas.
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-visual">
+        <svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="280" fill="#0A0A0A"/>
+          <path d="M70 90 L55 70 L100 55 L120 75 L130 70 L140 75 L160 55 L205 70 L190 90 L183 100 L183 250 L77 250 L77 100Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+          <circle cx="130" cy="130" r="30" fill="none" stroke="#90D932" stroke-width="1.5"/>
+          <text x="130" y="128" text-anchor="middle" font-size="22" font-family="sans-serif" font-weight="900" fill="#90D932">ᚢᚱᛉᚨ</text>
+          <text x="130" y="115" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="7" font-weight="900" font-style="italic" fill="#FFF" letter-spacing="4">RUNA</text>
+          <text x="130" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="36" font-weight="900" font-style="italic" fill="#FFF" opacity="0.9">21</text>
+          <text x="130" y="240" text-anchor="middle" font-size="24" fill="#90D932" opacity="0.8">ᛉ</text>
+        </svg>
+      </div>
+      <div class="prod-header"><h3>Gridiron E — Viking</h3><span class="prod-tag tag-runas">Runas</span></div>
+      <div class="prod-specs">
+        <div class="prod-spec"><span class="lbl">Material</span><span class="val">Mesh 240gsm Dri-fit</span></div>
+        <div class="prod-spec"><span class="lbl">Fit</span><span class="val">Football Loose</span></div>
+        <div class="prod-spec"><span class="lbl">Base</span><span class="val">Negro #0A0A0A</span></div>
+        <div class="prod-spec"><span class="lbl">Escudo</span><span class="val grn">Escudo vikingo + runas pecho</span></div>
+      </div>
+      <div class="prod-desc">
+        Escudo vikingo con runas. "RUNA" + #21. Runa Algiz ᛉ masiva 45cm espalda.
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 <!-- ══════════════════════════
@@ -1092,6 +2138,144 @@
   <img src="LOGOS/RUNA-07.png" alt="RUNA">
   <p>Brand Identity System 2025 · Confidencial · lab080.studio</p>
 </footer>
+
+<script>
+(function() {
+  /* ── Scroll progress bar ── */
+  const bar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (docH > 0 ? Math.min(scrollTop / docH, 1) : 0) + ')';
+  }
+
+  /* ── Section nav dots ── */
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = Array.from(dots).map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function updateNav() {
+    let current = sections[0];
+    sections.forEach(s => {
+      if (window.scrollY + window.innerHeight * 0.4 >= s.offsetTop) current = s;
+    });
+    dots.forEach(d => {
+      d.classList.toggle('active', d.dataset.target === current.id);
+    });
+  }
+
+  /* ── Scroll reveal ── */
+  const revealEls = [];
+
+  function setupReveal() {
+    /* Auto-tag key children of each section */
+    const sectionMap = [
+      ['#brand-foundation .section-label', 'reveal'],
+      ['#brand-foundation .mv-card:first-child', 'reveal-left d1'],
+      ['#brand-foundation .mv-card:last-child',  'reveal-right d2'],
+      ['#pilares .section-label', 'reveal'],
+      ['#pilares .pilares-headline', 'reveal d1'],
+      ['#pilares .pilar-card:nth-child(1)', 'reveal d1'],
+      ['#pilares .pilar-card:nth-child(2)', 'reveal d2'],
+      ['#pilares .pilar-card:nth-child(3)', 'reveal d3'],
+      ['#pilares .pilar-card:nth-child(4)', 'reveal d4'],
+      ['#filosofia .section-label', 'reveal'],
+      ['#filosofia .filosofia-quote', 'reveal-left d1'],
+      ['#filosofia .filosofia-item:nth-child(1)', 'reveal-right d1'],
+      ['#filosofia .filosofia-item:nth-child(2)', 'reveal-right d2'],
+      ['#filosofia .filosofia-item:nth-child(3)', 'reveal-right d3'],
+      ['#inspiracion .inspiracion-content', 'reveal-left'],
+      ['#inspiracion .inspiracion-mark', 'reveal-right d2'],
+      ['#style-tile .section-label', 'reveal'],
+      ['#style-tile .tile-left', 'reveal-left d1'],
+      ['#style-tile .tile-right', 'reveal-right d1'],
+      ['#colors .colors-header', 'reveal'],
+      ['#colors .cm-verde', 'reveal-left d1'],
+      ['#colors .cm-noche', 'reveal-right d2'],
+      ['#typography .section-label', 'reveal'],
+      ['#typography .type-section:first-of-type', 'reveal'],
+      ['#logo-usage .section-label', 'reveal'],
+      ['#logo-usage .logo-cell:nth-child(1)', 'reveal-scale d1'],
+      ['#logo-usage .logo-cell:nth-child(2)', 'reveal-scale d2'],
+      ['#logo-usage .logo-cell:nth-child(3)', 'reveal-scale d3'],
+      ['#logo-usage .logo-cell:nth-child(4)', 'reveal-scale d4'],
+      ['#voice .section-label', 'reveal'],
+      ['#voice .voice-headline', 'reveal d1'],
+      ['#voice .phrase-card', 'reveal'],
+      ['#clothing .section-label', 'reveal'],
+      ['#clothing .clothing-intro', 'reveal d1'],
+      ['#clothing .prod-section-title', 'reveal'],
+    ];
+
+    sectionMap.forEach(([sel, classes]) => {
+      document.querySelectorAll(sel).forEach(el => {
+        classes.split(' ').forEach(c => el.classList.add(c));
+        revealEls.push(el);
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+  }
+
+  /* ── Cover parallax ── */
+  const coverWrap = document.querySelector('#cover .cover-logo-wrap');
+  function parallax() {
+    if (!coverWrap) return;
+    const y = window.scrollY;
+    coverWrap.style.transform = `translateY(${y * 0.25}px)`;
+  }
+
+  /* ── Scroll handler ── */
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateProgress();
+        updateNav();
+        parallax();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* ── Color mosaic entrance ── */
+  const cmBlocks = document.querySelectorAll('.cm-block');
+  if (cmBlocks.length) {
+    const cmObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          cmObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    cmBlocks.forEach(b => cmObserver.observe(b));
+  }
+
+  /* ── Init ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    setupReveal();
+    updateProgress();
+    updateNav();
+  });
+})();
+</script>
 
 </body>
 </html>

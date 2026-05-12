@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNA — Drop 02 · Friction Collection · Ampliada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,900&family=Inter:wght@300;400;500;600;700;900&display=swap');
+  :root {
+    --verde: #90D932; --noche: #0A0A0A; --carbon: #1C1C1C;
+    --blanco: #FFFFFF; --ceniza: #888888; --fuego: #F5620F;
+    --card-bg: #111111;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--noche); color: var(--blanco);
+    font-family: var(--font-body); padding: 40px 20px;
+  }
+  header {
+    text-align: center; margin-bottom: 20px; padding: 60px 20px 40px;
+    border-bottom: 1px solid var(--carbon); position: relative;
+  }
+  header::before {
+    content: 'ᚢ'; position: absolute; top: 20px; right: 40px;
+    font-size: 120px; opacity: 0.04; line-height: 1;
+  }
+  header h1 { font-family: var(--font-display); font-size: 80px; font-weight: 900; font-style: italic; letter-spacing: -3px; line-height: 0.85; }
+  header h1 .verde { color: var(--verde); }
+  header .tagline { font-family: var(--font-body); font-size: 14px; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: var(--ceniza); margin: 12px 0 4px; }
+  header .sub { font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #555; }
+  header .runa-line { width: 40px; height: 2px; background: var(--verde); margin: 16px auto; }
+  .concept { max-width: 800px; margin: 0 auto 60px; text-align: center; padding: 40px 20px; }
+  .concept h2 { font-family: var(--font-display); font-size: 36px; font-weight: 900; font-style: italic; margin-bottom: 16px; letter-spacing: -1px; }
+  .concept h2 em { color: var(--verde); font-style: italic; }
+  .concept p { font-family: var(--font-body); color: var(--ceniza); font-size: 15px; line-height: 1.7; max-width: 640px; margin: 0 auto; }
+  .pillars { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+  .pillar { font-family: var(--font-body); background: var(--carbon); border: 1px solid #2a2a2a; border-radius: 40px; padding: 6px 16px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ceniza); }
+  .pillar.active { border-color: var(--verde); color: var(--verde); }
+  .pillar.fuego { border-color: var(--fuego); color: var(--fuego); }
+  .pillar.runas { border-color: #fff; color: #fff; }
+  .section-title { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--verde); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--carbon); }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 60px; }
+  .card { background: var(--card-bg); border-radius: 14px; overflow: hidden; border: 1px solid #1E1E1E; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--verde); }
+  .card-header { padding: 14px 18px 10px; border-bottom: 1px solid #1E1E1E; display: flex; justify-content: space-between; align-items: flex-start; }
+  .card-header h3 { font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.3px; }
+  .card-header .line-tag { font-family: var(--font-body); font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .line-statement { background: var(--blanco); color: var(--noche); }
+  .line-pattern { background: var(--verde); color: var(--noche); }
+  .line-tecnico { background: #fff; color: var(--noche); border: 1px solid var(--verde); }
+  .line-fuego { background: var(--fuego); color: var(--blanco); }
+  .line-runas { background: var(--noche); color: var(--verde); border: 1px solid var(--verde); }
+  .tech-specs { padding: 12px 18px; border-bottom: 1px solid #1E1E1E; }
+  .spec-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 10px; font-family: var(--font-body); }
+  .spec-row .label { color: #666; letter-spacing: 0.3px; }
+  .spec-row .value { color: #ccc; text-align: right; max-width: 55%; }
+  .spec-row .value.verde { color: var(--verde); }
+  .spec-row .value.fuego { color: var(--fuego); }
+  .design-desc { font-family: var(--font-body); padding: 12px 18px 8px; font-size: 10px; color: var(--ceniza); line-height: 1.5; border-bottom: 1px solid #1E1E1E; }
+  .prompt-box { background: #0a0a0a; padding: 12px 18px; border-top: 1px solid #1E1E1E; }
+  .prompt-box .prompt-label { font-family: var(--font-body); font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: var(--verde); margin-bottom: 4px; }
+  .prompt-box .prompt-text { font-family: var(--font-body); font-size: 9px; color: #777; line-height: 1.4; font-family: monospace; }
+  .ref-img { font-family: var(--font-body); font-size: 8px; color: #555; padding: 4px 18px; background: #080808; border-top: 1px solid #111; font-family: monospace; }
+  footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--carbon); margin-top: 40px; }
+  footer .r { font-family: var(--font-display); font-size: 32px; font-weight: 900; font-style: italic; color: var(--verde); letter-spacing: 2px; }
+  footer p { font-family: var(--font-body); font-size: 10px; color: #555; letter-spacing: 4px; text-transform: uppercase; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>RU<span class="verde">N</span>A</h1>
+  <div class="runa-line"></div>
+  <div class="tagline">Friction · Drop 02 · Colección Ampliada</div>
+  <div class="sub">7 Categorías · 35 Productos · 5 Líneas de Diseño</div>
+</header>
+
+<div class="concept">
+  <h2>« <em>Friction</em> is the forge. »</h2>
+  <p>
+    Drop 02 ampliado: 5 líneas de diseño que exploran el universo RUNA.
+    Desde la tipografía bold hasta los símbolos rúnicos ancestrales.
+    El naranjo Fuego se suma como color protagónico. 35 productos.
+  </p>
+  <div class="pillars">
+    <span class="pillar active">✦ Statement</span>
+    <span class="pillar active">✦ Pattern Runa</span>
+    <span class="pillar active">✦ Técnico</span>
+    <span class="pillar fuego">✦ Fuego</span>
+    <span class="pillar runas">✦ Runas</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. POLERONES -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Polerones — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Polerón A — «FRICTION»</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 380gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Oversized · Boxey</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Acento</span><span class="value verde">Verde #90D932</span></div>
+      <div class="spec-row"><span class="label">Estampado</span><span class="value">Serigrafía plastisol · Pecho + Espalda</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> Logo RUNA verde pecho izquierdo 8cm.<br>
+      <strong>Back:</strong> "FRICTION" vertical masivo blanco (60cm) tracking -2.<br>
+      <strong>Hood:</strong> Doble capa, cordón plano verde.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polerón negro oversized frente, logotipo RUNA wordmark verde #90D932 pecho izquierdo, capucha cordón verde. Derecha: espalda "FRICTION" vertical masivo blanco tracking -2 (60cm). French Terry 380gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Polerón B — Runa Allover</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 380gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Full Zip</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Isotipo RUNA allover · Verde 12%</span></div>
+      <div class="spec-row"><span class="label">Cierre</span><span class="value">YKK negro mate · Bidireccional</span></div>
+      <div class="spec-row"><span class="label">Forro Capucha</span><span class="value verde">Verde sólido #90D932</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Patrón allover módulo "R" en diagonal, verde 12% opacidad.<br>
+      <strong>Hood lining:</strong> Verde sólido, destello al bajar capucha.<br>
+      <strong>Ref:</strong> magnific_adn-de-marca-runa-auditor_2884718554.png
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polerón carbón #1C1C1C full zip frente, patrón allover módulo "R" verde #90D932 12% opacidad repetición diagonal, capucha abajo forro verde. Derecha: espalda patrón continuo. French Terry 380gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Polerón C — Dynamic Motion</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 380gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Pullover</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Isotipo RUNA + efecto movimiento</span></div>
+      <div class="spec-row"><span class="label">Ref:</span><span class="value">adn-de-marca-runa-auditor + agregarle-movimiento</span></div>
+      <div class="spec-row"><span class="label">Capucha</span><span class="value verde">Forro verde sólido</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Ref:</strong> magnific_adn-de-marca-runa-auditor_2884718554 + magnific_agregarle-movimiento_2884899064<br>
+      <strong>Body:</strong> Patrón del isotipo RUNA (módulo "R") en verde #90D932 con efecto de movimiento dinámico — ondas y líneas de velocidad que distorsionan el patrón diagonalmente, creando flujo cinético.<br>
+      <strong>Hood lining:</strong> Verde sólido.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polerón negro frente con patrón del isotipo RUNA módulo "R" verde #90D932 con efecto movimiento dinámico — ondas y líneas de velocidad que distorsionan el patrón diagonal creando flujo cinético. Derecha: reversa con patrón dinámico continuo. Capucha forro verde. French Terry 380gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO -->
+  <div class="card">
+    <div class="card-header"><h3>Polerón D — Fuego</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 380gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Pullover</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Panel Pecho</span><span class="value fuego">Franja fuego #F5620F 12cm</span></div>
+      <div class="spec-row"><span class="label">Estampado</span><span class="value fuego">"RUNA" fuego tracking 6</span></div>
+      <div class="spec-row"><span class="label">Cordón</span><span class="value fuego">Naranjo · Agujetas metálicas</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Chest band:</strong> Franja horizontal fuego 12cm cruzando el pecho.<br>
+      <strong>Text:</strong> "RUNA" en tipografía bold sobre la franja, tracking 6.<br>
+      <strong>Back:</strong> Logo RUNA fuego grande (20cm) centro espalda.<br>
+      <strong>Details:</strong> Cordón naranjo, puños rib fuego.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polerón negro frente, franja horizontal fuego #F5620F 12cm cruzando pecho con "RUNA" tracking 6, cordón naranjo. Derecha: espalda, logotipo RUNA wordmark fuego 20cm centro. French Terry 380gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>Polerón E — Runa Uruz</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 380gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Oversized · Pullover</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Estampado</span><span class="value verde">Símbolos rúnicos · Verde + fuego</span></div>
+      <div class="spec-row"><span class="label">Distribución</span><span class="value">Círculo de runas pecho + espalda</span></div>
+      <div class="spec-row"><span class="label">Runas</span><span class="value">ᚢ Uruz · ᚱ Raido · ᛉ Algiz</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> Círculo de runas en verde #90D932 al centro del pecho (25cm). Runas: ᚢ ᚱ ᛉ ᚨ ᚺ.<br>
+      <strong>Back:</strong> Runa Uruz (ᚢ) masiva en fuego #F5620F (40cm) centro espalda.<br>
+      <strong>Sleeve:</strong> "RUNA" en tipografía rúnica, manga izquierda.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polerón negro oversized frente, círculo de runas ᚢ ᚱ ᛉ verde #90D932 pecho 25cm. Derecha: espalda, runa Uruz ᚢ masiva fuego #F5620F 40cm. French Terry 380gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. BUZO COMPLETO -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Buzo Completo — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Buzo A — Built for Battle</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 320gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Set completo</span></div>
+      <div class="spec-row"><span class="label">Color</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Hoodie Back</span><span class="value">"BUILT FOR BATTLE" 40cm</span></div>
+      <div class="spec-row"><span class="label">Pants Leg</span><span class="value verde">"FRICTION" vertical 25cm</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> Logo RUNA bordado pecho 3cm verde.<br>
+      <strong>Back:</strong> "BUILT FOR BATTLE" masivo blanco.<br>
+      <strong>Pants:</strong> "FRICTION" vertical pierna izq, logo rodilla der.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: set buzo negro frente, hoodie logotipo RUNA wordmark bordado verde pecho. Derecha: espalda "BUILT FOR BATTLE" 40cm, pantalón "FRICTION" vertical pierna izq. French Terry 320gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Buzo B — Geometric Runa</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 320gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Set completo</span></div>
+      <div class="spec-row"><span class="label">Color</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Rombos geométricos verde+fuego</span></div>
+      <div class="spec-row"><span class="label">Cargo</span><span class="value">Bolso + cinta reflectante</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Rombos geométricos inspirados runa Uruz, verde+fuego.<br>
+      <strong>Pants:</strong> Bolsillo cargo con cinta reflectante RUNA.<br>
+      <strong>Ankle:</strong> Ribete verde con logo bordado.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: set buzo carbón #1C1C1C frente, rombos geométricos verde #90D932 + fuego #F5620F, capucha forrada. Derecha: espalda, pantalón cargo cinta reflectante RUNA. French Terry 320gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Buzo C — Racing Stripe</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 320gsm + Nylon</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Slim · Set completo</span></div>
+      <div class="spec-row"><span class="label">Color</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Stripe Lateral</span><span class="value">Triple: verde+negro+fuego</span></div>
+      <div class="spec-row"><span class="label">Reflectante</span><span class="value">Logo RUNA pecho+pantorrilla</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Triple stripe lateral completo (verde 1cm + negro 0.5cm + fuego 1cm).<br>
+      <strong>Hoodie:</strong> Full zip, cuello stand, bolsillos cremallera.<br>
+      <strong>Pants:</strong> Slim, tobilleras cremallera, cincha ajustable.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: set buzo slim negro frente, triple stripe lateral verde #90D932 + negro + fuego #F5620F. Derecha: espalda, logo reflectante pecho+pantorrilla. Algodón 320gsm+nylon. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO — Argentina style -->
+  <div class="card">
+    <div class="card-header"><h3>Buzo D — Albiceleste</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 320gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Set completo</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Stripe Lateral</span><span class="value fuego">Fuego #F5620F + blanco + fuego</span></div>
+      <div class="spec-row"><span class="label">Espalda</span><span class="value fuego">Logo RUNA grande tipo bandera</span></div>
+      <div class="spec-row"><span class="label">Ref:</span><span class="value">Diseño Argentina</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Referencia:</strong> Como el diseño de Argentina que mandaste — stripe lateral tipo Adidas con RUNA.<br>
+      <strong>Side stripe:</strong> Triple fuego + blanco + fuego donde irían las rayas Adidas, con "RUNA" vertical.<br>
+      <strong>Back:</strong> Logo RUNA masivo como la bandera de Argentina en la espalda del hoodie.<br>
+      <strong>Pants:</strong> Mismo stripe lateral continuo.
+    </div>
+    <div class="ref-img">📌 Ref: diseño Argentina que mandaste · stripe lateral tipo Adidas con RUNA + logo espalda bandera</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: set buzo negro frente, triple stripe lateral fuego #F5620F + blanco + fuego con "RUNA" vertical sobre stripe como diseño tipo Adidas. Derecha: espalda hoodie, logotipo RUNA wordmark masivo estilo bandera argentina. French Terry 320gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>Buzo E — Runas Set</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 320gsm · French Terry</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Set completo</span></div>
+      <div class="spec-row"><span class="label">Color Base</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Runas allover · Verde+fuego</span></div>
+      <div class="spec-row"><span class="label">Hoodie</span><span class="value">Capucha forro runas</span></div>
+      <div class="spec-row"><span class="label">Pantalón</span><span class="value">Runas verticales piernas</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Símbolos rúnicos (ᚢ ᚱ ᛉ ᚨ) como patrón allover en verde + fuego.<br>
+      <strong>Hoodie back:</strong> Runa Uruz (ᚢ) masiva centro.<br>
+      <strong>Pants:</strong> Columnas de runas verticales en cada pierna.<br>
+      <strong>Hood:</strong> Interior forrado con patrón de runas.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: set buzo carbón #1C1C1C frente, runas ᚢ ᚱ ᛉ allover verde+fuego, capucha forro runas. Derecha: espalda, runa Uruz ᚢ masiva, pantalón runas verticales piernas. French Terry 320gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. CALCETINES -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Calcetines — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Calcetín A — Wordmark</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón peinado 200 agujas</span></div>
+      <div class="spec-row"><span class="label">Altura</span><span class="value">Crew · 18cm</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Puño</span><span class="value verde">Verde #90D932 · 4cm</span></div>
+      <div class="spec-row"><span class="label">Texto</span><span class="value">"RUNA" vertical tracking 4 · blanco</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: calcetín crew negro frente, puño verde #90D932 4cm, "RUNA" vertical blanco costado. Derecha: girado mostrando refuerzo talón. Algodón 200 agujas. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Calcetín B — Runa Grid</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón peinado 200 agujas</span></div>
+      <div class="spec-row"><span class="label">Altura</span><span class="value">Crew · 18cm</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Grid "R" verde cada 3cm</span></div>
+      <div class="spec-row"><span class="label">Talón</span><span class="value verde">Verde sólido</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: calcetín crew carbón frente, grid isotipo "R" verde #90D932, puño negro ribete verde. Derecha: girado, talón verde. Algodón 200 agujas. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Calcetín C — Performance Stripe</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón + Elastano 15%</span></div>
+      <div class="spec-row"><span class="label">Altura</span><span class="value">No-show</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Bandas</span><span class="value">3: verde+negro+fuego</span></div>
+      <div class="spec-row"><span class="label">Talón</span><span class="value">Gel antideslizante</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: calcetín no-show negro frente, 3 bandas verde #90D932 + negro + fuego #F5620F, logotipo RUNA wordmark bordado empeine. Derecha: girado, gel talón. Algodón+elastano. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO — JJF Themed -->
+  <div class="card">
+    <div class="card-header"><h3>Calcetín D — JJF</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón peinado 200 agujas</span></div>
+      <div class="spec-row"><span class="label">Altura</span><span class="value">Crew · 18cm</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Tema JJF</span><span class="value fuego">Cinturón BJJ · Açaí · Shaka</span></div>
+      <div class="spec-row"><span class="label">Textos</span><span class="value">"TAP OR BE TAPPED"</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Motivos JJF:</strong> Cinturón de jiu-jitsu cruzando el empeine, fruto de açaí, mano shaka (meñique+pulgar).<br>
+      <strong>Cuff:</strong> Fuego #F5620F con texto "TAP OR BE TAPPED".<br>
+      <strong>Heel:</strong> Oreja de coliflor en gráfico pequeño.<br>
+      <strong>Toe:</strong> Kimono minimal.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: calcetín crew negro frente, gráficos JJF: cinturón BJJ açaí mano shaka empeine, puño fuego #F5620F "TAP OR BE TAPPED". Derecha: girado, oreja coliflor talón, kimono punta. Algodón 200 agujas. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS / HERITAGE -->
+  <div class="card">
+    <div class="card-header"><h3>Calcetín E — Helio Gracie</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón peinado 200 agujas</span></div>
+      <div class="spec-row"><span class="label">Altura</span><span class="value">Crew · 18cm</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Blanco #FFFFFF</span></div>
+      <div class="spec-row"><span class="label">Diseño</span><span class="value">Helio Gracie vintage + runas</span></div>
+      <div class="spec-row"><span class="label">Runas</span><span class="value verde">ᚢ ᚱ bordadas en verde</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Diseño heritage:</strong> Retrato de Helio Gracie en estilo vintage sepia sobre blanco.<br>
+      <strong>Side:</strong> Runas ᚢ (Uruz) y ᚱ (Raido) bordadas en verde #90D932.<br>
+      <strong>Cuff:</strong> Negro con "RUNA · EST. 2024" en blanco.<br>
+      <strong>Heel/toe:</strong> Refuerzo negro.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: calcetín crew blanco frente, retrato Helio Gracie vintage sepia, runas ᚢ ᚱ bordadas verde #90D932 costado. Derecha: girado, puño negro "RUNA · EST. 2024", refuerzo talón. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. POLERAS -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Poleras — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Polera A — You Belong Here</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 240gsm</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Oversized · Drop shoulder</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"YOU BELONG HERE" 15cm tracking 4</span></div>
+      <div class="spec-row"><span class="label">Back</span><span class="value verde">Logo RUNA verde 25cm</span></div>
+      <div class="spec-row"><span class="label">Cuello</span><span class="value verde">Rib verde 2cm</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polera negra oversized frente, "YOU BELONG HERE" tracking 4 blanco, cuello rib verde. Derecha: espalda, logotipo RUNA wordmark verde #90D932 25cm. Algodón 240gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Polera B — Micro R Allover</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 240gsm</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Blanco #FFFFFF</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Micro "R" allover 8% opacidad</span></div>
+      <div class="spec-row"><span class="label">Logo</span><span class="value">Bordado negro pecho 4cm</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polera blanca regular frente, patrón micro "R" verde #90D932 8% opacidad textura sutil, logotipo RUNA wordmark bordado negro 4cm. Derecha: espalda. Algodón 240gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Polera C — Side Panel</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 240gsm + Nylon mesh</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Slim · Performance</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Paneles</span><span class="value verde">Mesh verde laterales</span></div>
+      <div class="spec-row"><span class="label">Costuras</span><span class="value">Planas flatlock verde</span></div>
+      <div class="spec-row"><span class="label">Logo</span><span class="value">Reflectante pecho derecho</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polera carbón #1C1C1C slim frente, mesh verde laterales #90D932, costuras flatlock verde, logo reflectante pecho. Derecha: espalda. Algodón 240gsm+nylon mesh. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO -->
+  <div class="card">
+    <div class="card-header"><h3>Polera D — Friction Fuego</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 240gsm</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Oversized</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value fuego">"FRICTION" fuego 18cm tracking 6</span></div>
+      <div class="spec-row"><span class="label">Back</span><span class="value fuego">Logo RUNA fuego 20cm</span></div>
+      <div class="spec-row"><span class="label">Cuello</span><span class="value fuego">Rib fuego #F5620F</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> "FRICTION" en tipografía bold fuego #F5620F, tracking 6, 18cm.<br>
+      <strong>Back:</strong> Logo RUNA masivo en fuego (20cm) centro.<br>
+      <strong>Collar:</strong> Rib fuego naranjo.<br>
+      <strong>Sleeve:</strong> "BUILT FOR BATTLE" pequeño fuego.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polera negra oversized frente, "FRICTION" fuego #F5620F 18cm tracking 6, cuello rib fuego. Derecha: espalda, logotipo RUNA wordmark fuego 20cm. Algodón 240gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>Polera E — Runaᛉ</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Algodón 240gsm</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Estampado</span><span class="value verde">Runas ᚢᚱᛉᚨᚺ frontales</span></div>
+      <div class="spec-row"><span class="label">Distribución</span><span class="value">Columna vertical pecho + espalda</span></div>
+      <div class="spec-row"><span class="label">Acento</span><span class="value fuego">Runa central en fuego</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> Columna vertical de runas: ᚢ (Uruz) verde, ᚱ (Raido) fuego, ᛉ (Algiz) verde, ᚨ (Ansuz) fuego, ᚺ (Hagalaz) verde. 25cm de alto.<br>
+      <strong>Back:</strong> Runa única ᛉ (Algiz) masiva en verde (30cm) — símbolo de protección.<br>
+      <strong>Cuello:</strong> Rib negro con etiqueta RUNA.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: polera negra frente, columna vertical runas ᚢᚱᛉᚨᚺ verde #90D932 y fuego #F5620F 25cm. Derecha: espalda, runa Algiz ᛉ masiva verde 30cm protección. Algodón 240gsm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. CORTA VIENTO -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Corta Viento — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Corta Viento A — Forged</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Nylon Ripstop DWR</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Espalda</span><span class="value">"FORGED IN FRICTION" masivo tracking 4</span></div>
+      <div class="spec-row"><span class="label">Pecho</span><span class="value verde">Logo RUNA reflectante 6cm</span></div>
+      <div class="spec-row"><span class="label">Cierre</span><span class="value">YKK impermeable bidireccional</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: corta viento negra nylon ripstop DWR frente, logotipo RUNA wordmark reflectante pecho 6cm, YKK impermeable. Derecha: espalda "FORGED IN FRICTION" masivo tracking 4. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Corta Viento B — Camo Runa</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Nylon Ripstop DWR</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular · Packable</span></div>
+      <div class="spec-row"><span class="label">Patrón</span><span class="value verde">Camuflaje con runa Uruz</span></div>
+      <div class="spec-row"><span class="label">Peso</span><span class="value">~180g</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: corta viento packable frente, camuflaje runa Uruz verde+gris, capucha plegable. Derecha: espalda, guardada en bolsillo con mosquetón. Nylon Ripstop ~180g. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Corta Viento C — Color Block</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Nylon Ripstop DWR</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Hombros</span><span class="value verde">Paneles verdes</span></div>
+      <div class="spec-row"><span class="label">Pecho</span><span class="value">Franja fuego 10cm</span></div>
+      <div class="spec-row"><span class="label">Mangas</span><span class="value">Stripe verde</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: corta viento color block frente, hombros verdes #90D932, franja fuego #F5620F 10cm pecho, mangas stripe verde. Derecha: espalda, capucha forro verde, dobladillo cincha. Nylon DWR. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO -->
+  <div class="card">
+    <div class="card-header"><h3>Corta Viento D — Fuego</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Nylon Ripstop DWR</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value fuego">Fuego #F5620F</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Detalles</span><span class="value">Reflectantes fuego</span></div>
+      <div class="spec-row"><span class="label">Capucha</span><span class="value">Forro negro</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Corta viento en fuego #F5620F como color dominante.<br>
+      <strong>Yoke:</strong> Hombros y capucha en negro contraste.<br>
+      <strong>Details:</strong> Cremallera YKK negra, logos reflectantes fuego.<br>
+      <strong>Pockets:</strong> 2 laterales con cremallera impermeable.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: corta viento fuego #F5620F nylon DWR frente, yoke hombros negro, logo reflectante. Derecha: espalda, capucha negra. Cremallera YKK. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>Corta Viento E — Runa Shield</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Nylon Ripstop DWR</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Regular</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Pecho</span><span class="value verde">Escudo de runas reflectante</span></div>
+      <div class="spec-row"><span class="label">Espalda</span><span class="value">Runa Uruz masiva reflectante</span></div>
+      <div class="spec-row"><span class="label">Material</span><span class="value">Reflectante + DWR</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Chest:</strong> Escudo circular de runas (ᚢᚱᛉ) en material reflectante verde.<br>
+      <strong>Back:</strong> Runa Uruz (ᚢ) masiva reflectante en la espalda.<br>
+      <strong>Hood:</strong> Bordura de runas grabadas en el borde de la capucha.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: corta viento negra nylon DWR frente, escudo de runas ᚢᚱᛉ reflectante verde pecho. Derecha: espalda, runa Uruz ᚢ masiva reflectante, capucha con runas borde. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. BASKETBALL JERSEY -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Basketball Jersey — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>BBall A — #FRICTION</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 100% Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Loose Basketball</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" 18cm tracking 8</span></div>
+      <div class="spec-row"><span class="label">Back</span><span class="value">"FRICTION" + #02 30cm</span></div>
+      <div class="spec-row"><span class="label">Paneles</span><span class="value verde">Verde + blanco laterales</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey basketball negro mesh frente, "RUNA" tracking 8, paneles verde+blanco. Derecha: espalda "FRICTION" + #02. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>BBall B — Side Runa</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 100% Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Loose Basketball</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Blanco #FFFFFF</span></div>
+      <div class="spec-row"><span class="label">Laterales</span><span class="value verde">Patrón Runa verde+fuego</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + #03 negro</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey basketball blanco mesh frente, paneles laterales patrón Runa verde+fuego, "RUNA" + #03. Derecha: espalda #03 masivo. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>BBall C — Contrast Panels</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 100% Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Loose Basketball</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Carbón #1C1C1C</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value verde">Verde + ribete fuego</span></div>
+      <div class="spec-row"><span class="label">Laterales</span><span class="value">Fuego #F5620F</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + #07</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey basketball carbón mesh frente, yoke verde #90D932 ribete fuego, laterales fuego #F5620F, "RUNA" + #07. Derecha: espalda, dobladillo bicolor. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO -->
+  <div class="card">
+    <div class="card-header"><h3>BBall D — Fuego</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 100% Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Loose Basketball</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value fuego">Fuego #F5620F</span></div>
+      <div class="spec-row"><span class="label">Paneles</span><span class="value">Negro laterales</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" negro + #13</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Jersey fuego #F5620F como color dominante.<br>
+      <strong>Side panels:</strong> Negro para contraste.<br>
+      <strong>Front:</strong> "RUNA" en negro, número 13.<br>
+      <strong>Back:</strong> Número 13 masivo negro.<br>
+      <strong>Neck:</strong> V-cut con rib negro.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey basketball fuego #F5620F mesh frente, "RUNA" negro + #13, paneles laterales negro. Derecha: espalda #13 masivo negro. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>BBall E — Runa</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 100% Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Loose Basketball</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + runas bajo texto</span></div>
+      <div class="spec-row"><span class="label">Back</span><span class="value">Número 05 + runa ᛉ</span></div>
+      <div class="spec-row"><span class="label">Paneles</span><span class="value verde">Runas verde lateral</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Front:</strong> "RUNA" en blanco. Debajo, runas ᚢᚱᛉ en verde.<br>
+      <strong>Back:</strong> Número 05 masivo blanco con runa ᛉ pequeña al lado.<br>
+      <strong>Side panels:</strong> Franja de runas verticales en verde y fuego.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey basketball negro mesh frente, "RUNA" + runas ᚢᚱᛉ verde, paneles laterales runas verticales. Derecha: espalda #05 + ᛉ. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. FOOTBALL / HOCKEY JERSEY -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Football / Hockey Jersey — 5 diseños</p>
+<div class="product-grid">
+
+  <!-- A: STATEMENT -->
+  <div class="card">
+    <div class="card-header"><h3>Gridiron A — Battle</h3><span class="line-tag line-statement">Statement</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 240gsm Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Football Loose</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"BATTLE" 15cm tracking 6</span></div>
+      <div class="spec-row"><span class="label">Back</span><span class="value">"RUNA" arco + #07 40cm</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value verde">Verde + stripe blanco</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey football negro mesh frente, "BATTLE" tracking 6, yoke verde+blanco. Derecha: espalda "RUNA" arco + #07 40cm. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- B: PATTERN -->
+  <div class="card">
+    <div class="card-header"><h3>Gridiron B — Shoulder Runa</h3><span class="line-tag line-pattern">Pattern</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 240gsm Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Football Loose</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Blanco #FFFFFF</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value verde">Patrón Runa allover</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + #23 verde</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey football blanco mesh frente, yoke patrón Runa allover verde, "RUNA" + #23. Derecha: espalda #23 40cm, mangas franjas verde+negro. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- C: TÉCNICO -->
+  <div class="card">
+    <div class="card-header"><h3>Gridiron C — Classic Stripe</h3><span class="line-tag line-tecnico">Técnico</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 240gsm Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Football Loose</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Rayas</span><span class="value">Verde+blanco+negro pecho</span></div>
+      <div class="spec-row"><span class="label">Parche</span><span class="value">Capitán "C" fuego manga izq</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + #01</span></div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey football negro mesh frente, rayas verde+blanco+negro pecho, parche "C" fuego, "RUNA" + #01. Derecha: espalda #01 40cm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- D: FUEGO -->
+  <div class="card">
+    <div class="card-header"><h3>Gridiron D — Fuego</h3><span class="line-tag line-fuego">Fuego</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 240gsm Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Football Loose</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value fuego">Fuego #F5620F</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Rayas</span><span class="value">Negras en mangas</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" negro + #17</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Body:</strong> Jersey fuego #F5620F dominante.<br>
+      <strong>Yoke:</strong> Hombros y capucha en negro.<br>
+      <strong>Sleeves:</strong> Rayas negras anchas.<br>
+      <strong>Front:</strong> "RUNA" en negro, número 17.<br>
+      <strong>Back:</strong> Número 17 masivo negro.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey football fuego #F5620F mesh frente, yoke negro, "RUNA" negro + #17, rayas negras mangas. Derecha: espalda #17 40cm. Corte loose. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+  <!-- E: RUNAS -->
+  <div class="card">
+    <div class="card-header"><h3>Gridiron E — Viking</h3><span class="line-tag line-runas">Runas</span></div>
+    <div class="tech-specs">
+      <div class="spec-row"><span class="label">Material</span><span class="value">Mesh 240gsm Dri-fit</span></div>
+      <div class="spec-row"><span class="label">Fit</span><span class="value">Football Loose</span></div>
+      <div class="spec-row"><span class="label">Base</span><span class="value">Negro #0A0A0A</span></div>
+      <div class="spec-row"><span class="label">Escudo</span><span class="value verde">Escudo vikingo + runas pecho</span></div>
+      <div class="spec-row"><span class="label">Yoke</span><span class="value verde">Runas allover en hombros</span></div>
+      <div class="spec-row"><span class="label">Front</span><span class="value">"RUNA" + #21</span></div>
+    </div>
+    <div class="design-desc">
+      <strong>Chest:</strong> Escudo vikingo circular con runas ᚢᚱᛉᚨ en el borde, verde + fuego.<br>
+      <strong>Yoke:</strong> Hombros con patrón de runas allover.<br>
+      <strong>Front:</strong> "RUNA" en blanco sobre el escudo, número 21.<br>
+      <strong>Back:</strong> Runa ᛉ (Algiz) masiva en verde, 45cm.
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">Prompt</div>
+      <div class="prompt-text">Producto 3D. Composición 16:9 lado a lado sobre fondo blanco plano. Izquierda: jersey football negro mesh frente, escudo vikingo con runas ᚢᚱᛉᚨ pecho, "RUNA" + #21, yoke runas allover. Derecha: espalda, runa Algiz ᛉ masiva verde 45cm. Sin nada más. --ar 16:9</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="r">ᚢ</div>
+  <p>RUNA · Friction Drop 02 · 2026</p>
+  <p style="font-size:9px;color:#444;margin-top:4px;">7 categorías · 35 productos · 5 líneas de diseño: Statement · Pattern · Técnico · Fuego · Runas</p>
+</footer>
+
+</body>
+</html>

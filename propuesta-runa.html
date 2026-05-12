@@ -6,22 +6,27 @@
   <title>RUNA — Propuesta de marca</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,900&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:    #0A0A0A;
-      --green: #90D932;
-      --white: #FFFFFF;
-      --muted: #666666;
-      --card:  #111111;
-      --dim:   #1A1A1A;
-      --font:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+      /* RUNA Brand Tokens */
+      --verde:   #90D932;
+      --noche:   #0A0A0A;
+      --carbon:  #1C1C1C;
+      --blanco:  #FFFFFF;
+      --ceniza:  #888888;
+      --ceniza-light: #666666;
+      --fuego:   #F5620F;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--noche);
       background-image:
         repeating-linear-gradient(
           135deg,
@@ -30,8 +35,8 @@
           rgba(144,217,50,0.035) 28px,
           rgba(144,217,50,0.035) 29px
         );
-      color: var(--white);
-      font-family: var(--font);
+      color: var(--blanco);
+      font-family: var(--font-body);
       height: 100vh;
       overflow: hidden;
     }
@@ -39,8 +44,8 @@
     /* ── Progress ── */
     #bar {
       position: fixed; top: 0; left: 0;
-      height: 2px; background: var(--green);
-      transition: width 0.4s ease; z-index: 200;
+      height: 2px; background: var(--verde);
+      transition: width 0.4s var(--ease-out-expo); z-index: 200;
     }
 
     /* ── Slide engine ── */
@@ -52,7 +57,7 @@
       justify-content: center; align-items: flex-start;
       padding: 72px 10vw;
       opacity: 0; visibility: hidden;
-      transition: opacity 0.45s ease;
+      transition: opacity 0.45s var(--ease-out-expo);
     }
     .slide.active { opacity: 1; visibility: visible; }
     .slide.center { align-items: center; text-align: center; }
@@ -67,25 +72,27 @@
       width: 40px; height: 40px; border-radius: 50%;
       border: 1px solid #2A2A2A;
       background: rgba(255,255,255,0.04);
-      color: var(--muted); font-size: 14px;
-      cursor: pointer; transition: all 0.2s;
+      color: var(--ceniza); font-size: 14px;
+      cursor: pointer; transition: all 0.25s var(--ease-out-expo);
     }
-    .nb:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+    .nb:hover { background: rgba(255,255,255,0.1); color: var(--blanco); }
     .nb-next {
       width: auto; padding: 0 28px; border-radius: 40px;
-      background: var(--green); border: none;
+      background: var(--verde); border: none;
       color: #000; font-size: 0.72rem; font-weight: 900;
+      font-family: var(--font-body);
       letter-spacing: 3px; text-transform: uppercase;
       display: flex; align-items: center; gap: 8px;
     }
     .nb-next:hover { filter: brightness(1.1); color: #000; }
-    #ctr { font-size: 11px; color: #333; letter-spacing: 2px; }
+    #ctr { font-size: 11px; color: #333; letter-spacing: 2px; font-family: var(--font-body); }
 
     /* Slide number watermark */
     .wm {
       position: absolute; right: 10vw; top: 50%;
       transform: translateY(-50%);
       font-size: clamp(8rem, 18vw, 18rem);
+      font-family: var(--font-display);
       font-weight: 900; font-style: italic;
       color: rgba(255,255,255,0.025);
       line-height: 1; pointer-events: none; user-select: none;
@@ -94,33 +101,39 @@
     /* ── Type ── */
     .eyebrow {
       font-size: 0.68rem; letter-spacing: 5px;
-      text-transform: uppercase; color: var(--green);
+      text-transform: uppercase; color: var(--verde);
+      font-family: var(--font-body); font-weight: 500;
       margin-bottom: 20px;
     }
     .h1 {
+      font-family: var(--font-display);
       font-size: clamp(3.2rem, 8vw, 8rem);
       font-weight: 900; font-style: italic;
       letter-spacing: -3px; line-height: 0.9;
     }
-    .h1 em { color: var(--green); font-style: inherit; }
+    .h1 em { color: var(--verde); font-style: inherit; }
     .h2 {
+      font-family: var(--font-display);
       font-size: clamp(2rem, 5vw, 4.2rem);
-      font-weight: 800; line-height: 1.05;
-      letter-spacing: -1.5px;
+      font-weight: 900; font-style: italic;
+      line-height: 0.95;
+      letter-spacing: -2px;
     }
-    .h2 em { color: var(--green); font-style: inherit; }
+    .h2 em { color: var(--verde); font-style: inherit; }
     .h3 {
+      font-family: var(--font-body);
       font-size: clamp(1.3rem, 3vw, 2rem);
       font-weight: 700; line-height: 1.2;
     }
     .body {
+      font-family: var(--font-body);
       font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-      color: var(--muted); line-height: 1.7;
+      color: var(--ceniza); line-height: 1.7;
       max-width: 580px; margin-top: 20px;
     }
-    .body strong { color: var(--white); }
-    .accent { color: var(--green); }
-    .bar { width: 40px; height: 3px; background: var(--green); border-radius: 2px; margin: 24px 0; }
+    .body strong { color: var(--blanco); }
+    .accent { color: var(--verde); }
+    .bar { width: 40px; height: 3px; background: var(--verde); border-radius: 2px; margin: 24px 0; }
 
     /* ── Layouts ── */
     .row {
@@ -132,106 +145,113 @@
     /* ── Cards ── */
     .cards { display: flex; gap: 16px; margin-top: 32px; width: 100%; max-width: 920px; }
     .card {
-      flex: 1; background: var(--card);
+      flex: 1; background: var(--carbon);
       border: 1px solid #1E1E1E; border-radius: 14px;
       padding: 26px 22px;
     }
     .card-num {
       font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--green); margin-bottom: 12px;
+      font-family: var(--font-body); font-weight: 500;
+      color: var(--verde); margin-bottom: 12px;
     }
-    .card-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
-    .card-body { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+    .card-title { font-family: var(--font-body); font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .card-body { font-family: var(--font-body); font-size: 0.82rem; color: var(--ceniza); line-height: 1.65; }
 
-    /* ── Quote cards (what he said) ── */
+    /* ── Quote cards ── */
     .quotes { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; max-width: 860px; width: 100%; }
     .qcard {
-      background: var(--dim); border-left: 3px solid var(--green);
+      background: var(--carbon); border-left: 3px solid var(--verde);
       border-radius: 0 10px 10px 0; padding: 16px 22px;
       display: flex; align-items: flex-start; gap: 16px;
     }
     .qtopic {
       font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--green); min-width: 100px; margin-top: 2px;
+      font-family: var(--font-body); font-weight: 500;
+      color: var(--verde); min-width: 100px; margin-top: 2px;
     }
-    .qtext { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.55; }
+    .qtext { font-family: var(--font-body); font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.55; }
 
     /* ── Insight cards ── */
     .insights { display: flex; gap: 16px; margin-top: 28px; max-width: 920px; width: 100%; }
     .insight {
-      flex: 1; background: var(--card); border-radius: 14px;
-      padding: 28px 22px; border-top: 3px solid var(--green);
+      flex: 1; background: var(--carbon); border-radius: 14px;
+      padding: 28px 22px; border-top: 3px solid var(--verde);
     }
     .insight-icon {
       font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--green); margin-bottom: 16px; font-weight: 700;
+      font-family: var(--font-body); font-weight: 700;
+      color: var(--verde); margin-bottom: 16px;
     }
-    .insight-h { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
-    .insight-p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .insight-h { font-family: var(--font-body); font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .insight-p { font-family: var(--font-body); font-size: 0.82rem; color: var(--ceniza); line-height: 1.6; }
 
     /* ── Phrase cards ── */
     .phrases { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; max-width: 860px; width: 100%; }
     .phrase {
-      background: var(--card); border-radius: 12px;
+      background: var(--carbon); border-radius: 12px;
       padding: 20px 22px; border: 1px solid #1E1E1E;
     }
-    .phrase-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .phrase-text { font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 800; font-style: italic; line-height: 1.25; }
-    .phrase.runa { border-left: 2px solid var(--green); border-color: var(--green); }
+    .phrase-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; font-family: var(--font-body); color: var(--ceniza); margin-bottom: 8px; }
+    .phrase-text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 900; font-style: italic; line-height: 1.25; }
+    .phrase.runa { border-left: 2px solid var(--verde); }
     .phrase.jjf  { border-left: 2px solid rgba(144,217,50,0.3); }
 
     /* ── Style cards ── */
     .styles { display: flex; gap: 16px; margin-top: 28px; max-width: 920px; width: 100%; }
     .style {
-      flex: 1; background: var(--card); border-radius: 14px;
+      flex: 1; background: var(--carbon); border-radius: 14px;
       padding: 28px 22px; position: relative; overflow: hidden;
     }
     .style-bg {
       position: absolute; right: -10px; bottom: -20px;
-      font-size: 7rem; font-weight: 900; font-style: italic;
+      font-family: var(--font-display); font-weight: 900; font-style: italic;
+      font-size: 7rem;
       color: rgba(144,217,50,0.06); line-height: 1; pointer-events: none;
     }
     .style-tag {
       display: inline-block; background: rgba(144,217,50,0.12);
-      color: var(--green); font-size: 0.65rem; letter-spacing: 2px;
+      color: var(--verde); font-size: 0.65rem; letter-spacing: 2px;
       text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
+      font-family: var(--font-body); font-weight: 500;
       margin-bottom: 14px;
     }
-    .style-h { font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
-    .style-p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .style-h { font-family: var(--font-body); font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+    .style-p { font-family: var(--font-body); font-size: 0.82rem; color: var(--ceniza); line-height: 1.6; }
     .style-items {
       margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
     }
     .style-item {
       font-size: 0.7rem; padding: 3px 9px;
       border: 1px solid #2A2A2A; border-radius: 20px; color: #666;
+      font-family: var(--font-body);
     }
 
     /* ── Deliverable list ── */
     .deliv { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; max-width: 740px; width: 100%; }
     .deliv-item {
       display: flex; align-items: center; gap: 16px;
-      background: var(--dim); border-radius: 10px; padding: 14px 20px;
+      background: var(--carbon); border-radius: 10px; padding: 14px 20px;
     }
     .deliv-day {
       font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--green); min-width: 48px;
+      font-family: var(--font-body); font-weight: 500;
+      color: var(--verde); min-width: 48px;
     }
-    .deliv-text { font-size: 0.9rem; color: rgba(255,255,255,0.85); flex: 1; }
-    .deliv-type { font-size: 0.72rem; color: var(--muted); text-align: right; }
+    .deliv-text { font-family: var(--font-body); font-size: 0.9rem; color: rgba(255,255,255,0.85); flex: 1; }
+    .deliv-type { font-family: var(--font-body); font-size: 0.72rem; color: var(--ceniza); text-align: right; }
 
     /* ── Pricing cards ── */
     .pricing { display: flex; gap: 16px; margin-top: 28px; max-width: 940px; width: 100%; }
     .plan {
-      flex: 1; background: var(--card);
+      flex: 1; background: var(--carbon);
       border: 1px solid #1E1E1E; border-radius: 16px;
       padding: 28px 24px; cursor: pointer;
-      transition: border-color 0.25s, transform 0.2s, background 0.25s;
+      transition: border-color 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo), background 0.25s;
       position: relative;
     }
     .plan:hover { border-color: #3A3A3A; transform: translateY(-2px); }
     .plan.selected {
-      border-color: var(--green);
+      border-color: var(--verde);
       background: rgba(144,217,50,0.06);
     }
     .plan.recommended {
@@ -242,39 +262,42 @@
     .plan.recommended:hover { transform: scale(1.05) translateY(-2px); }
     .plan-badge {
       position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: #000;
+      background: var(--verde); color: #000;
       font-size: 0.6rem; font-weight: 900; letter-spacing: 3px;
       text-transform: uppercase; padding: 3px 12px; border-radius: 20px;
       white-space: nowrap;
+      font-family: var(--font-body);
     }
     .plan-name {
       font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 10px;
+      font-family: var(--font-body); font-weight: 500;
+      color: var(--ceniza); margin-bottom: 10px;
     }
     .plan-price {
+      font-family: var(--font-display);
       font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       font-weight: 900; font-style: italic;
       letter-spacing: -1px; line-height: 1;
     }
-    .plan-price span { font-size: 0.9rem; font-weight: 400; font-style: normal; color: var(--muted); margin-left: 4px; }
+    .plan-price span { font-family: var(--font-body); font-size: 0.9rem; font-weight: 400; font-style: normal; color: var(--ceniza); margin-left: 4px; }
     .plan-divider { width: 100%; height: 1px; background: #1E1E1E; margin: 18px 0; }
     .plan-items { display: flex; flex-direction: column; gap: 8px; }
     .plan-item {
-      font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.4;
+      font-family: var(--font-body); font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.4;
       display: flex; align-items: flex-start; gap: 8px;
     }
-    .plan-item::before { content: '✦'; color: var(--green); font-size: 0.6rem; margin-top: 2px; flex-shrink: 0; }
-    .plan.selected .plan-price { color: var(--green); }
+    .plan-item::before { content: '✦'; color: var(--verde); font-size: 0.6rem; margin-top: 2px; flex-shrink: 0; }
+    .plan.selected .plan-price { color: var(--verde); }
 
     /* ── OK button ── */
     .ok-btn {
       margin-top: 40px; padding: 18px 64px;
-      background: var(--green); color: #000;
+      background: var(--verde); color: #000;
       border: none; border-radius: 8px;
-      font-family: var(--font); font-size: 1rem;
-      font-weight: 900; letter-spacing: 3px;
+      font-family: var(--font-body);
+      font-size: 1rem; font-weight: 900; letter-spacing: 3px;
       text-transform: uppercase; cursor: pointer;
-      transition: filter 0.2s, transform 0.15s;
+      transition: filter 0.25s, transform 0.15s;
     }
     .ok-btn:hover { filter: brightness(1.08); transform: scale(1.02); }
     .ok-btn:disabled {
@@ -284,7 +307,7 @@
 
     /* ── Animations ── */
     .slide.active > * {
-      animation: up 0.55s ease-out both;
+      animation: up 0.55s var(--ease-out-expo) both;
     }
     .slide.active > *:nth-child(1) { animation-delay: 0.04s; }
     .slide.active > *:nth-child(2) { animation-delay: 0.12s; }
@@ -310,7 +333,7 @@
 
     /* ── Gradient number ── */
     .grad-num {
-      background: linear-gradient(135deg, var(--green) 0%, #c8ff4d 100%);
+      background: linear-gradient(135deg, var(--verde) 0%, #c8ff4d 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -319,59 +342,33 @@
     .ok-btn:not(:disabled) { animation: pulse-glow 2.4s ease-in-out infinite; }
 
     /* ═══════════════════════════════
-       RESPONSIVE — MOBILE FIRST
-       ═══════════════════════════════ */
+       RESPONSIVE
+    ═══════════════════════════════ */
     @media (max-width: 768px) {
-
-      /* Slide base */
       .slide { padding: 56px 24px 80px; }
       .slide.center { padding: 56px 24px 80px; }
       .slide-pricing { padding-top: 52px !important; padding-bottom: 90px !important; }
-
-      /* Nav */
       #nav { bottom: 14px; }
       .nb-next { padding: 0 18px; font-size: 0.65rem; letter-spacing: 2px; }
-
-      /* Watermark */
       .wm { font-size: clamp(5rem, 28vw, 10rem); }
-
-      /* Cards row → stack */
-      .cards     { flex-direction: column; gap: 12px; }
-      .insights  { flex-direction: column; gap: 12px; }
-      .styles    { flex-direction: column; gap: 12px; }
-
-      /* Pricing — stack vertically */
+      .cards, .insights, .styles { flex-direction: column; gap: 12px; }
       .pricing { flex-direction: column; gap: 16px; max-width: 100%; }
       .plan.recommended { transform: scale(1); }
       .plan.recommended:hover { transform: translateY(-2px); }
-
-      /* Phrase grid → single column */
       .phrases { grid-template-columns: 1fr; }
-
-      /* Quotes — tighten up */
       .qcard { flex-direction: column; gap: 6px; }
       .qtopic { min-width: unset; }
-
-      /* Stat row in slide 7 */
       .stat-row { gap: 10px; }
       .stat-row > div { min-width: unset; flex: 1; padding: 14px 12px; }
-
-      /* OK button */
       .ok-btn { padding: 16px 36px; font-size: 0.9rem; letter-spacing: 2px; }
-
-      /* Heading adjustments */
       .h1 { font-size: clamp(2.6rem, 12vw, 5rem); letter-spacing: -2px; }
       .h2 { font-size: clamp(1.8rem, 8vw, 3rem); letter-spacing: -1px; }
-
-      /* Body text */
       .body { font-size: 0.95rem; }
     }
-
     @media (max-width: 480px) {
       .slide { padding: 48px 20px 76px; }
       .insight { padding: 20px 16px; }
-      .card   { padding: 18px 16px; }
-      .plan   { padding: 20px 16px; }
+      .card, .plan { padding: 18px 16px; }
       .plan-price { font-size: 1.8rem; }
     }
   </style>
@@ -541,24 +538,24 @@
       Cuando el producto físico esté, lo validamos con shooting real.
     </p>
     <div class="stat-row" style="display:flex;gap:24px;margin-top:32px">
-      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+      <div style="background:var(--carbon);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
         <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">16</div>
-        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">piezas listas</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--ceniza);margin-top:6px">piezas listas</div>
       </div>
-      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+      <div style="background:var(--carbon);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
         <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">2</div>
-        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">mundos visuales</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--ceniza);margin-top:6px">mundos visuales</div>
       </div>
-      <div style="background:var(--dim);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
+      <div style="background:var(--carbon);border-radius:12px;padding:20px 28px;text-align:center;min-width:120px">
         <div class="grad-num" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;font-style:italic;line-height:1">0</div>
-        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:6px">fotógrafos</div>
+        <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--ceniza);margin-top:6px">fotógrafos</div>
       </div>
     </div>
   </div>
 
   <!-- 8. EL DECK -->
   <div class="slide">
-    <div class="wm">9</div>
+    <div class="wm">8</div>
     <div class="eyebrow">Entregable final</div>
     <div class="h2">Un deck que<br>puedes <em>mostrar.</em></div>
     <div class="bar"></div>
@@ -567,7 +564,7 @@
       <strong>Frases aprobadas. Estilos definidos. Campaña visual lista.</strong>
     </p>
     <div class="cards" style="margin-top:24px;max-width:640px">
-      <div class="card" style="border-top:2px solid var(--green)">
+      <div class="card" style="border-top:2px solid var(--verde)">
         <div class="card-body" style="line-height:2.1;color:rgba(255,255,255,0.7)">
           ✦ &nbsp;Las frases de cada línea<br>
           ✦ &nbsp;Los 3 estilos visuales con mockups<br>
@@ -635,12 +632,11 @@
       Si estás de acuerdo con este plan,<br>presiona OK y empezamos.
     </p>
     <button class="ok-btn" id="ok-btn" onclick="handleOK()" disabled>OK — EMPEZAMOS</button>
-    <p id="ok-hint" style="margin-top:14px;font-size:0.75rem;color:var(--muted)">← Elige un plan primero</p>
+    <p id="ok-hint" style="margin-top:14px;font-size:0.75rem;color:var(--ceniza)">← Elige un plan primero</p>
   </div>
 
 </div>
 
-<!-- Form oculto para notificación email -->
 <iframe name="fs-frame" style="display:none" title="form target"></iframe>
 <form id="fs-notify" action="https://formspree.io/f/mojyqbel" method="POST" target="fs-frame" style="display:none">
   <input type="hidden" name="_subject" value="RUNA — Sebastián eligió un plan">
@@ -649,7 +645,6 @@
   <input type="hidden" name="mensaje" value="Sebastián revisó la propuesta RUNA y eligió un plan.">
 </form>
 
-<!-- Nav -->
 <div id="nav">
   <button class="nb" onclick="prev()">←</button>
   <span id="ctr">01 / 10</span>
@@ -680,7 +675,6 @@
     if (e.key === 'ArrowLeft')                    { e.preventDefault(); prev(); }
   });
 
-  // Swipe support
   let tx = 0;
   document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
   document.addEventListener('touchend',   e => {
@@ -701,25 +695,19 @@
 
   function handleOK() {
     if (!selectedPlanName) return;
-
-    // Notificación por WhatsApp
     const msg = encodeURIComponent('Hola Giorgio, revisé la propuesta RUNA y elegí el plan: ' + selectedPlanName);
     window.open('https://wa.me/56991509244?text=' + msg, '_blank');
-
-    // Notificación por email (respaldo)
     document.getElementById('fs-plan').value = selectedPlanName;
     document.getElementById('fs-notify').submit();
-
-    // Animación de confirmación
     document.body.style.transition = 'background 0.7s';
     document.body.style.background = '#90D932';
     setTimeout(() => {
       document.body.innerHTML = `
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
           height:100vh;font-family:'Inter',sans-serif;color:#000;text-align:center;padding:48px">
-          <div style="font-size:clamp(4rem,12vw,9rem);font-weight:900;font-style:italic;
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(4rem,12vw,9rem);font-weight:900;font-style:italic;
             letter-spacing:-4px;line-height:0.9">RUNA<br>BRAND</div>
-          <div style="margin-top:28px;font-size:1rem;opacity:0.6;letter-spacing:4px;text-transform:uppercase">
+          <div style="margin-top:28px;font-size:1rem;opacity:0.6;letter-spacing:4px;text-transform:uppercase;font-weight:500">
             Plan confirmado
           </div>
           <div style="margin-top:16px;font-size:0.9rem;font-weight:700;opacity:0.8;letter-spacing:1px">

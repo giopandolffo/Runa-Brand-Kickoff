@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RUNA BRAND — Kick-off</title>
+  <title>RUNA BRAND — Kick-off · Brand Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0A0A0A;
-      --card-bg: #161616;
-      --card-hover: #1E1E1E;
-      --green: #90D932;
-      --white: #FFFFFF;
-      --muted: #888888;
-      --border: #2A2A2A;
-      --radius-card: 12px;
-      --radius-btn: 8px;
-      --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      --orange: #f0a500;
+      /* RUNA Brand Tokens */
+      --verde: #90D932;
+      --noche: #0A0A0A;
+      --carbon: #1C1C1C;
+      --blanco: #FFFFFF;
+      --ceniza: #888888;
+      --ceniza-light: #666666;
+      --fuego: #F5620F;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: var(--font);
+      background: var(--noche);
+      color: var(--blanco);
+      font-family: var(--font-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -36,13 +39,13 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 4px;
-      background: var(--border);
+      background: #2A2A2A;
       z-index: 100;
     }
     #progress-bar {
       height: 100%;
-      background: var(--green);
-      transition: width 0.4s ease;
+      background: var(--verde);
+      transition: width 0.4s var(--ease-out-expo);
     }
 
     /* ── Header ── */
@@ -52,29 +55,34 @@
       padding: 0 24px;
     }
     .logo {
-      font-size: 2.8rem;
+      font-family: var(--font-display);
+      font-size: 3.2rem;
       font-weight: 900;
       font-style: italic;
-      letter-spacing: -2px;
-      color: var(--white);
+      letter-spacing: -3px;
+      color: var(--blanco);
+      line-height: 0.9;
     }
-    .logo span { color: var(--green); }
+    .logo span { color: var(--verde); }
     .logo-sub {
+      font-family: var(--font-body);
       font-size: 0.7rem;
       letter-spacing: 6px;
-      color: var(--muted);
+      color: var(--ceniza);
       text-transform: uppercase;
       margin-top: 4px;
+      font-weight: 500;
     }
 
     /* ── Step indicator ── */
     #step-indicator {
       margin-top: 32px;
+      font-family: var(--font-body);
       font-size: 0.85rem;
-      color: var(--muted);
+      color: var(--ceniza);
       text-align: center;
     }
-    #step-indicator strong { color: var(--green); }
+    #step-indicator strong { color: var(--verde); }
 
     /* ── Main container ── */
     #wizard {
@@ -87,13 +95,15 @@
     .step.active { display: block; }
 
     .step h2 {
+      font-family: var(--font-body);
       font-size: 1.6rem;
       font-weight: 800;
       margin-bottom: 8px;
       line-height: 1.2;
     }
     .step-desc {
-      color: var(--muted);
+      color: var(--ceniza);
+      font-family: var(--font-body);
       font-size: 0.95rem;
       margin-bottom: 28px;
     }
@@ -107,28 +117,28 @@
     }
 
     .card {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-card);
+      background: var(--carbon);
+      border: 2px solid #2A2A2A;
+      border-radius: 12px;
       padding: 16px 12px;
       cursor: pointer;
       text-align: center;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s var(--ease-out-expo), background 0.2s;
       user-select: none;
       position: relative;
     }
-    .card:hover { background: var(--card-hover); }
+    .card:hover { background: #1E1E1E; }
     .card.selected {
-      border-color: var(--green);
-      background: var(--card-hover);
+      border-color: var(--verde);
+      background: #1E1E1E;
     }
     .card .card-icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .card .card-label { font-size: 0.82rem; font-weight: 600; }
+    .card .card-label { font-family: var(--font-body); font-size: 0.82rem; font-weight: 600; }
     .card .check {
       position: absolute;
       top: 8px; right: 8px;
       width: 18px; height: 18px;
-      background: var(--green);
+      background: var(--verde);
       border-radius: 50%;
       display: none;
       align-items: center;
@@ -148,59 +158,62 @@
     }
     .card.selected .priority-wrap { display: flex; }
     .priority-btn {
+      font-family: var(--font-body);
       font-size: 0.65rem;
       padding: 2px 6px;
       border-radius: 4px;
-      border: 1px solid var(--border);
+      border: 1px solid #2A2A2A;
       background: transparent;
-      color: var(--muted);
+      color: var(--ceniza);
       cursor: pointer;
       transition: all 0.15s;
     }
-    .priority-btn.active-alta { background: var(--green); color: #000; border-color: var(--green); }
-    .priority-btn.active-media { background: var(--orange); color: #000; border-color: var(--orange); }
-    .priority-btn.active-baja { background: var(--border); color: var(--white); }
+    .priority-btn.active-alta { background: var(--verde); color: #000; border-color: var(--verde); }
+    .priority-btn.active-media { background: var(--fuego); color: #000; border-color: var(--fuego); }
+    .priority-btn.active-baja { background: #2A2A2A; color: var(--blanco); }
 
     /* ── Text inputs / textareas ── */
     .field-wrap { margin-bottom: 20px; }
     .field-wrap label {
       display: block;
+      font-family: var(--font-body);
       font-size: 0.85rem;
-      color: var(--muted);
+      color: var(--ceniza);
       margin-bottom: 6px;
     }
     input[type="text"],
     textarea,
     select {
       width: 100%;
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-btn);
-      color: var(--white);
-      font-family: var(--font);
+      background: var(--carbon);
+      border: 2px solid #2A2A2A;
+      border-radius: 8px;
+      color: var(--blanco);
+      font-family: var(--font-body);
       font-size: 0.95rem;
       padding: 10px 14px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s var(--ease-out-expo);
     }
     input[type="text"]:focus,
     textarea:focus,
-    select:focus { border-color: var(--green); }
+    select:focus { border-color: var(--verde); }
     textarea { resize: vertical; min-height: 90px; }
-    select option { background: var(--card-bg); }
+    select option { background: var(--carbon); }
 
     /* ── Sliders ── */
     .slider-wrap { margin: 16px 0; }
     .slider-labels {
       display: flex;
       justify-content: space-between;
+      font-family: var(--font-body);
       font-size: 0.75rem;
-      color: var(--muted);
+      color: var(--ceniza);
       margin-bottom: 4px;
     }
     input[type="range"] {
       width: 100%;
-      accent-color: var(--green);
+      accent-color: var(--verde);
     }
 
     /* ── Radio / Checkbox groups ── */
@@ -210,23 +223,25 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-btn);
+      background: var(--carbon);
+      border: 2px solid #2A2A2A;
+      border-radius: 8px;
       padding: 10px 14px;
       cursor: pointer;
+      font-family: var(--font-body);
       font-size: 0.9rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s var(--ease-out-expo);
     }
-    .option-label:hover { border-color: var(--muted); }
-    .option-label input { accent-color: var(--green); width: 16px; height: 16px; }
-    .option-label:has(input:checked) { border-color: var(--green); }
+    .option-label:hover { border-color: var(--ceniza); }
+    .option-label input { accent-color: var(--verde); width: 16px; height: 16px; }
+    .option-label:has(input:checked) { border-color: var(--verde); }
 
     /* ── Sub-section headers ── */
     .sub-heading {
+      font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 700;
-      color: var(--green);
+      color: var(--verde);
       margin: 28px 0 14px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -237,7 +252,7 @@
       position: fixed;
       bottom: 0; left: 0; right: 0;
       background: rgba(10,10,10,0.95);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid #2A2A2A;
       padding: 16px 24px;
       display: flex;
       justify-content: space-between;
@@ -247,32 +262,31 @@
 
     .btn {
       padding: 12px 28px;
-      border-radius: var(--radius-btn);
-      font-family: var(--font);
+      border-radius: 8px;
+      font-family: var(--font-body);
       font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       border: none;
-      transition: all 0.2s;
+      transition: all 0.2s var(--ease-out-expo);
     }
     .btn-ghost {
       background: transparent;
-      color: var(--muted);
-      border: 2px solid var(--border);
+      color: var(--ceniza);
+      border: 2px solid #2A2A2A;
     }
-    .btn-ghost:hover { border-color: var(--muted); color: var(--white); }
+    .btn-ghost:hover { border-color: var(--ceniza); color: var(--blanco); }
     .btn-primary {
-      background: var(--green);
+      background: var(--verde);
       color: #000;
     }
     .btn-primary:hover { filter: brightness(1.1); }
     .btn-primary:disabled {
-      background: var(--border);
-      color: var(--muted);
+      background: #2A2A2A;
+      color: var(--ceniza);
       cursor: not-allowed;
       filter: none;
     }
-    .btn-large { padding: 16px 48px; font-size: 1.1rem; width: 100%; margin-top: 24px; }
 
     /* ── Reveal field ── */
     .reveal-field { display: none; margin-top: 12px; }
@@ -280,22 +294,24 @@
 
     /* ── Summary ── */
     .summary-block {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
+      background: var(--carbon);
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
       padding: 18px 20px;
       margin-bottom: 16px;
     }
     .summary-block h3 {
+      font-family: var(--font-body);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--green);
+      color: var(--verde);
       margin-bottom: 10px;
     }
     .summary-block p, .summary-block li {
+      font-family: var(--font-body);
       font-size: 0.9rem;
-      color: var(--muted);
+      color: var(--ceniza);
       line-height: 1.6;
     }
     .summary-block ul { padding-left: 16px; }
@@ -311,15 +327,33 @@
       min-height: 80vh;
       padding: 48px 24px;
     }
-    #success-screen { color: #000; background: var(--green); border-radius: 16px; margin: 32px 24px; }
-    #error-screen { color: var(--white); }
-    #success-screen h1 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
-    #success-screen p { font-size: 1rem; opacity: 0.8; }
-    #error-screen h1 { font-size: 1.5rem; color: #ff4444; margin-bottom: 12px; }
+    #success-screen {
+      color: #000;
+      background: var(--verde);
+      border-radius: 16px;
+      margin: 32px 24px;
+    }
+    #success-screen h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+    #success-screen p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    #error-screen { color: var(--blanco); }
+    #error-screen h1 { font-family: var(--font-body); font-size: 1.5rem; color: #ff4444; margin-bottom: 12px; }
+    #error-screen p { font-family: var(--font-body); }
 
     /* ── Validation error ── */
     .validation-msg {
       color: #ff4444;
+      font-family: var(--font-body);
       font-size: 0.82rem;
       margin-top: -12px;
       margin-bottom: 12px;
@@ -338,8 +372,8 @@
   <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
 
   <header>
-    <div class="logo">r<span>u</span>na<sup style="font-size:0.4em;color:var(--muted)">®</sup></div>
-    <div class="logo-sub">Brand Kick-off</div>
+    <div class="logo">r<span>u</span>na</div>
+    <div class="logo-sub">Brand Kick-off · Discovery</div>
   </header>
 
   <div id="step-indicator"></div>
@@ -512,11 +546,10 @@
         <textarea id="comentarios" placeholder="Comentarios adicionales, dudas, contexto..." oninput="state.comentarios=this.value"></textarea>
       </div>
 
-      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-card);padding:16px 20px;margin-top:8px">
-        <p style="font-size:0.8rem;color:var(--muted)">Este formulario será enviado a <strong style="color:var(--white)">contacto@lab080.studio</strong> y <strong style="color:var(--white)">giorgiopandolffo@gmail.com</strong></p>
+      <div style="background:var(--carbon);border:1px solid #2A2A2A;border-radius:12px;padding:16px 20px;margin-top:8px">
+        <p style="font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--ceniza)">Este formulario será enviado a <strong style="color:var(--blanco)">contacto@lab080.studio</strong> y <strong style="color:var(--blanco)">giorgiopandolffo@gmail.com</strong></p>
       </div>
 
-      <!-- Hidden Formspree form -->
       <form id="kickoff-form" action="https://formspree.io/f/mjgjveap" method="POST" style="display:none">
         <input type="hidden" name="_subject" value="RUNA-BRAND Kick-off — Sebastián Weiss" />
         <input type="hidden" name="client_name" value="Sebastián Weiss" />
@@ -550,16 +583,15 @@
   </div>
 
   <script>
-    // State object — populated as user fills in the form
     const state = {
       step: 1,
       totalSteps: 5,
-      productos: {},      // { id: { selected: bool, priority: 'Alta'|'Media'|'Baja' } }
+      productos: {},
       productosOtros: '',
-      disenio: {},        // { id: { selected: bool, sobrio: 5, minimal: 5 } }
+      disenio: {},
       disenioOtros: '',
       disenioRefs: '',
-      canales: {},        // { id: bool }
+      canales: {},
       canalesOtros: '',
       canalPrincipal: '',
       ecommerce: '',
@@ -574,7 +606,7 @@
     };
 
     const STEP_LABELS = [
-      '', // 1-indexed
+      '',
       'Productos',
       'Diseño',
       'Canales',
@@ -614,7 +646,6 @@
       if (state.step > 1) { state.step--; showStep(state.step); }
     }
 
-    // Validation — returns true if step is valid
     function validateStep(n) {
       const msgId = 'val-msg-' + n;
       const msg = document.getElementById(msgId);
@@ -642,7 +673,6 @@
       return true;
     }
 
-    // ── Step 3: Canales ──
     const CANALES = [
       { id: 'instagram',   label: 'Instagram',         icon: '📸' },
       { id: 'tiktok',      label: 'TikTok',             icon: '🎵' },
@@ -693,12 +723,10 @@
       }
     }
 
-    // ── Step 4: Ecommerce ──
     function togglePlataformas(show) {
       document.getElementById('plataformas-wrap').classList.toggle('visible', show);
     }
 
-    // ── Step 5: Resumen & Envío ──
     function renderSummary() {
       const el = document.getElementById('summary-container');
 
@@ -795,10 +823,9 @@
       }
     }
 
-    // ── Step 1: Productos ──
     const PRODUCTOS = [
       { id: 'polera',       label: 'Polera / Tee',          icon: '👕' },
-      { id: 'poleron',      label: 'Poleón / Hoodie',        icon: '🧥' },
+      { id: 'poleron',      label: 'Polerón / Hoodie',       icon: '🧥' },
       { id: 'short',        label: 'Short',                  icon: '🩳' },
       { id: 'calza',        label: 'Calza',                  icon: '🩱' },
       { id: 'calcetines',   label: 'Calcetines (pack)',       icon: '🧦' },
@@ -849,7 +876,6 @@
       });
     }
 
-    // ── Step 2: Diseño ──
     const DISENIOS = [
       { id: 'tipografia', label: 'Tipografía / Frases',   icon: '✍️', desc: '"You belong here", frases inspiracionales' },
       { id: 'abstracto',  label: 'Abstracto / Energía',   icon: '⚡', desc: 'Rayos, ritmo, movimiento, patrones' },
@@ -865,7 +891,7 @@
           <div class="check">✓</div>
           <div class="card-icon">${d.icon}</div>
           <div class="card-label">${d.label}</div>
-          <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">${d.desc}</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;color:var(--ceniza);margin-top:6px">${d.desc}</div>
         </div>
       `).join('');
     }
@@ -884,8 +910,8 @@
       const selected = DISENIOS.filter(d => d.id !== 'otros' && state.disenio[d.id].selected);
       if (selected.length === 0) { container.innerHTML = ''; return; }
       container.innerHTML = selected.map(d => `
-        <div style="margin-top:20px;padding:16px;background:var(--card-bg);border-radius:var(--radius-card);border:1px solid var(--border)">
-          <div style="font-weight:700;margin-bottom:12px">${d.icon} ${d.label}</div>
+        <div style="margin-top:20px;padding:16px;background:var(--carbon);border-radius:12px;border:1px solid #2A2A2A">
+          <div style="font-family:'Inter',sans-serif;font-weight:700;margin-bottom:12px">${d.icon} ${d.label}</div>
           <div class="slider-wrap">
             <div class="slider-labels"><span>Sobrio</span><span>Llamativo</span></div>
             <input type="range" min="1" max="10" value="${state.disenio[d.id].sobrio}"
@@ -900,7 +926,6 @@
       `).join('');
     }
 
-    // Init
     document.addEventListener('DOMContentLoaded', () => {
       initProductos();
       initDisenio();

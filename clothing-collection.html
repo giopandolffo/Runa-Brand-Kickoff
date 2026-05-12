@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUNA — Colección Drop 01 · Built for Battle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,900&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #90D932;
+    --noche: #0A0A0A;
+    --carbon: #1C1C1C;
+    --blanco: #FFFFFF;
+    --ceniza: #888888;
+    --fuego: #F5620F;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--noche);
+    color: var(--blanco);
+    font-family: var(--font-body);
+    padding: 40px 20px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--carbon);
+    padding-bottom: 40px;
+  }
+
+  header h1 {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -3px;
+    color: var(--blanco);
+    line-height: 0.9;
+  }
+
+  header h1 span { color: var(--verde); }
+
+  header p {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ceniza);
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  .section-title {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--carbon);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .card {
+    background: var(--carbon);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    transition: border-color 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo);
+  }
+
+  .card:hover {
+    border-color: var(--verde);
+    transform: translateY(-4px);
+  }
+
+  .card svg {
+    width: 100%;
+    display: block;
+  }
+
+  .card-info {
+    padding: 16px 20px;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  .card-info h3 {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-info p {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--ceniza);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+
+  .tag-verde { background: var(--verde); color: var(--noche); }
+  .tag-fuego { background: var(--fuego); color: var(--blanco); }
+  .tag-ceniza { background: #2a2a2a; color: var(--ceniza); }
+
+  /* Brand footer */
+  .brand-footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--carbon);
+    margin-top: 40px;
+  }
+  .brand-footer .r {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--verde);
+    letter-spacing: 2px;
+  }
+  .brand-footer p {
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>RU<span>N</span>A</h1>
+  <p>Drop 01 · Built for Battle · Colección Completa</p>
+</header>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- POLERONES -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Polerones — 2 diseños</p>
+<div class="grid">
+
+  <!-- POLERON 01: FORGED IN FRICTION -->
+  <div class="card">
+    <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="420" fill="#0A0A0A"/>
+      <path d="M80 120 L60 80 L130 60 L160 100 L200 85 L240 100 L270 60 L340 80 L320 120 L310 140 L310 370 L90 370 L90 140 Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M160 100 Q200 70 240 100 Q240 50 200 40 Q160 50 160 100Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="130" y="270" width="140" height="50" rx="4" fill="#111111" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="200" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#90D932" letter-spacing="5">RUNA</text>
+      <text x="200" y="235" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="28" font-weight="900" font-style="italic" fill="#FFFFFF" letter-spacing="-1">FORGED IN</text>
+      <text x="200" y="268" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="28" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="-1">FRICTION</text>
+      <line x1="185" y1="105" x2="180" y2="140" stroke="#888" stroke-width="1.5"/>
+      <line x1="215" y1="105" x2="220" y2="140" stroke="#888" stroke-width="1.5"/>
+      <rect x="80" y="360" width="30" height="10" rx="3" fill="#111"/>
+      <rect x="290" y="360" width="30" height="10" rx="3" fill="#111"/>
+    </svg>
+    <div class="card-info">
+      <h3>Polerón 01 — Forged in Friction</h3>
+      <p>Oversized hoodie · Negro Noche · Estampado pecho + espalda</p>
+      <span class="tag tag-ceniza">Algodón 380gsm</span>
+    </div>
+  </div>
+
+  <!-- POLERON 02: RUNA PATTERN -->
+  <div class="card">
+    <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="420" fill="#1C1C1C"/>
+      <path d="M80 120 L60 80 L130 60 L155 95 L200 80 L245 95 L270 60 L340 80 L320 120 L310 140 L310 370 L90 370 L90 140 Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M155 95 Q200 65 245 95 Q245 45 200 35 Q155 45 155 95Z" fill="#0A0A0A" stroke="#2a2a2a" stroke-width="1"/>
+      <defs>
+        <pattern id="runa-pat" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <text x="1" y="14" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="900" font-style="italic" fill="#90D932" opacity="0.15">R</text>
+        </pattern>
+      </defs>
+      <path d="M80 120 L60 80 L130 60 L155 95 L90 140Z" fill="url(#runa-pat)"/>
+      <path d="M320 120 L340 80 L270 60 L245 95 L310 140Z" fill="url(#runa-pat)"/>
+      <rect x="192" y="140" width="16" height="230" fill="#90D932" opacity="0.08" rx="2"/>
+      <text x="178" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="6" transform="rotate(-90,178,200)">RUNA · BUILT FOR BATTLE</text>
+      <text x="200" y="248" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="72" font-weight="900" font-style="italic" fill="#FFFFFF" opacity="0.06">R</text>
+      <rect x="135" y="275" width="130" height="45" rx="4" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="200" y="303" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#90D932" letter-spacing="3">RUNA</text>
+      <line x1="200" y1="90" x2="200" y2="290" stroke="#333" stroke-width="2"/>
+      <rect x="196" y="150" width="8" height="12" rx="2" fill="#555"/>
+    </svg>
+    <div class="card-info">
+      <h3>Polerón 02 — Pattern R / Zip</h3>
+      <p>Half-zip · Carbón + Verde sutil · Branding vertical lateral</p>
+      <span class="tag tag-verde">Signature</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BUZO COMPLETO -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Buzo Completo — Tracksuit Stripe Series</p>
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1; max-width: 800px; margin: 0 auto; width: 100%;">
+    <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="450" fill="#0A0A0A"/>
+      <!-- HOODIE -->
+      <path d="M80 150 L60 110 L125 85 L155 125 L195 110 L235 125 L265 85 L330 110 L310 150 L300 170 L300 400 L90 400 L90 170Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M155 125 Q195 95 235 125 Q235 75 195 65 Q155 75 155 125Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="80" y="385" width="28" height="15" rx="4" fill="#90D932"/>
+      <rect x="285" y="385" width="28" height="15" rx="4" fill="#90D932"/>
+      <rect x="120" y="295" width="120" height="45" rx="4" fill="#111" stroke="#2a2a2a"/>
+      <text x="195" y="205" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#90D932" letter-spacing="5">RUNA</text>
+      <text x="195" y="220" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="400" fill="#888" letter-spacing="3" font-style="italic">BUILT FOR BATTLE</text>
+      <rect x="88" y="170" width="6" height="215" fill="#90D932" opacity="0.7" rx="2"/>
+      <rect x="298" y="170" width="6" height="215" fill="#90D932" opacity="0.7" rx="2"/>
+      <text x="195" y="440" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#555" letter-spacing="3">PART 01 · HOODIE</text>
+      <!-- DIVIDER -->
+      <line x1="380" y1="50" x2="380" y2="430" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,4"/>
+      <!-- PANTALON -->
+      <path d="M430 120 L430 350 L480 400 L510 350 L515 250 L520 350 L550 400 L580 350 L580 120 Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="425" y="108" width="160" height="20" rx="4" fill="#111" stroke="#2a2a2a"/>
+      <line x1="490" y1="118" x2="475" y2="145" stroke="#888" stroke-width="1.5"/>
+      <line x1="520" y1="118" x2="535" y2="145" stroke="#888" stroke-width="1.5"/>
+      <rect x="432" y="130" width="6" height="218" fill="#90D932" opacity="0.7" rx="2"/>
+      <rect x="572" y="130" width="6" height="218" fill="#90D932" opacity="0.7" rx="2"/>
+      <rect x="436" y="200" width="55" height="60" rx="3" fill="#111" stroke="#2a2a2a"/>
+      <text x="463" y="234" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" font-weight="700" fill="#90D932" letter-spacing="2">RUNA</text>
+      <rect x="430" y="388" width="50" height="14" rx="4" fill="#90D932"/>
+      <rect x="550" y="388" width="30" height="14" rx="4" fill="#90D932"/>
+      <text x="505" y="440" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#555" letter-spacing="3">PART 02 · PANTALÓN</text>
+      <!-- Title -->
+      <text x="690" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="18" font-weight="900" font-style="italic" fill="#FFFFFF" letter-spacing="2">BUZO</text>
+      <text x="690" y="222" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="18" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="2">COMPLETO</text>
+      <text x="690" y="245" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#555" letter-spacing="2">Drop 01</text>
+      <rect x="660" y="255" width="60" height="2" fill="#90D932" rx="1"/>
+      <text x="690" y="275" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#888">Negro + Verde</text>
+      <text x="690" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#888">Stripe lateral</text>
+    </svg>
+    <div class="card-info">
+      <h3>Buzo Completo — Stripe Series</h3>
+      <p>Hoodie + Pantalón · Carbón/Negro · Stripe verde lateral continuo · Tobilleras verdes</p>
+      <span class="tag tag-verde">Set completo</span>
+      <span class="tag tag-ceniza" style="margin-left:6px">French Terry 320gsm</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CALCETINES -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Calcetines — 3 diseños</p>
+<div class="grid-3">
+
+  <!-- CALCETIN 01: ABSTRACT VERDE -->
+  <div class="card">
+    <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+      <rect width="220" height="280" fill="#0A0A0A"/>
+      <path d="M65 40 L65 200 Q65 240 90 250 L150 255 Q175 255 175 235 L175 215 Q175 205 165 205 L130 205 L130 40Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1.5"/>
+      <rect x="65" y="40" width="65" height="25" rx="0" fill="#90D932"/>
+      <rect x="130" y="40" width="45" height="25" rx="0" fill="#0A0A0A"/>
+      <circle cx="90" cy="110" r="12" fill="none" stroke="#90D932" stroke-width="2"/>
+      <circle cx="110" cy="130" r="8" fill="#90D932" opacity="0.6"/>
+      <line x1="75" y1="155" x2="145" y2="155" stroke="#90D932" stroke-width="2"/>
+      <text x="97" y="185" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+      <circle cx="85" cy="145" r="4" fill="#F5620F"/>
+      <circle cx="115" cy="120" r="3" fill="#FFFFFF" opacity="0.4"/>
+      <rect x="65" y="245" width="110" height="10" rx="3" fill="#111"/>
+    </svg>
+    <div class="card-info">
+      <h3>Calcetín 01 — Abstract Verde</h3>
+      <p>Verde + Negro · Acento Fuego · Geométrico</p>
+      <span class="tag tag-verde">Pattern</span>
+    </div>
+  </div>
+
+  <!-- CALCETIN 02: GRAFFITI / STICKER -->
+  <div class="card">
+    <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+      <rect width="220" height="280" fill="#0A0A0A"/>
+      <path d="M65 40 L65 200 Q65 240 90 250 L150 255 Q175 255 175 235 L175 215 Q175 205 165 205 L130 205 L130 40Z" fill="#FFFFFF" stroke="#ddd" stroke-width="1.5"/>
+      <rect x="65" y="40" width="65" height="22" fill="#0A0A0A"/>
+      <rect x="130" y="40" width="45" height="22" fill="#F5620F"/>
+      <text x="97" y="100" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="30" font-weight="900" font-style="italic" fill="#0A0A0A" transform="rotate(-8,97,100)">RUN</text>
+      <text x="105" y="130" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="22" font-weight="900" font-style="italic" fill="#F5620F" transform="rotate(5,105,130)">A!</text>
+      <circle cx="88" cy="155" r="10" fill="#90D932"/>
+      <text x="88" y="159" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" font-weight="900" fill="#000">★</text>
+      <line x1="75" y1="170" x2="130" y2="175" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/>
+      <text x="97" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#888" letter-spacing="2">BUILT FOR</text>
+      <rect x="65" y="245" width="110" height="10" rx="3" fill="#eee"/>
+    </svg>
+    <div class="card-info">
+      <h3>Calcetín 02 — Graffiti</h3>
+      <p>Blanco + Negro + Fuego · Estilo tag urbano</p>
+      <span class="tag tag-fuego">Bold</span>
+    </div>
+  </div>
+
+  <!-- CALCETIN 03: CHECKER VERDE/NEGRO -->
+  <div class="card">
+    <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+      <rect width="220" height="280" fill="#0A0A0A"/>
+      <path d="M65 40 L65 200 Q65 240 90 250 L150 255 Q175 255 175 235 L175 215 Q175 205 165 205 L130 205 L130 40Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1.5"/>
+      <defs>
+        <clipPath id="sock-clip">
+          <path d="M66 62 L66 200 Q66 238 90 248 L150 253 Q173 253 173 234 L173 215 Q173 206 164 206 L131 206 L131 62Z"/>
+        </clipPath>
+        <pattern id="checker" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect width="10" height="10" fill="#90D932"/>
+          <rect x="10" y="10" width="10" height="10" fill="#90D932"/>
+          <rect x="10" y="0" width="10" height="10" fill="#0A0A0A"/>
+          <rect x="0" y="10" width="10" height="10" fill="#0A0A0A"/>
+        </pattern>
+      </defs>
+      <rect x="65" y="40" width="110" height="22" fill="#90D932"/>
+      <rect x="65" y="100" width="110" height="80" fill="url(#checker)" clip-path="url(#sock-clip)"/>
+      <text x="97" y="210" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="9" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+      <rect x="65" y="245" width="110" height="10" rx="3" fill="#111"/>
+    </svg>
+    <div class="card-info">
+      <h3>Calcetín 03 — Checker Verde</h3>
+      <p>Verde + Negro · Tablero central · Puño sólido verde</p>
+      <span class="tag tag-verde">Signature Pattern</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- POLERAS -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Poleras — 5 diseños</p>
+<div class="grid">
+
+  <!-- POLERA 01: RUNA OVERSIZE TYPOGRAPHY -->
+  <div class="card">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="380" fill="#0A0A0A"/>
+      <path d="M90 100 L65 70 L120 50 L150 80 L200 65 L250 80 L280 50 L335 70 L310 100 L305 120 L305 340 L95 340 L95 120Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M150 80 Q200 100 250 80" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+      <text x="200" y="200" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="80" font-weight="900" font-style="italic" fill="#FFFFFF" opacity="0.9" letter-spacing="-4">RUNA</text>
+      <text x="200" y="230" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="400" fill="#90D932" letter-spacing="8">BUILT FOR BATTLE</text>
+      <circle cx="135" cy="155" r="12" fill="#90D932"/>
+      <text x="135" y="159" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="900" fill="#000">R</text>
+    </svg>
+    <div class="card-info">
+      <h3>Polera 01 — RUNA Oversize</h3>
+      <p>Carbón · Tipografía masiva frente · Logo círculo verde pecho</p>
+      <span class="tag tag-ceniza">240gsm · Oversize</span>
+    </div>
+  </div>
+
+  <!-- POLERA 02: BUILT FOR BATTLE back print -->
+  <div class="card">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="380" fill="#0A0A0A"/>
+      <path d="M90 100 L65 70 L120 50 L150 80 L200 65 L250 80 L280 50 L335 70 L310 100 L305 120 L305 340 L95 340 L95 120Z" fill="#FFFFFF" stroke="#ddd" stroke-width="1"/>
+      <path d="M150 80 Q200 100 250 80" fill="none" stroke="#ccc" stroke-width="1.5"/>
+      <text x="200" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#0A0A0A" letter-spacing="5">RUNA</text>
+      <text x="200" y="210" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="16" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="2">FORGED IN</text>
+      <text x="200" y="232" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="36" font-weight="900" font-style="italic" fill="#F5620F" letter-spacing="-1">FRICTION</text>
+      <text x="200" y="310" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#888" letter-spacing="3">THE MAT DOESN'T LIE</text>
+      <line x1="140" y1="300" x2="260" y2="300" stroke="#ddd" stroke-width="0.5"/>
+    </svg>
+    <div class="card-info">
+      <h3>Polera 02 — Friction Blanca</h3>
+      <p>Blanco · Acento Fuego · Frase icónica RUNA</p>
+      <span class="tag tag-fuego">Statement</span>
+    </div>
+  </div>
+
+  <!-- POLERA 03: JAPANESE INSPIRED -->
+  <div class="card">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="380" fill="#0A0A0A"/>
+      <path d="M90 100 L65 70 L120 50 L150 80 L200 65 L250 80 L280 50 L335 70 L310 100 L305 120 L305 340 L95 340 L95 120Z" fill="#0A0A0A" stroke="#90D932" stroke-width="1.5"/>
+      <rect x="95" y="120" width="80" height="100" fill="#90D932" opacity="0.08"/>
+      <text x="170" y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#90D932" letter-spacing="4" transform="rotate(-90,170,190)">ルナ · 強さから生まれる</text>
+      <text x="200" y="210" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="52" font-weight="900" font-style="italic" fill="#90D932" opacity="0.9">RUNA</text>
+      <text x="200" y="245" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#FFFFFF" letter-spacing="4">ルナ · EST. 2024</text>
+      <text x="200" y="270" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#888" letter-spacing="2">FORGED IN FRICTION</text>
+      <rect x="170" y="285" width="3" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="175" y="285" width="1" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="178" y="285" width="4" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="184" y="285" width="2" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="188" y="285" width="5" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="195" y="285" width="1" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="198" y="285" width="3" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="203" y="285" width="2" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="207" y="285" width="4" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="213" y="285" width="1" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="216" y="285" width="3" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="221" y="285" width="2" height="20" fill="#90D932" opacity="0.5"/>
+      <rect x="225" y="285" width="5" height="20" fill="#90D932" opacity="0.5"/>
+    </svg>
+    <div class="card-info">
+      <h3>Polera 03 — ルナ (Runa JP)</h3>
+      <p>Negro · Kanji verde · Estética japonesa urbana</p>
+      <span class="tag tag-verde">Cultural</span>
+    </div>
+  </div>
+
+  <!-- POLERA 04: MINIMAL DOT LOGO -->
+  <div class="card">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="380" fill="#0A0A0A"/>
+      <path d="M90 100 L65 70 L120 50 L150 80 L200 65 L250 80 L280 50 L335 70 L310 100 L305 120 L305 340 L95 340 L95 120Z" fill="#888888" stroke="#666" stroke-width="1"/>
+      <text x="200" y="215" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="46" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="-2">RUNA</text>
+      <text x="200" y="235" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#0A0A0A" letter-spacing="6" opacity="0.6">BUILT FOR BATTLE</text>
+      <circle cx="200" cy="175" r="6" fill="#0A0A0A" opacity="0.3"/>
+      <circle cx="185" cy="175" r="3" fill="#0A0A0A" opacity="0.2"/>
+      <circle cx="215" cy="175" r="3" fill="#0A0A0A" opacity="0.2"/>
+    </svg>
+    <div class="card-info">
+      <h3>Polera 04 — Ceniza Minimal</h3>
+      <p>Ceniza · Wordmark negro · Ultra clean</p>
+      <span class="tag tag-ceniza">Minimal</span>
+    </div>
+  </div>
+
+  <!-- POLERA 05: ALL OVER print -->
+  <div class="card">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="380" fill="#0A0A0A"/>
+      <defs>
+        <pattern id="allover" x="0" y="0" width="50" height="30" patternUnits="userSpaceOnUse">
+          <text x="0" y="22" font-family="'Barlow Condensed',sans-serif" font-size="14" font-weight="900" font-style="italic" fill="#90D932" opacity="0.12">RUNA</text>
+        </pattern>
+        <clipPath id="tee-clip">
+          <path d="M91 101 L66 71 L121 51 L151 81 L201 66 L251 81 L281 51 L336 71 L311 101 L306 121 L306 339 L96 339 L96 121Z"/>
+        </clipPath>
+      </defs>
+      <path d="M90 100 L65 70 L120 50 L150 80 L200 65 L250 80 L280 50 L335 70 L310 100 L305 120 L305 340 L95 340 L95 120Z" fill="#0A0A0A" stroke="#90D932" stroke-width="1"/>
+      <rect x="0" y="0" width="400" height="380" fill="url(#allover)" clip-path="url(#tee-clip)"/>
+      <circle cx="200" cy="220" r="55" fill="none" stroke="#90D932" stroke-width="1.5"/>
+      <text x="200" y="212" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#FFFFFF" letter-spacing="3">FORGED</text>
+      <text x="200" y="228" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">IN FRICTION</text>
+      <text x="200" y="244" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#888" letter-spacing="2">2024 · RUNA</text>
+    </svg>
+    <div class="card-info">
+      <h3>Polera 05 — All Over Print</h3>
+      <p>Negro · Allover RUNA sutil · Sello circular centro</p>
+      <span class="tag tag-verde">Full Print</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CORTA VIENTO -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Corta Viento — Windbreaker Color Block</p>
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+    <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="420" fill="#0A0A0A"/>
+      <path d="M130 130 L100 95 L170 70 L200 105 L250 88 L300 88 L350 105 L380 70 L450 95 L420 130 L410 155 L410 360 L140 360 L140 155Z" fill="#1C1C1C" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M200 105 L170 70 L250 70 L250 130 Z" fill="#90D932"/>
+      <path d="M350 105 L400 70 L300 70 L300 130 Z" fill="#90D932"/>
+      <rect x="140" y="155" width="270" height="12" fill="#F5620F" opacity="0.8"/>
+      <path d="M200 105 Q250 90 300 88 Q350 90 350 105 Q350 78 300 68 Q250 68 200 78 Z" fill="#0d0d0d" stroke="#333"/>
+      <line x1="250" y1="100" x2="250" y2="340" stroke="#444" stroke-width="3"/>
+      <rect x="246" y="165" width="9" height="14" rx="2" fill="#666"/>
+      <rect x="155" y="175" width="75" height="40" rx="3" fill="#0A0A0A" stroke="#90D932" stroke-width="1"/>
+      <text x="192" y="191" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="900" font-style="italic" fill="#90D932" letter-spacing="3">RUNA</text>
+      <text x="192" y="207" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#888" letter-spacing="2">WINDBREAKER</text>
+      <rect x="130" y="200" width="12" height="150" fill="#90D932" opacity="0.4" rx="2"/>
+      <rect x="408" y="200" width="12" height="150" fill="#90D932" opacity="0.4" rx="2"/>
+      <rect x="148" y="270" width="80" height="55" rx="4" fill="#111" stroke="#2a2a2a"/>
+      <rect x="322" y="270" width="80" height="55" rx="4" fill="#111" stroke="#2a2a2a"/>
+      <rect x="140" y="348" width="270" height="14" rx="4" fill="#111" stroke="#2a2a2a"/>
+      <rect x="130" y="352" width="12" height="10" rx="3" fill="#90D932"/>
+      <rect x="408" y="352" width="12" height="10" rx="3" fill="#90D932"/>
+      <text x="340" y="193" text-anchor="middle" font-family="Inter,sans-serif" font-size="6" fill="#F5620F" letter-spacing="2">JJF × RUNA</text>
+    </svg>
+    <div class="card-info">
+      <h3>Corta Viento — Windbreaker Color Block</h3>
+      <p>Carbón base · Hombros verde · Franja Fuego pecho · Puños y tobillo verde · Stand collar</p>
+      <span class="tag tag-verde">Color Block</span>
+      <span class="tag tag-fuego" style="margin-left:6px">Nylon Ripstop</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BASKETBALL JERSEY -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Polera Basketball — Jersey</p>
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto; width: 100%;">
+    <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="420" fill="#0A0A0A"/>
+      <path d="M130 110 L105 80 L170 60 L195 90 L250 75 L305 90 L330 60 L395 80 L370 110 L360 130 L360 370 L140 370 L140 130Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+      <path d="M140 130 L130 110 L105 80 L170 60 L195 90 L180 130Z" fill="#90D932"/>
+      <path d="M360 130 L370 110 L395 80 L330 60 L305 90 L320 130Z" fill="#90D932"/>
+      <rect x="140" y="300" width="40" height="70" fill="#90D932" opacity="0.9"/>
+      <rect x="320" y="300" width="40" height="70" fill="#90D932" opacity="0.9"/>
+      <path d="M195 90 Q250 115 305 90" fill="none" stroke="#90D932" stroke-width="2"/>
+      <path d="M140 130 Q130 180 140 220" fill="none" stroke="#90D932" stroke-width="3"/>
+      <path d="M360 130 Q370 180 360 220" fill="none" stroke="#90D932" stroke-width="3"/>
+      <text x="250" y="245" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="90" font-weight="900" font-style="italic" fill="#FFFFFF" opacity="0.9">01</text>
+      <text x="250" y="175" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="22" font-weight="900" font-style="italic" fill="#FFFFFF" letter-spacing="8">RUNA</text>
+      <rect x="140" y="362" width="220" height="8" fill="#90D932" rx="0"/>
+      <text x="250" y="320" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#888" letter-spacing="3">BUILT FOR BATTLE</text>
+    </svg>
+    <div class="card-info">
+      <h3>Polera Basketball — Jersey #01</h3>
+      <p>Negro + Verde · Número masivo · Paneles laterales verdes · Corte basketball</p>
+      <span class="tag tag-verde">Performance Mesh</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HOCKEY / FOOTBALL JERSEY -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Jersey — Hockey Hielo / Football Americano</p>
+<div class="grid">
+  <div class="card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+    <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="440" fill="#0A0A0A"/>
+      <path d="M120 160 L80 120 L150 80 L185 115 L250 95 L350 95 L415 115 L450 80 L520 120 L480 160 L470 180 L470 380 L130 380 L130 180Z" fill="#0A0A0A" stroke="#90D932" stroke-width="2"/>
+      <path d="M130 180 L80 120 L90 195 L130 220Z" fill="#1C1C1C" stroke="#90D932" stroke-width="1.5"/>
+      <path d="M470 180 L520 120 L510 195 L470 220Z" fill="#1C1C1C" stroke="#90D932" stroke-width="1.5"/>
+      <path d="M185 115 L150 80 L250 80 L250 140Z" fill="#90D932"/>
+      <path d="M415 115 L450 80 L350 80 L350 140Z" fill="#90D932"/>
+      <rect x="130" y="195" width="340" height="20" fill="#90D932"/>
+      <rect x="130" y="225" width="340" height="8" fill="#FFFFFF" opacity="0.9"/>
+      <rect x="80" y="148" width="55" height="10" fill="#90D932"/>
+      <rect x="465" y="148" width="55" height="10" fill="#90D932"/>
+      <path d="M185 115 Q250 145 315 115" fill="none" stroke="#90D932" stroke-width="2"/>
+      <text x="300" y="325" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="95" font-weight="900" font-style="italic" fill="#FFFFFF" opacity="0.9">23</text>
+      <text x="300" y="195" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="16" font-weight="900" font-style="italic" fill="#0A0A0A" letter-spacing="8">RUNA</text>
+      <rect x="130" y="368" width="340" height="12" fill="#90D932" rx="0"/>
+      <rect x="445" y="235" width="22" height="22" rx="3" fill="#F5620F"/>
+      <text x="456" y="250" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="900" fill="#FFFFFF">C</text>
+      <rect x="80" y="210" width="14" height="8" rx="2" fill="#90D932"/>
+      <rect x="506" y="210" width="14" height="8" rx="2" fill="#90D932"/>
+      <text x="300" y="355" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#888" letter-spacing="3">RUNA FC · DROP 01</text>
+    </svg>
+    <div class="card-info">
+      <h3>Jersey Hockey/Football — #23</h3>
+      <p>Negro + Verde · Yoke verde hombros · Rayas pecho verde/blanco · Parche C Fuego · Número masivo</p>
+      <span class="tag tag-verde">Athletic Heritage</span>
+      <span class="tag tag-fuego" style="margin-left:6px">Captain Edition</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PALETA + RESUMEN -->
+<!-- ═══════════════════════════════════════════ -->
+<p class="section-title">Paleta de Colores — RUNA Brand Identity</p>
+<div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:60px;">
+  <div style="background:#90D932;width:80px;height:80px;border-radius:8px;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#000;letter-spacing:1px;font-family:'Inter',sans-serif">CAMPO VERDE<br>#90D932</span>
+  </div>
+  <div style="background:#0A0A0A;width:80px;height:80px;border-radius:8px;border:1px solid #2a2a2a;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#888;letter-spacing:1px;font-family:'Inter',sans-serif">NOCHE<br>#0A0A0A</span>
+  </div>
+  <div style="background:#1C1C1C;width:80px;height:80px;border-radius:8px;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#888;letter-spacing:1px;font-family:'Inter',sans-serif">CARBÓN<br>#1C1C1C</span>
+  </div>
+  <div style="background:#FFFFFF;width:80px;height:80px;border-radius:8px;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#000;letter-spacing:1px;font-family:'Inter',sans-serif">BLANCO<br>#FFFFFF</span>
+  </div>
+  <div style="background:#888888;width:80px;height:80px;border-radius:8px;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#fff;letter-spacing:1px;font-family:'Inter',sans-serif">CENIZA<br>#888888</span>
+  </div>
+  <div style="background:#F5620F;width:80px;height:80px;border-radius:8px;display:flex;align-items:flex-end;padding:8px;">
+    <span style="font-size:9px;font-weight:700;color:#fff;letter-spacing:1px;font-family:'Inter',sans-serif">FUEGO<br>#F5620F</span>
+  </div>
+</div>
+
+<p class="section-title">Resumen — 14 Prendas</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:60px;">
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Polerones</div>
+    <div style="font-size:13px;font-weight:700;font-family:'Inter',sans-serif">01 — Forged in Friction</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Negro · Oversize Hood</div>
+    <div style="font-size:13px;font-weight:700;margin-top:8px;font-family:'Inter',sans-serif">02 — Pattern R / Zip</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Carbón · Half-zip</div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Buzo Completo</div>
+    <div style="font-size:13px;font-weight:700;font-family:'Inter',sans-serif">Stripe Series</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Negro + Verde · Hoodie + Pantalón</div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Calcetines</div>
+    <div style="font-size:13px;font-weight:700;font-family:'Inter',sans-serif">01 — Abstract Verde</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Verde + Negro + Fuego</div>
+    <div style="font-size:13px;font-weight:700;margin-top:8px;font-family:'Inter',sans-serif">02 — Graffiti</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Blanco + Negro + Fuego</div>
+    <div style="font-size:13px;font-weight:700;margin-top:8px;font-family:'Inter',sans-serif">03 — Checker Verde</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Verde + Negro tablero</div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Poleras</div>
+    <div style="font-size:11px;color:#888;font-family:'Inter',sans-serif">01 · RUNA Oversize — Carbón</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;font-family:'Inter',sans-serif">02 · Friction Blanca — Fuego</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;font-family:'Inter',sans-serif">03 · ルナ JP — Negro + Verde</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;font-family:'Inter',sans-serif">04 · Ceniza Minimal — Ceniza</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;font-family:'Inter',sans-serif">05 · All Over Print — Negro</div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Outerwear</div>
+    <div style="font-size:13px;font-weight:700;font-family:'Inter',sans-serif">Windbreaker Color Block</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Carbón + Verde + Fuego</div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:8px;padding:16px;border:1px solid #2a2a2a;">
+    <div style="font-size:9px;color:#90D932;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:500">Sport Jerseys</div>
+    <div style="font-size:13px;font-weight:700;font-family:'Inter',sans-serif">Basketball #01</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Negro + Verde · Performance Mesh</div>
+    <div style="font-size:13px;font-weight:700;margin-top:8px;font-family:'Inter',sans-serif">Hockey/Football #23</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;font-family:'Inter',sans-serif">Negro + Verde · Captain Edition</div>
+  </div>
+</div>
+
+<!-- FICHA TÉCNICA -->
+<p class="section-title">Ficha Técnica — Colección Drop 01</p>
+<div style="max-width:900px; margin:0 auto 60px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+  <div style="background:#1C1C1C;border-radius:12px;padding:24px;border:1px solid #2a2a2a;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:var(--verde);margin-bottom:12px">Brand</div>
+    <div style="display:flex;flex-direction:column;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#999">
+      <div><span style="color:#666">Marca:</span> RUNA</div>
+      <div><span style="color:#666">Drop:</span> 01 — Built for Battle</div>
+      <div><span style="color:#666">Fecha:</span> 2025</div>
+      <div><span style="color:#666">Líneas:</span> RUNA Sports · JJF Collab</div>
+    </div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:12px;padding:24px;border:1px solid #2a2a2a;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:var(--verde);margin-bottom:12px">Color System</div>
+    <div style="display:flex;flex-direction:column;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#999">
+      <div><span style="color:#666">Primary:</span> Campo Verde #90D932</div>
+      <div><span style="color:#666">Background:</span> Noche #0A0A0A / Carbón #1C1C1C</div>
+      <div><span style="color:#666">Text:</span> Blanco #FFFFFF / Ceniza #888888</div>
+      <div><span style="color:#666">Accent:</span> Fuego #F5620F (JJF Collab)</div>
+    </div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:12px;padding:24px;border:1px solid #2a2a2a;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:var(--verde);margin-bottom:12px">Tipografía</div>
+    <div style="display:flex;flex-direction:column;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#999">
+      <div><span style="color:#666">Display:</span> Barlow Condensed Black Italic</div>
+      <div><span style="color:#666">Body:</span> Inter Regular · Medium · Bold</div>
+      <div><span style="color:#666">Etiquetas:</span> Inter Bold · Uppercase · 11px</div>
+      <div><span style="color:#666">Números:</span> Barlow Condensed Black Italic</div>
+    </div>
+  </div>
+  <div style="background:#1C1C1C;border-radius:12px;padding:24px;border:1px solid #2a2a2a;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:var(--verde);margin-bottom:12px">Materiales</div>
+    <div style="display:flex;flex-direction:column;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#999">
+      <div><span style="color:#666">Polerones:</span> French Terry 380gsm</div>
+      <div><span style="color:#666">Buzo:</span> French Terry 320gsm</div>
+      <div><span style="color:#666">Poleras:</span> Algodón 240gsm</div>
+      <div><span style="color:#666">Corta Viento:</span> Nylon Ripstop DWR</div>
+      <div><span style="color:#666">Jerseys:</span> Mesh Dri-fit 100% poliéster</div>
+    </div>
+  </div>
+</div>
+
+<div class="brand-footer">
+  <div class="r">RUNA</div>
+  <p>Built for Battle · Drop 01 · 2025 · Brand Identity by lab080.studio</p>
+</div>
+
+</body>
+</html>
