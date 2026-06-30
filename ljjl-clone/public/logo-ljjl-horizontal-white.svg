@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" fill="none">
+  <!-- Falcon Icon -->
+  <g transform="translate(20, 35)">
+    <!-- Falcon body -->
+    <path d="M55 130 C60 110 75 85 90 70 C100 60 110 55 115 58 C120 61 118 70 110 78 C102 86 90 100 82 120 L55 130Z" fill="#d13e48"/>
+    <!-- Falcon head -->
+    <path d="M90 70 C95 55 100 45 102 35 C104 28 108 25 110 28 C112 31 112 38 110 45 C108 52 105 58 100 65 L90 70Z" fill="#d13e48"/>
+    <!-- Falcon beak -->
+    <path d="M102 35 C105 30 112 25 115 28 C118 31 115 38 110 42 C107 40 104 38 102 35Z" fill="#07162e"/>
+    <!-- Falcon eye -->
+    <circle cx="106" cy="34" r="3" fill="#07162e"/>
+    <!-- Falcon wing geometric pattern -->
+    <path d="M75 85 C85 75 100 60 115 58 L110 65 C95 65 82 78 75 85Z" fill="#07162e" opacity="0.3"/>
+    <path d="M65 100 C78 88 95 72 110 70 L107 76 C92 78 80 90 65 100Z" fill="#07162e" opacity="0.2"/>
+    <!-- Falcon tail -->
+    <path d="M55 130 L40 140 L45 128 L35 135 L42 122 L55 130Z" fill="#d13e48"/>
+    <!-- Falcon talon -->
+    <path d="M70 120 L65 135 L72 128 L75 138 L78 125 L70 120Z" fill="#d13e48"/>
+    <!-- Small geometric accents -->
+    <circle cx="50" cy="125" r="2" fill="#07162e" opacity="0.3"/>
+    <circle cx="60" cy="115" r="1.5" fill="#07162e" opacity="0.2"/>
+  </g>
+  <!-- LJJL Text -->
+  <text x="160" y="100" font-family="'Poppins', sans-serif" font-weight="800" font-style="italic" font-size="68" fill="#ffffff">LJJL</text>
+  <!-- LATAM JIU-JITSU LEAGUE -->
+  <text x="160" y="140" font-family="'Poppins', sans-serif" font-weight="500" font-size="14" fill="#a7a8ab" letter-spacing="6">LATAM JIU-JITSU LEAGUE</text>
+  <!-- Falcon small accent in LJJL -->
+  <rect x="460" y="75" width="4" height="4" fill="#d13e48" rx="1"/>
+  <rect x="470" y="85" width="4" height="4" fill="#d13e48" rx="1"/>
+  <rect x="450" y="85" width="4" height="4" fill="#d13e48" rx="1"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
+  <!-- Falcon Icon centered -->
+  <g transform="translate(60, 30)">
+    <!-- Falcon body -->
+    <path d="M90 200 C95 170 115 135 135 115 C148 102 160 95 167 100 C173 105 170 120 158 132 C146 144 130 162 120 190 L90 200Z" fill="#d13e48"/>
+    <!-- Falcon head -->
+    <path d="M135 115 C142 95 148 80 150 65 C152 55 158 50 162 55 C165 60 165 70 162 80 C159 90 155 100 148 110 L135 115Z" fill="#d13e48"/>
+    <!-- Falcon beak -->
+    <path d="M150 65 C155 58 165 50 170 55 C174 60 170 72 162 78 C158 75 154 70 150 65Z" fill="#07162e"/>
+    <!-- Falcon eye -->
+    <circle cx="158" cy="62" r="5" fill="#07162e"/>
+    <!-- Falcon wing pattern -->
+    <path d="M115 135 C130 120 148 100 167 100 L160 110 C142 110 125 128 115 135Z" fill="#07162e" opacity="0.3"/>
+    <path d="M100 160 C120 140 142 118 160 115 L156 125 C136 128 120 145 100 160Z" fill="#07162e" opacity="0.2"/>
+    <!-- Falcon tail -->
+    <path d="M90 200 L70 215 L77 198 L62 210 L72 190 L90 200Z" fill="#d13e48"/>
+    <!-- Falcon talon -->
+    <path d="M112 185 L105 210 L115 198 L120 215 L125 195 L112 185Z" fill="#d13e48"/>
+  </g>
+  <!-- LJJL Text below -->
+  <text x="150" y="255" font-family="'Poppins', sans-serif" font-weight="800" font-style="italic" font-size="52" fill="#ffffff" text-anchor="middle">LJJL</text>
+</svg>
