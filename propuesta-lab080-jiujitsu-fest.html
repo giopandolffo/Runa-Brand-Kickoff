@@ -295,6 +295,85 @@ nav .nav-select-wrap{display:none;}
 }
 .cond-list li strong{color:var(--text);}
 
+/* ═══ PRICING ═══ */
+.pricing-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;
+  margin-bottom:20px;
+}
+@media(max-width:1000px){.pricing-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto 20px;}}
+.pricing-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px 20px 20px;
+  display:flex;flex-direction:column;position:relative;
+  transition:border-color .25s var(--ease-out), transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+}
+.pricing-card:hover{
+  border-color:rgba(225,60,38,.3);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(225,60,38,.06);
+}
+.pricing-featured{
+  border-color:var(--red);
+  background:linear-gradient(180deg,rgba(225,60,38,.06),var(--surface));
+}
+.pricing-featured:hover{transform:translateY(-4px);}
+.pricing-badge{
+  position:absolute;top:14px;right:14px;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:1.2px;
+  text-transform:uppercase;font-weight:500;
+  padding:2px 8px;border-radius:100px;
+  background:var(--red-subtle);color:var(--red);border:1px solid rgba(225,60,38,.2);
+}
+.pricing-featured-tag{
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;font-weight:600;
+  padding:4px 14px;border-radius:0 0 8px 8px;
+  background:var(--red);color:#0D0D0D;z-index:3;white-space:nowrap;
+}
+@media(max-width:1000px){.pricing-featured-tag{left:50%;transform:translateX(-50%);}}
+.pricing-featured{padding-top:32px;}
+.pricing-header{margin-bottom:14px;}
+.pricing-header .pricing-name{
+  font-family:var(--font-display);font-size:18px;font-weight:700;
+  color:var(--text);letter-spacing:-.3px;margin-bottom:4px;
+}
+.pricing-header .pricing-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.pricing-amount{
+  display:flex;align-items:baseline;gap:4px;
+  padding:14px 0;margin-bottom:10px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.pricing-currency{
+  font-family:var(--font-mono);font-size:10px;color:var(--text3);letter-spacing:1px;
+}
+.pricing-value{
+  font-family:var(--font-display);font-size:28px;
+  font-weight:800;color:var(--text);letter-spacing:-.5px;line-height:1;
+}
+.pricing-featured .pricing-value{color:var(--red);}
+.pricing-period{font-size:12px;color:var(--text3);}
+.pricing-features{list-style:none;padding:0;margin:0 0 14px;flex:1;}
+.pricing-features li{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 0;font-size:12px;color:var(--text2);line-height:1.4;
+}
+.pricing-features li.pf-na{color:var(--text3);opacity:.5;}
+.pf-check{color:var(--red);font-weight:700;font-size:13px;width:14px;flex-shrink:0;}
+.pf-dash{color:var(--text3);font-size:13px;width:14px;flex-shrink:0;}
+.pricing-ideal{
+  font-size:11px;color:var(--text3);line-height:1.5;
+  padding-top:10px;border-top:1px solid var(--border);
+}
+.pricing-note{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:14px 18px;background:var(--surface2);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  font-size:12px;color:var(--text2);line-height:1.6;
+}
+.pricing-note-icon{font-size:13px;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pricing-note strong{color:var(--text);}
+
 /* ═══ CLOSE ═══ */
 .close-section{
   text-align:center;padding:80px 24px 40px;
@@ -318,12 +397,11 @@ nav .nav-select-wrap{display:none;}
   .page-sep{page-break-after:always;height:0;margin:0;background:none;}
   .page-sep:last-of-type{page-break-after:avoid;}
   nav{display:none!important;}
-  .reveal{opacity:1!important;transform:none!important;}
 }
 
 /* ═══ REDUCED MOTION ═══ */
 @media(prefers-reduced-motion:reduce){
-  .cover-logo,.cover-badge,.cover h1,.cover .sub,.cover-line,.cover-meta span,.cover-claim{opacity:1!important;transform:none!important;}
+  .cover-logo,.cover-badge,.cover h1,.cover .sub,.cover-line,.cover-meta span,.cover-claim{opacity:1!important;}
 }
 </style>
 </head>
@@ -343,6 +421,7 @@ nav .nav-select-wrap{display:none;}
       <li><a href="#cuatro">Etapas</a></li>
       <li><a href="#cinco">Rol</a></li>
       <li><a href="#condiciones">Condiciones</a></li>
+      <li><a href="#precios">Planes</a></li>
     </ul>
     <div class="nav-select-wrap">
       <select aria-label="Ir a sección" onchange="if(this.value)location.hash=this.value;this.value=''">
@@ -354,6 +433,7 @@ nav .nav-select-wrap{display:none;}
         <option value="#cuatro">CUATRO — Entregables por Etapa</option>
         <option value="#cinco">CINCO — Responsabilidades</option>
         <option value="#condiciones">Condiciones Mínimas</option>
+        <option value="#precios">07 — Planes de Servicio</option>
       </select>
     </div>
   </div>
@@ -791,6 +871,118 @@ nav .nav-select-wrap{display:none;}
   </div>
 </section>
 
+<div class="page-sep"></div>
+
+<!-- ═══════ PRECIOS ═══════ -->
+<section id="precios">
+  <div class="section-title reveal">
+    <span class="num">07</span>
+    <div>
+      <h2>Planes de Servicio</h2>
+      <span class="meta">Inversión mensual · CLP</span>
+    </div>
+  </div>
+  <p class="section-subtitle reveal">Elegí el nivel de acompañamiento creativo que mejor se adapte al momento de tu liga. Todos los planes incluyen dirección creativa, supervisión y control de calidad LAB080.</p>
+
+  <div class="pricing-grid">
+    <!-- PLAN BÁSICO -->
+    <div class="pricing-card reveal" data-plan="basico">
+      <div class="pricing-badge">Entry</div>
+      <div class="pricing-header">
+        <h3 class="pricing-name">Básico</h3>
+        <p class="pricing-desc">Marca activa, contenido constante y reporte mensual.</p>
+      </div>
+      <div class="pricing-amount">
+        <span class="pricing-currency">CLP</span>
+        <span class="pricing-value">580.000</span>
+        <span class="pricing-period">/mes</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> <strong>2 posteos</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>2 stories</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>4 piezas gráficas</strong> estáticas por semana</li>
+        <li><span class="pf-check">✓</span> <strong>1 pieza animada</strong> por semana (reel/motion)</li>
+        <li><span class="pf-check">✓</span> Actualización web mensual (banners, fechas)</li>
+        <li><span class="pf-check">✓</span> Reporte mensual de métricas y avance</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Cobertura de eventos</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Concepto visual de premiación</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Kit para sponsors</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Toolkit regional / expansión</li>
+      </ul>
+      <div class="pricing-ideal">Ideal para <strong>mantener</strong> la marca activa y visible entre torneos.</div>
+    </div>
+
+    <!-- PLAN PROFESIONAL (destacado) -->
+    <div class="pricing-card pricing-featured reveal" data-plan="profesional">
+      <div class="pricing-featured-tag">Recomendado</div>
+      <div class="pricing-header">
+        <h3 class="pricing-name">Profesional</h3>
+        <p class="pricing-desc">Operación completa + cobertura y conceptualización de torneos.</p>
+      </div>
+      <div class="pricing-amount">
+        <span class="pricing-currency">CLP</span>
+        <span class="pricing-value">1.190.000</span>
+        <span class="pricing-period">/mes</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> <strong>3 posteos</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>3 stories</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>5 piezas gráficas</strong> estáticas por semana</li>
+        <li><span class="pf-check">✓</span> <strong>2 piezas animadas</strong> por semana (reel + motion)</li>
+        <li><span class="pf-check">✓</span> Actualización web semanal</li>
+        <li><span class="pf-check">✓</span> Reporte mensual con Carta Gantt</li>
+        <li><span class="pf-check">✓</span> <strong>Cobertura de hasta 6 eventos/año</strong></li>
+        <li><span class="pf-check">✓</span> Campaña de inscripción + flyers oficiales</li>
+        <li><span class="pf-check">✓</span> Conteo regresivo + gráficas de categorías</li>
+        <li><span class="pf-check">✓</span> Supervisión creativa en vivo</li>
+        <li><span class="pf-check">✓</span> Highlights + resumen post-evento</li>
+        <li><span class="pf-check">✓</span> <strong>Concepto visual de premiación</strong> (medallas, trofeos, diplomas)</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Kit para sponsors</li>
+        <li class="pf-na"><span class="pf-dash">—</span> Toolkit regional / expansión</li>
+      </ul>
+      <div class="pricing-ideal">Ideal para ligas con <strong>calendario activo</strong> de torneos regionales.</div>
+    </div>
+
+    <!-- PLAN PREMIUM -->
+    <div class="pricing-card reveal" data-plan="premium">
+      <div class="pricing-badge">Full</div>
+      <div class="pricing-header">
+        <h3 class="pricing-name">Premium</h3>
+        <p class="pricing-desc">Dirección creativa integral + cobertura total + expansión multi-país.</p>
+      </div>
+      <div class="pricing-amount">
+        <span class="pricing-currency">CLP</span>
+        <span class="pricing-value">1.620.000</span>
+        <span class="pricing-period">/mes</span>
+      </div>
+      <ul class="pricing-features">
+        <li><span class="pf-check">✓</span> <strong>4+ posteos</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>4+ stories</strong> semanales por plataforma</li>
+        <li><span class="pf-check">✓</span> <strong>6+ piezas gráficas</strong> por semana</li>
+        <li><span class="pf-check">✓</span> <strong>3+ piezas animadas</strong> por semana</li>
+        <li><span class="pf-check">✓</span> Actualización web en tiempo real</li>
+        <li><span class="pf-check">✓</span> Reporte ejecutivo semanal</li>
+        <li><span class="pf-check">✓</span> <strong>Cobertura de eventos ilimitada</strong></li>
+        <li><span class="pf-check">✓</span> Campaña de inscripción + flyers oficiales</li>
+        <li><span class="pf-check">✓</span> Conteo regresivo + gráficas de categorías</li>
+        <li><span class="pf-check">✓</span> Supervisión creativa en vivo + dirección de contenido</li>
+        <li><span class="pf-check">✓</span> Highlights + resumen audiovisual + galería oficial</li>
+        <li><span class="pf-check">✓</span> Resultados, campeones y piezas de comunidad</li>
+        <li><span class="pf-check">✓</span> <strong>Concepto visual de premiación</strong></li>
+        <li><span class="pf-check">✓</span> <strong>Kit para sponsors</strong> completo</li>
+        <li><span class="pf-check">✓</span> <strong>Toolkit regional</strong> + plantillas multi-país</li>
+        <li><span class="pf-check">✓</span> Manual de implementación + adaptaciones por mercado</li>
+      </ul>
+      <div class="pricing-ideal">Ideal para ligas en <strong>expansión regional</strong> que buscan presencia multi-país.</div>
+    </div>
+  </div>
+
+  <div class="pricing-note reveal">
+    <span class="pricing-note-icon">ⓘ</span>
+    <span>Los precios no incluyen producción externa (impresión, fotografía, video, traslados). Producción externa se cotiza aparte.</span>
+  </div>
+</section>
+
 <!-- ═══════ CIERRE ═══════ -->
 <section class="close-section reveal">
   <div class="close-line"></div>
@@ -808,38 +1000,41 @@ nav .nav-select-wrap{display:none;}
 (function() {
   'use strict';
 
-  // ═══ SEGUNDO INTENTO: esperar a que todo cargue ═══
-  document.addEventListener('DOMContentLoaded', function() {
+  // ═══ REDUCED MOTION — salir sin animaciones ═══
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
 
-    // Si prefiere reduced motion, quitar opacidad y salir
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.reveal').forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      });
+  const EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
+
+  function loadGSAP(callback) {
+    if (typeof gsap !== 'undefined') {
+      callback();
       return;
     }
-
-    // Marcar para activar las reglas CSS de .js-animate .reveal
-    document.documentElement.classList.add('js-animate');
-
-    // Asegurar que todo .reveal arranque visible
-    gsap.set('.reveal', { opacity: 1, y: 0 });
-
-    const EASE = 'cubic-bezier(0.32, 0.72, 0, 1)';
-
-    try {
-      gsap.registerPlugin(ScrollTrigger);
-    } catch(e) {
-      // Si ScrollTrigger falla (file://), animar todo de una
-      document.querySelectorAll('.reveal').forEach(el => {
-        gsap.from(el, { y: 24, opacity: 0, duration: 0.5, ease: EASE, clearProps: 'all' });
+    // Si GSAP no cargó, hacer reveals con IntersectionObserver nativo
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
       });
-      return;
-    }
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  }
+
+  loadGSAP(function() {
+    try { gsap.registerPlugin(ScrollTrigger); } catch(e) {}
 
     // ═══ COVER ENTRY ═══
-    const coverTl = gsap.timeline({ defaults: { ease: EASE } });
+    var coverTl = gsap.timeline({ defaults: { ease: EASE } });
     coverTl
       .from('.cover-logo',      { y: -30, opacity: 0, duration: 0.6 })
       .from('.cover-badge',     { y: -12, opacity: 0, duration: 0.4 }, '-=0.3')
@@ -849,80 +1044,113 @@ nav .nav-select-wrap{display:none;}
       .from('.cover-meta span', { y: 10,  opacity: 0, duration: 0.3, stagger: 0.08 }, '-=0.2')
       .from('.cover-claim',     { y: 10,  opacity: 0, duration: 0.3 }, '-=0.15');
 
-    // ═══ SCROLL REVEALS ═══
-    const revealEls = gsap.utils.toArray('.reveal');
-    revealEls.forEach((el) => {
-      gsap.from(el, {
-        y: 24,
-        opacity: 0,
-        duration: 0.5,
-        ease: EASE,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-      });
-    });
-
-    // ═══ CARD STAGGER INSIDE GRIDS ═══
-    gsap.utils.toArray('.grid-2, .grid-3, .phase-grid').forEach((grid) => {
-      const children = grid.querySelectorAll('.card.reveal, .phase-item');
-      if (children.length > 1) {
-        gsap.from(children, {
+    // ═══ INTERSECTION OBSERVER PARA REVEALS ═══
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        gsap.from(el, {
           y: 20,
           opacity: 0,
-          duration: 0.4,
+          duration: 0.45,
           ease: EASE,
-          stagger: 0.06,
-          scrollTrigger: {
-            trigger: grid,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
+          clearProps: 'opacity,transform',
         });
-      }
+        observer.unobserve(el);
+      });
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
     });
 
-    // ═══ CONDITION LIST STAGGER ═══
-    gsap.utils.toArray('.cond-list li').forEach((li, i) => {
-      gsap.from(li, {
-        x: -12,
-        opacity: 0,
-        duration: 0.3,
-        ease: EASE,
-        delay: i * 0.06,
-        scrollTrigger: {
-          trigger: li.closest('.cond-list'),
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
+    // ═══ STAGGER DENTRO DE GRIDS CON OBSERVER ═══
+    var staggerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var grid = entry.target;
+        var children = grid.querySelectorAll('.card.reveal, .phase-item');
+        if (children.length > 1) {
+          gsap.from(children, {
+            y: 16,
+            opacity: 0,
+            duration: 0.35,
+            ease: EASE,
+            stagger: 0.06,
+            clearProps: 'opacity,transform',
+          });
+        }
+        staggerObserver.unobserve(grid);
       });
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+
+    document.querySelectorAll('.grid-2, .grid-3, .phase-grid').forEach(function(grid) {
+      staggerObserver.observe(grid);
     });
 
     // ═══ TABLE ROW STAGGER ═══
-    gsap.utils.toArray('.respon-table tbody tr').forEach((row, i) => {
-      gsap.from(row, {
-        opacity: 0,
-        x: -8,
-        duration: 0.25,
-        ease: EASE,
-        delay: i * 0.035,
-        scrollTrigger: {
-          trigger: '.respon-table-wrap',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
+    var tableObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var rows = entry.target.querySelectorAll('tbody tr');
+        gsap.from(rows, {
+          opacity: 0,
+          x: -6,
+          duration: 0.2,
+          ease: EASE,
+          stagger: 0.035,
+          clearProps: 'opacity,transform',
+        });
+        tableObserver.unobserve(entry.target);
       });
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+
+    var tableWraps = document.querySelectorAll('.respon-table-wrap');
+    tableWraps.forEach(function(w) { tableObserver.observe(w); });
+
+    // ═══ CONDITION LIST ═══
+    var condObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var items = entry.target.querySelectorAll('.cond-list li');
+        gsap.from(items, {
+          x: -10,
+          opacity: 0,
+          duration: 0.25,
+          ease: EASE,
+          stagger: 0.05,
+          clearProps: 'opacity,transform',
+        });
+        condObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+
+    document.querySelectorAll('.cond-list').forEach(function(list) {
+      condObserver.observe(list.parentElement);
     });
 
-    // ═══ REDUCED MOTION ═══
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.globalTimeline.clear();
-      ScrollTrigger.getAll().forEach(function(st) { st.kill(); });
-    }
+    // ═══ PRICING CARDS STAGGER ═══
+    var pricingObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var cards = entry.target.querySelectorAll('.pricing-card');
+        gsap.from(cards, {
+          y: 24,
+          opacity: 0,
+          duration: 0.5,
+          ease: EASE,
+          stagger: 0.08,
+          clearProps: 'opacity,transform',
+        });
+        pricingObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '-80px 0px' });
+
+    var pricingGrid = document.querySelector('.pricing-grid');
+    if (pricingGrid) pricingObserver.observe(pricingGrid);
 
   });
+
 })();
 </script>
 </body>
