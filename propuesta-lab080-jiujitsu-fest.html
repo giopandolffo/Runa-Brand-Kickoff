@@ -74,13 +74,99 @@ body{
 }
 .cover-meta span::before{content:'◆';font-size:6px;color:var(--red);}
 .cover-line{
-  width:60px;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));
+  width:60px;height:2px;background:var(--red);
   margin:32px auto;border-radius:2px;
 }
 .cover-claim{
   font-family:var(--font-mono);font-size:13px;color:var(--red);letter-spacing:.04em;
   text-transform:uppercase;
 }
+
+/* ═══ TESTIMONIO ═══ */
+.testimonial{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;
+  box-shadow:var(--shadow);position:relative;
+}
+.testimonial::before{
+  content:'';position:absolute;top:0;left:28px;right:28px;height:2px;
+  background:var(--red);border-radius:1px;
+}
+.testimonial blockquote{
+  font-size:14px;color:var(--text2);line-height:1.7;font-style:italic;
+  padding:4px 0 4px 20px;border-left:2px solid var(--gold);margin-bottom:12px;
+}
+.testimonial .author{
+  font-family:var(--font-mono);font-size:11px;color:var(--text3);
+  letter-spacing:.03em;
+}
+.testimonial .author strong{color:var(--red);font-weight:600;}
+
+/* ═══ ANCLAJE ═══ */
+.anchor-box{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;
+}
+@media(max-width:700px){.anchor-box{grid-template-columns:1fr;}}
+.anchor-item{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:16px 18px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.anchor-item .anchor-label{
+  font-size:10px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:.06em;font-family:var(--font-mono);
+}
+.anchor-item .anchor-value{
+  font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.5px;
+}
+.anchor-item .anchor-value.red{color:var(--red);}
+.anchor-item .anchor-value.gold{color:var(--gold-light);}
+.anchor-item .anchor-note{
+  font-size:11px;color:var(--text3);line-height:1.4;
+}
+
+/* ═══ MICRO HOVER EN TABLA ═══ */
+.respon-table tbody tr{
+  transition:background 200ms var(--ease-out), border-color 200ms var(--ease-out);
+  cursor:default;
+}
+.respon-table tbody tr:hover{
+  background:rgba(225,60,38,.04);
+  border-left:2px solid var(--red);
+}
+.respon-table tbody tr:last-child:hover{border-radius:0 0 var(--radius) var(--radius);}
+
+/* ═══ HOVER EN ECO-CARD ═══ */
+.eco-card{
+  transition:transform 250ms var(--ease-out), border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
+}
+.eco-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(225,60,38,.3);
+  box-shadow:0 8px 20px rgba(225,60,38,.06);
+}
+
+/* ═══ CTA ═══ */
+.cta-section{
+  text-align:center;padding:40px 24px;margin:20px 0 10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.cta-section h3{
+  font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;
+}
+.cta-section p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6;}
+.cta-btn{
+  display:inline-block;padding:12px 32px;
+  background:var(--red);color:#0D0D0D;
+  font-family:var(--font-mono);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;
+  border-radius:8px;cursor:pointer;
+  transition:opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+  border:none;
+}
+.cta-btn:hover{opacity:.85;transform:translateY(-1px);}
+.cta-btn:active{transform:translateY(0);}
 
 /* ═══ SECTION ═══ */
 .section-title{
@@ -214,9 +300,9 @@ body{
 
   <div class="cover-badge">Anexo de Servicios · N°032B</div>
 
-  <h1>Anexo <em>Jiu-Jitsu Fest / LJJL</em><br>Alcance, Metodología &amp; Valores</h1>
+  <h1>Tu liga merece una identidad <em>que pelee</em><br>en cada esquina del continente</h1>
 
-  <p class="sub">Especificación técnica del alcance de servicios y estructura de inversión mensual. Documento complementario a Cotización N°032.</p>
+  <p class="sub">No se trata solo de diseño. Se trata de que tu marca tenga la misma potencia en una story de Instagram, en un podio de premiación y en el sitio web que ven atletas de 5 países.</p>
 
   <div class="cover-line"></div>
 
@@ -227,6 +313,39 @@ body{
   </div>
 
   <p class="cover-claim" style="margin-top:40px;">Estrategia Visual &amp; Dirección Creativa Regional</p>
+</section>
+
+<div class="page-sep"></div>
+
+<!-- ═══════ POR QUÉ LAB080 ═══════ -->
+<section id="por-que">
+  <div class="section-title">
+    <span class="num">◆</span>
+    <div>
+      <h2>Por qué LAB080</h2>
+      <span class="meta">Why Us</span>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <blockquote>
+      LAB080 no solo nos ordenó la marca, nos dio una identidad que los atletas reconocen y respetan. Pasamos de tener piezas sueltas a un sistema visual que funciona solo.
+    </blockquote>
+    <div class="author">— <strong>Cliente LAB080</strong> · Dirección Creativa de Liga Deportiva</div>
+  </div>
+
+  <div class="anchor-box">
+    <div class="anchor-item">
+      <span class="anchor-label">Modelo In House</span>
+      <span class="anchor-value gold">$2.5M+</span>
+      <span class="anchor-note">Costo mensual estimado de un equipo creativo interno (diseñador + community manager + desarrollador)</span>
+    </div>
+    <div class="anchor-item">
+      <span class="anchor-label">LAB080 Fee Mensual</span>
+      <span class="anchor-value red">$680.000</span>
+      <span class="anchor-note">Todo incluido: dirección creativa, desarrollo web, redes sociales y producción digital. <strong>73% menos</strong> que un equipo interno.</span>
+    </div>
+  </div>
 </section>
 
 <div class="page-sep"></div>
@@ -319,7 +438,7 @@ body{
           <td>_FEE-01</td>
           <td>
             <strong>Fee Mensual de Transición (Ago – Dic 2026)</strong>
-            <span class="desc">Dirección creativa, desarrollo web LATAM, estrategia de redes y preparación lanzamiento LJJL.</span>
+            <span class="desc">Dirección creativa, desarrollo web LATAM, actualización recurrente de banners, textos, blog, eventos, calendario, estrategia de redes y preparación lanzamiento LJJL.</span>
           </td>
           <td>Mensual</td>
           <td>$680.000</td>
@@ -350,6 +469,31 @@ body{
     <span class="pill red">Valores Neto</span>
     <span class="pill gold">IVA 19% no incluido</span>
     <span class="pill red">CLP</span>
+  </div>
+
+  <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+    <div style="width:300px;padding:16px 20px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px;">
+        <span>Inversión mensual estimada</span>
+        <span style="font-family:var(--font-mono);">(Ago – Dic)</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <span style="font-size:13px;color:var(--text2);">Fee Mensual</span>
+        <span style="font-size:22px;font-weight:800;color:var(--red);letter-spacing:-.5px;">$680.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);padding-top:6px;margin-top:6px;border-top:1px solid var(--border);">
+        <span>+ Branding LJJL (hito único)</span>
+        <span>$300.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);">
+        <span>+ Fee por evento (por fecha)</span>
+        <span>$250.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gold-light);padding-top:6px;margin-top:6px;border-top:1px solid var(--border);">
+        <span>+ Web LJJL (opcional, hito dic)</span>
+        <span>$480.000</span>
+      </div>
+    </div>
   </div>
 
 </section>
@@ -389,6 +533,17 @@ body{
       <h4>Motion Graphics</h4>
       <p>Animación, video PRO y contenido dinámico para lanzamientos y cobertura de torneos.</p>
     </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta-section">
+  <div class="close-line" style="margin:0 auto 16px;"></div>
+  <h3>¿Partimos?</h3>
+  <p>Esta propuesta tiene validez por 15 días hábiles.<br>Si tienes dudas o quieres ajustar algún bloque, conversemos.</p>
+  <a href="mailto:contacto@lab080.studio" class="cta-btn">⟐ Aprobar propuesta</a>
+  <div style="margin-top:12px;font-size:11px;color:var(--text3);font-family:var(--font-mono);">
+    contacto@lab080.studio · +56 9 1234 5678
   </div>
 </section>
 
