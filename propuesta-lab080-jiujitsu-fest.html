@@ -3,559 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0D0D0D">
-<title>LAB080 · Anexo N°032B · LJJL Alcance y Valores</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Chivo+Mono:wght@400;500;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#FAFAFA">
+<title>LAB080 — Propuesta Jiu-Jitsu Fest / LJJL</title>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#0D0D0D;--surface:#111;--surface2:#161616;--surface3:#1E1E1E;
-  --border:#1E1E1E;--text:#fff;--text2:rgba(255,255,255,.7);--text3:rgba(255,255,255,.4);
-  --red:#e13c26;--red-bg:rgba(225,60,38,.08);--red-subtle:rgba(225,60,38,.12);
-  --gold:#d4a017;--gold-bg:rgba(212,160,23,.08);--gold-light:#e8c54a;--gold-subtle:rgba(212,160,23,.12);
-  --radius:14px;--radius-sm:8px;
-  --shadow:0 2px 8px rgba(0,0,0,.4);
-  --font-display:'Instrument Sans',sans-serif;
-  --font-mono:'Chivo Mono',monospace;
-  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
-}
-html{scroll-behavior:smooth;}
-body{
-  font-family:var(--font-display);
-  background:var(--bg);color:var(--text);
-  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
-}
-.bg-grain{
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -5%,rgba(225,60,38,.05) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 30% at 20% 80%,rgba(212,160,23,.025) 0%,transparent 50%),
-    radial-gradient(ellipse 40% 30% at 80% 70%,rgba(225,60,38,.025) 0%,transparent 50%);
-}
-.container{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 24px 60px;}
-.page-sep{height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--red),var(--border),transparent);margin:40px 0;opacity:.5;}
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
 
-/* ═══ PORTADA ═══ */
-.cover{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  align-items:center;text-align:center;padding:60px 24px;position:relative;
-}
-.cover::after{
-  content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent);
-}
-.cover-logo{width:auto;height:auto;max-width:300px;margin-bottom:48px;}
-.cover-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 20px;border-radius:100px;
-  background:var(--red-subtle);border:1px solid rgba(225,60,38,.3);
-  font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
-  font-family:var(--font-mono);color:var(--red);margin-bottom:28px;
-}
-.cover-badge::before{content:'◆';font-size:10px;}
-.cover h1{
-  font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:700;
-  line-height:1.12;margin-bottom:16px;color:var(--text);
-  max-width:800px;
-}
-.cover h1 em{font-style:italic;color:var(--red);}
-.cover .sub{
-  font-size:clamp(14px,2vw,17px);color:var(--text2);max-width:600px;
-  line-height:1.7;margin-bottom:32px;
-}
-.cover-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
-.cover-meta span{
-  font-size:11px;color:var(--text3);letter-spacing:1px;
-  text-transform:uppercase;font-weight:500;
-  font-family:var(--font-mono);
-  display:flex;align-items:center;gap:8px;
-}
-.cover-meta span::before{content:'◆';font-size:6px;color:var(--red);}
-.cover-line{
-  width:60px;height:2px;background:var(--red);
-  margin:32px auto;border-radius:2px;
-}
-.cover-claim{
-  font-family:var(--font-mono);font-size:13px;color:var(--red);letter-spacing:.04em;
-  text-transform:uppercase;
-}
+  :root {
+    --bg-color: #FAFAFA;
+    --text-color: #0D0D0D;
+    --accent-color: #CCFF00;
+    --border-color: #E5E5E5;
+    --muted-color: #666666;
+  }
 
-/* ═══ TESTIMONIO ═══ */
-.testimonial{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;
-  box-shadow:var(--shadow);position:relative;
-}
-.testimonial::before{
-  content:'';position:absolute;top:0;left:28px;right:28px;height:2px;
-  background:var(--red);border-radius:1px;
-}
-.testimonial blockquote{
-  font-size:14px;color:var(--text2);line-height:1.7;font-style:italic;
-  padding:4px 0 4px 20px;border-left:2px solid var(--gold);margin-bottom:12px;
-}
-.testimonial .author{
-  font-family:var(--font-mono);font-size:11px;color:var(--text3);
-  letter-spacing:.03em;
-}
-.testimonial .author strong{color:var(--red);font-weight:600;}
+  *{margin:0;padding:0;box-sizing:border-box;}
 
-/* ═══ ANCLAJE ═══ */
-.anchor-box{
-  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;
-}
-@media(max-width:700px){.anchor-box{grid-template-columns:1fr;}}
-.anchor-item{
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:16px 18px;
-  display:flex;flex-direction:column;gap:4px;
-}
-.anchor-item .anchor-label{
-  font-size:10px;color:var(--text3);text-transform:uppercase;
-  letter-spacing:.06em;font-family:var(--font-mono);
-}
-.anchor-item .anchor-value{
-  font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.5px;
-}
-.anchor-item .anchor-value.red{color:var(--red);}
-.anchor-item .anchor-value.gold{color:var(--gold-light);}
-.anchor-item .anchor-note{
-  font-size:11px;color:var(--text3);line-height:1.4;
-}
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
 
-/* ═══ MICRO HOVER EN TABLA ═══ */
-.respon-table tbody tr{
-  transition:background 200ms var(--ease-out), border-color 200ms var(--ease-out);
-  cursor:default;
-}
-.respon-table tbody tr:hover{
-  background:rgba(225,60,38,.04);
-  border-left:2px solid var(--red);
-}
-.respon-table tbody tr:last-child:hover{border-radius:0 0 var(--radius) var(--radius);}
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5em;
+  }
 
-/* ═══ HOVER EN ECO-CARD ═══ */
-.eco-card{
-  transition:transform 250ms var(--ease-out), border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
-}
-.eco-card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(225,60,38,.3);
-  box-shadow:0 8px 20px rgba(225,60,38,.06);
-}
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 15px;
+    margin-top: 0;
+  }
 
-/* ═══ CTA ═══ */
-.cta-section{
-  text-align:center;padding:40px 24px;margin:20px 0 10px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);box-shadow:var(--shadow);
-}
-.cta-section h3{
-  font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;
-}
-.cta-section p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6;}
-.cta-btn{
-  display:inline-block;padding:12px 32px;
-  background:var(--red);color:#0D0D0D;
-  font-family:var(--font-mono);font-size:12px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;
-  border-radius:8px;cursor:pointer;
-  transition:opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
-  border:none;
-}
-.cta-btn:hover{opacity:.85;transform:translateY(-1px);}
-.cta-btn:active{transform:translateY(0);}
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    margin-top: 40px;
+  }
 
-/* ═══ SECTION ═══ */
-.section-title{
-  margin:48px 0 20px;display:flex;align-items:baseline;gap:16px;
-  padding-bottom:14px;border-bottom:1px solid var(--border);
-}
-.section-title .num{
-  font-family:var(--font-mono);font-size:40px;font-weight:800;
-  line-height:1;color:var(--red);opacity:.5;margin-right:4px;
-}
-.section-title h2{
-  font-family:var(--font-display);font-size:clamp(18px,2.2vw,24px);
-  font-weight:700;color:var(--text);letter-spacing:-.5px;
-}
-.section-title .meta{
-  font-family:var(--font-mono);font-size:11px;color:var(--text3);text-transform:uppercase;
-  letter-spacing:1px;font-weight:500;
-}
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+  }
 
-/* ═══ CODE BLOCK (para el alcance) ═══ */
-.code-block{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;
-  box-shadow:var(--shadow);
-  font-family:var(--font-mono);
-}
-.code-block .line{
-  font-size:13px;color:var(--text2);line-height:1.8;white-space:pre-wrap;
-}
-.code-block .line.comment{color:var(--text3);font-style:italic;}
-.code-block .line.key{color:var(--red);font-weight:600;}
-.code-block .line.str{color:var(--gold-light);}
-.code-block .line.indent1{padding-left:20px;}
-.code-block .line.indent2{padding-left:40px;}
-.code-block .line.indent3{padding-left:60px;}
-.code-block .line.sep{color:var(--text3);text-align:center;margin:8px 0;}
+  .accent {
+    background-color: var(--accent-color);
+    padding: 2px 6px;
+    font-weight: 700;
+  }
 
-/* ═══ TABLE ═══ */
-.respon-table-wrap{
-  overflow-x:auto;border-radius:var(--radius);
-  border:1px solid var(--border);background:var(--surface);
-  margin-bottom:20px;
-}
-.respon-table{width:100%;border-collapse:collapse;font-size:14px;}
-.respon-table th,.respon-table td{
-  padding:14px 18px;text-align:left;border-bottom:1px solid var(--border);
-  vertical-align:top;
-}
-.respon-table tr:last-child td{border-bottom:none;}
-.respon-table th{
-  font-weight:600;font-size:10px;text-transform:uppercase;
-  letter-spacing:.08em;color:var(--text3);background:var(--surface2);
-  font-family:var(--font-mono);
-}
-.respon-table td:first-child{
-  font-family:var(--font-mono);font-weight:600;color:var(--red);
-  width:15%;font-size:12px;white-space:nowrap;
-}
-.respon-table td:nth-child(2){color:var(--text);width:35%;font-weight:500;}
-.respon-table td:nth-child(3){color:var(--text3);width:12%;font-family:var(--font-mono);font-size:11px;}
-.respon-table td:last-child{text-align:right;font-weight:700;font-size:15px;color:var(--text);white-space:nowrap;width:18%;}
-.respon-table tr:not(thead tr){transition:background 180ms var(--ease-out);}
-.respon-table .desc{color:var(--text3);display:block;font-weight:400;font-size:12px;}
-.respon-table .opcional{color:var(--gold-light);font-weight:500;}
-.respon-table .tot-label{color:var(--text2);font-weight:600;font-size:13px;}
-.respon-table .tot-value{color:var(--red);font-size:17px;font-weight:800;}
+  .prefix {
+    color: var(--muted-color);
+    font-family: monospace;
+  }
 
-/* ═══ NOTE ═══ */
-.note-box{
-  display:flex;align-items:flex-start;gap:12px;
-  padding:14px 18px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:var(--radius-sm);
-  font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:20px;
-}
-.note-box-icon{font-size:14px;color:var(--red);flex-shrink:0;margin-top:2px;}
-.note-box strong{color:var(--text);}
+  code, pre {
+    font-family: monospace;
+    background: #111;
+    color: #fff;
+    padding: 12px;
+    border-radius: 0px;
+    font-size: 0.85rem;
+  }
 
-/* ═══ PILLS ═══ */
-.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
-.pill{
-  display:inline-block;padding:3px 12px;border-radius:100px;
-  font-size:11px;font-weight:600;letter-spacing:.04em;cursor:default;
-}
-.pill.red{background:var(--red-subtle);color:var(--red);border:1px solid rgba(225,60,38,.2);}
-.pill.gold{background:var(--gold-subtle);color:var(--gold-light);border:1px solid rgba(212,160,23,.2);}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
 
-/* ═══ ECOSISTEMA ═══ */
-.eco-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
-@media(max-width:800px){.eco-grid{grid-template-columns:1fr;}}
-.eco-card{
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:16px 18px;text-align:center;
-}
-.eco-card .eco-icon{font-size:24px;margin-bottom:8px;color:var(--red);}
-.eco-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.eco-card p{font-size:11px;color:var(--text3);line-height:1.5;}
+  th {
+    background-color: #111;
+    color: #FFF;
+    text-transform: uppercase;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
 
-/* ═══ CLOSE ═══ */
-.close-section{
-  text-align:center;padding:50px 24px 30px;
-  border-top:1px solid var(--border);margin-top:30px;
-}
-.close-section .close-logo{max-width:140px;margin-bottom:16px;opacity:.8;}
-.close-section h2{font-size:clamp(1rem,2vw,1.4rem);font-weight:700;margin-bottom:6px;}
-.close-section p{color:var(--text2);font-size:13px;}
-.close-line{
-  width:40px;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));
-  margin:14px auto;border-radius:2px;
-}
+  td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px;
+  }
 
-/* ═══ PRINT ═══ */
-@media print{
-  @page{size:A4;margin:14mm 16mm;}
-  .cover{min-height:90vh;page-break-after:always;}
-  .page-sep{page-break-after:always;height:0;margin:0;background:none;}
-  .page-sep:last-of-type{page-break-after:avoid;}
-}
+  blockquote {
+    border-left: 3px solid var(--accent-color);
+    background: #F0F0F0;
+    margin: 20px 0;
+    padding: 15px 20px;
+    font-size: 0.9rem;
+  }
+
+  ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
+  }
 </style>
 </head>
 <body>
 
-<div class="bg-grain"></div>
+<h1>LAB080 // STUDIO &amp; SYSTEMS</h1>
+<p style="font-family:monospace;color:var(--muted-color);margin-top:-10px;margin-bottom:30px;">ESTRATEGIA VISUAL &amp; DIRECCIÓN CREATIVA REGIONAL</p>
 
-<div class="container">
+<hr>
 
-<!-- ═══════ PORTADA ═══════ -->
-<section class="cover">
-  <img class="cover-logo"
-       src="data:image/webp;base64,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"
-       alt="LAB080">
+<h2><span class="prefix">_01</span> / ALCANCE &amp; METODOLOGÍA</h2>
+<p><strong>PROYECTO:</strong> JIU-JITSU FEST / LJJL / LATAM EXPANSION<br>
+<strong>FECHA:</strong> AGOSTO 2026<br>
+<strong>MODO:</strong> REMOTE + ONSITE EVENT CONTROL</p>
 
-  <div class="cover-badge">Anexo de Servicios · N°032B</div>
+<hr>
 
-  <h1>Tu liga merece una identidad <em>que pelee</em><br>en cada esquina del continente</h1>
+<h3><span class="prefix">_</span>DESARROLLO &amp; GESTIÓN CONTINUA</h3>
+<p style="font-family:monospace;color:var(--muted-color);margin-bottom:12px;">BASE DEL FEE MENSUAL / AGOSTO - DICIEMBRE 2026</p>
 
-  <p class="sub">No se trata solo de diseño. Se trata de que tu marca tenga la misma potencia en una story de Instagram, en un podio de premiación y en el sitio web que ven atletas de 5 países.</p>
+<ul>
+  <li><strong>01_ECOSISTEMA DIGITAL LATAM</strong>
+    <ul>
+      <li><strong>SITIO WEB LATAM <span class="accent">[+] UI/UX</span>:</strong> DISEÑO Y MAQUETACIÓN INICIAL DEL SITIO OFICIAL REGIONAL. CARGA DE CONTENIDO CORPORATIVO E INFORMATIVO.</li>
+      <li><strong>DESPLIEGUE A DICIEMBRE:</strong> INTEGRACIÓN DEL CALENDARIO ANUAL 2027, FLYERS DE "FECHAS POR CONFIRMAR" POR PAÍS Y SISTEMA DE LANZAMIENTO MASIVO.</li>
+      <li><strong>INSTAGRAM LATAM:</strong> CONFIGURACIÓN DEL CANAL OFICIAL Y ESTRATEGIA DE CONTENIDO TIPO "CONSULTAS" Y EXPECTATIVA.</li>
+    </ul>
+  </li>
+  <li><strong>02_DIRECCIÓN DE ARTE &amp; MEJORA CONTINUA</strong>
+    <ul>
+      <li><strong>DIAGNÓSTICO IN SITU:</strong> INVOLUCRAMIENTO COMPLETO EN LA DINÁMICA DE TORNEOS PARA OPTIMIZAR SISTEMAS DE MONTAJE Y PRESENCIA DE MARCA.</li>
+      <li><strong>SISTEMA GRÁFICO LJJL:</strong> DESARROLLO DEL PAQUETE VISUAL DE ALTO IMPACTO (VIDEO PRO + RECURSOS) PARA EL LANZAMIENTO DE DICIEMBRE.</li>
+    </ul>
+  </li>
+</ul>
 
-  <div class="cover-line"></div>
+<hr>
 
-  <div class="cover-meta">
-    <span>Agosto 2026</span>
-    <span>Remote + Onsite</span>
-    <span>Anexo LAB080</span>
-  </div>
+<h3><span class="prefix">_</span>SERVICIOS POR EVENTO</h3>
+<p style="font-family:monospace;color:var(--muted-color);margin-bottom:12px;">COBERTURA &amp; PRODUCCIÓN DIGITAL / 2 A 3 FECHAS 2026</p>
 
-  <p class="cover-claim" style="margin-top:40px;">Estrategia Visual &amp; Dirección Creativa Regional</p>
-</section>
+<ul>
+  <li><strong>PRE-EVENTO:</strong> PUBLICACIÓN DE LLAVES DE COMPETICIÓN, CRUCES Y GRÁFICAS PROMOCIONALES DE EXPECTATIVA.</li>
+  <li><strong>LIVE EVENT:</strong> DIRECCIÓN Y PAUTA TÉCNICA PARA EL EQUIPO AUDIOVISUAL IN SITU (CAMARÓGRAFO, FOTÓGRAFO Y COBERTURA LIVE).</li>
+  <li><strong>POST-EVENTO:</strong> CURADURÍA AUDIOVISUAL, EDICIÓN DE CAMPEONES POR CATEGORÍA Y PODIO GENERAL POR EQUIPOS.</li>
+</ul>
 
-<div class="page-sep"></div>
+<blockquote>
+  <strong>NOTA DE ALCANCE:</strong> LA MANO DE OBRA FÍSICA Y MATERIALES PREVIOS (MEDALLAS, CINTAS Y PODIOS FÍSICOS) SE ENCUENTRAN CUBIERTOS POR LA LIGA. EL FEE POR EVENTO CUBRE LA DIRECCIÓN DE ARTE Y EL DELIVERY DIGITAL.
+</blockquote>
 
-<!-- ═══════ POR QUÉ LAB080 ═══════ -->
-<section id="por-que">
-  <div class="section-title">
-    <span class="num">◆</span>
-    <div>
-      <h2>Por qué LAB080</h2>
-      <span class="meta">Why Us</span>
-    </div>
-  </div>
+<hr>
 
-  <div class="testimonial">
-    <blockquote>
-      LAB080 no solo nos ordenó la marca, nos dio una identidad que los atletas reconocen y respetan. Pasamos de tener piezas sueltas a un sistema visual que funciona solo.
-    </blockquote>
-    <div class="author">— <strong>Cliente LAB080</strong> · Dirección Creativa de Liga Deportiva</div>
-  </div>
+<h2><span class="prefix">_02</span> / PROPUESTA COMERCIAL</h2>
+<p style="font-family:monospace;color:var(--muted-color);margin-bottom:12px;">INVERSIÓN Y VALORES EN CLP [NETO]</p>
 
-  <div class="anchor-box">
-    <div class="anchor-item">
-      <span class="anchor-label">Modelo In House</span>
-      <span class="anchor-value gold">$2.5M+</span>
-      <span class="anchor-note">Costo mensual estimado de un equipo creativo interno (diseñador + community manager + desarrollador)</span>
-    </div>
-    <div class="anchor-item">
-      <span class="anchor-label">LAB080 Fee Mensual</span>
-      <span class="anchor-value red">$680.000</span>
-      <span class="anchor-note">Todo incluido: dirección creativa, desarrollo web, redes sociales y producción digital. <strong>73% menos</strong> que un equipo interno.</span>
-    </div>
-  </div>
-</section>
+<table>
+  <thead>
+    <tr>
+      <th>CÓDIGO</th>
+      <th>ITEM / SERVICIO</th>
+      <th>TIPO</th>
+      <th>INVERSIÓN (CLP)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>_BRAND-01</strong></td>
+      <td>
+        <strong>BRANDING &amp; BRAND GUIDELINES LJJL</strong><br>
+        <small style="color:var(--muted-color);">Desarrollo de ADN visual, sistema de marca y manual de aplicación internacional.</small>
+      </td>
+      <td>PAGO ÚNICO</td>
+      <td><strong>$300.000</strong></td>
+    </tr>
+    <tr>
+      <td><strong>_FEE-01</strong></td>
+      <td>
+        <strong>FEE MENSUAL DE TRANSICIÓN (AGO - DIC 2026)</strong><br>
+        <small style="color:var(--muted-color);">Dirección creativa, actualización de sitio web, estrategia de redes, preparación LJJL.</small>
+      </td>
+      <td>MENSUAL</td>
+      <td><strong>$680.000</strong></td>
+    </tr>
+    <tr>
+      <td><strong>_EVENT-01</strong></td>
+      <td>
+        <strong>FEE POR EVENTO (TORNEOS 2026)</strong><br>
+        <small style="color:var(--muted-color);">Pauta audiovisual, dirección de arte en vivo, gráfica de podios y cobertura de campeones.</small>
+      </td>
+      <td>POR FECHA</td>
+      <td><strong>$250.000</strong></td>
+    </tr>
+    <tr>
+      <td><strong>_WEB-02</strong></td>
+      <td>
+        <strong>DESARROLLO WEB LJJL</strong><br>
+        <small style="color:var(--muted-color);">Plataforma completa de lanzamientos y registros 2027.</small>
+      </td>
+      <td>PAGO ÚNICO</td>
+      <td><strong>$480.000</strong></td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="page-sep"></div>
+<hr>
 
-<!-- ═══════ 01 / ALCANCE ═══════ -->
-<section id="alcance">
-  <div class="section-title">
-    <span class="num">01</span>
-    <div>
-      <h2>Alcance &amp; Metodología</h2>
-      <span class="meta">Scope &amp; Methodology</span>
-    </div>
-  </div>
+<h2><span class="prefix">_03</span> / ECOSISTEMA TECNOLÓGICO</h2>
+<p style="font-family:monospace;color:var(--muted-color);margin-bottom:12px;">TECH STACK: SMART PRODUCTION</p>
 
-  <div class="code-block">
-    <div class="line key"><span style="color:var(--text3);">//</span> PROYECTO: JIU-JITSU FEST / LJJL / LATAM EXPANSION</div>
-    <div class="line key"><span style="color:var(--text3);">//</span> FECHA: AGOSTO 2026</div>
-    <div class="line key"><span style="color:var(--text3);">//</span> MODO: REMOTE + ONSITE EVENT CONTROL</div>
-  </div>
-
-  <!-- DESARROLLO & GESTIÓN CONTINUA -->
-  <div class="code-block">
-    <div class="line key">_DESARROLLO & GESTIÓN CONTINUA</div>
-    <div class="line comment">// BASE DEL FEE MENSUAL / AGOSTO - DICIEMBRE 2026</div>
-    <div class="line sep">- - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-
-    <div class="line key" style="margin-top:8px;">01_ECOSISTEMA DIGITAL LATAM</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">SITIO WEB LATAM [+] ACTUALIZACIONES:</span> Actualización recurrente de banners, textos, blog, eventos, calendario y contenido editorial del sitio oficial regional.</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">INSTAGRAM LATAM:</span> Configuración del canal oficial y estrategia de contenido tipo "consultas" y expectativa.</div>
-
-    <div class="line key" style="margin-top:8px;">02_DIRECCIÓN DE ARTE & MEJORA CONTINUA</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">DIAGNÓSTICO IN SITU:</span> Involucramiento completo en la dinámica de torneos para optimizar sistemas de montaje y presencia de marca.</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">SISTEMA GRÁFICO LJJL:</span> Desarrollo del paquete visual de alto impacto para el lanzamiento: video PRO, identidad consolidada.</div>
-  </div>
-
-  <!-- SERVICIOS POR EVENTO -->
-  <div class="code-block">
-    <div class="line key">_SERVICIOS POR EVENTO</div>
-    <div class="line comment">// COBERTURA & PRODUCCIÓN DIGITAL / 2 A 3 FECHAS 2026</div>
-    <div class="line sep">- - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-
-    <div class="line indent1"><span style="color:var(--gold-light);">PRE-EVENTO:</span> Publicación de llaves de competición, cruces y gráficas promocionales de expectativa.</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">LIVE EVENT:</span> Dirección y pauta técnica para el equipo audiovisual in situ (camarógrafo, fotógrafo y cobertura live).</div>
-    <div class="line indent1"><span style="color:var(--gold-light);">POST-EVENTO:</span> Curaduría audiovisual, edición de campeones por categoría y podio general por equipos.</div>
-  </div>
-
-  <!-- NOTA -->
-  <div class="note-box">
-    <div class="note-box-icon">◆</div>
-    <div>
-      <strong>Nota de Alcance:</strong> La mano de obra física y materiales previos (medallas, cintas y podios físicos) se encuentran cubiertos por la liga. El fee por evento cubre la dirección de arte y el delivery digital.
-    </div>
-  </div>
-</section>
-
-<div class="page-sep"></div>
-
-<!-- ═══════ 02 / PROPUESTA COMERCIAL ═══════ -->
-<section id="propuesta">
-  <div class="section-title">
-    <span class="num">02</span>
-    <div>
-      <h2>Propuesta Comercial</h2>
-      <span class="meta">Inversión y Valores en CLP [Neto]</span>
-    </div>
-  </div>
-
-  <div class="respon-table-wrap">
-    <table class="respon-table">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Item / Servicio</th>
-          <th>Tipo</th>
-          <th>Inversión (CLP)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>_BRAND-01</td>
-          <td>
-            <strong>Branding &amp; Brand Guidelines LJJL</strong>
-            <span class="desc">Desarrollo de ADN visual, sistema de marca y manual de aplicación internacional.</span>
-          </td>
-          <td>Pago Único</td>
-          <td>$300.000</td>
-        </tr>
-        <tr>
-          <td>_FEE-01</td>
-          <td>
-            <strong>Fee Mensual de Transición (Ago – Dic 2026)</strong>
-            <span class="desc">Dirección creativa, estrategia de redes, actualización recurrente de banners, textos, blog, eventos, calendario, contenido editorial y preparación lanzamiento LJJL.</span>
-          </td>
-          <td>Mensual</td>
-          <td>$680.000</td>
-        </tr>
-        <tr>
-          <td>_EVENT-01</td>
-          <td>
-            <strong>Fee por Evento (Torneos 2026)</strong>
-            <span class="desc">Pauta audiovisual, dirección de arte en vivo, gráfica de podios y cobertura de campeones.</span>
-          </td>
-          <td>Por Fecha</td>
-          <td>$250.000</td>
-        </tr>
-        <tr>
-          <td style="color:var(--gold-light);">_WEB-02</td>
-          <td>
-            <strong class="opcional">Desarrollo Web LJJL</strong>
-            <span class="desc">Plataforma completa de lanzamientos y registros 2027. Opcional.</span>
-          </td>
-          <td style="color:var(--gold-light);">Pago Único</td>
-          <td style="color:var(--gold-light);">$480.000</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="pills">
-    <span class="pill red">Valores Neto</span>
-    <span class="pill gold">IVA 19% no incluido</span>
-    <span class="pill red">CLP</span>
-  </div>
-
-  <div style="display:flex;justify-content:flex-end;margin-top:16px;">
-    <div style="width:300px;padding:16px 20px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);">
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:4px;">
-        <span>Inversión mensual estimada</span>
-        <span style="font-family:var(--font-mono);">(Ago – Dic)</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <span style="font-size:13px;color:var(--text2);">Fee Mensual</span>
-        <span style="font-size:22px;font-weight:800;color:var(--red);letter-spacing:-.5px;">$680.000</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);padding-top:6px;margin-top:6px;border-top:1px solid var(--border);">
-        <span>+ Branding LJJL (hito único)</span>
-        <span>$300.000</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);">
-        <span>+ Fee por evento (por fecha)</span>
-        <span>$250.000</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gold-light);padding-top:6px;margin-top:6px;border-top:1px solid var(--border);">
-        <span>+ Web LJJL (opcional, hito dic)</span>
-        <span>$480.000</span>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<div class="page-sep"></div>
-
-<!-- ═══════ 03 / ECOSISTEMA ═══════ -->
-<section id="ecosistema">
-  <div class="section-title">
-    <span class="num">03</span>
-    <div>
-      <h2>Ecosistema Tecnológico</h2>
-      <span class="meta">Tech Stack: Smart Production</span>
-    </div>
-  </div>
-
-  <div class="note-box">
-    <div class="note-box-icon">⚡</div>
-    <div>
-      Reemplazamos la <strong>logística pesada y tiempos muertos</strong> con <strong>Smart Production</strong>: un flujo de trabajo basado en <strong>Gen-AI + Cloudflare/Webflow + Motion Graphics</strong> que entrega calidad de estándar internacional en tiempo récord.
-    </div>
-  </div>
-
-  <div class="eco-grid">
-    <div class="eco-card">
-      <div class="eco-icon">🤖</div>
-      <h4>Gen-AI</h4>
-      <p>Generación de activos visuales, edición asistida y automatización de procesos creativos.</p>
-    </div>
-    <div class="eco-card">
-      <div class="eco-icon">☁️</div>
-      <h4>Cloudflare / Webflow</h4>
-      <p>Infraestructura web rápida, segura y escalable para el ecosistema digital LATAM.</p>
-    </div>
-    <div class="eco-card">
-      <div class="eco-icon">🎬</div>
-      <h4>Motion Graphics</h4>
-      <p>Animación, video PRO y contenido dinámico para lanzamientos y cobertura de torneos.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ CTA ═══════ -->
-<section class="cta-section">
-  <div class="close-line" style="margin:0 auto 16px;"></div>
-  <h3>¿Partimos?</h3>
-  <p>Esta propuesta tiene validez por 15 días hábiles.<br>Si tienes dudas o quieres ajustar algún bloque, conversemos.</p>
-  <a href="mailto:contacto@lab080.studio" class="cta-btn">⟐ Aprobar propuesta</a>
-  <div style="margin-top:12px;font-size:11px;color:var(--text3);font-family:var(--font-mono);">
-    contacto@lab080.studio · +56 9 1234 5678
-  </div>
-</section>
-
-<!-- ═══════ CIERRE ═══════ -->
-<section class="close-section">
-  <img src="data:image/webp;base64,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"
-       alt="LAB080" class="close-logo">
-  <div class="close-line"></div>
-  <h2>LAB080 // Studio &amp; Systems</h2>
-  <p>Reñaca Norte 265 Of. 510, Viña del Mar · contacto@lab080.studio</p>
-</section>
-
-</div><!-- /container -->
+<blockquote>
+  REEMPLAZAMOS LA <strong>LOGÍSTICA PESADA Y TIEMPOS MUERTOS</strong> CON <span class="accent">SMART PRODUCTION</span>: UN FLUJO DE TRABAJO BASADO EN <strong>GEN-AI + CLOUDFLARE/WEBFLOW + MOTION GRAPHICS</strong> QUE ENTREGA CALIDAD DE ESTÁNDAR INTERNACIONAL EN TIEMPO RÉCORD.
+</blockquote>
 
 </body>
 </html>
